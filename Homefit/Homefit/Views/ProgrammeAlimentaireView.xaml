@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Homefit.Views.ProgrammeAlimentaireView">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <ListView x:Name="DaysView" ItemsSource="{Binding ListDays}" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
+                                    <StackLayout Orientation="Vertical" HeightRequest="100">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Button Grid.Column="0" Text="{Binding day1}" HorizontalOptions="CenterAndExpand" Command="{Binding Path=BindingContext.GetProgramme, Source={x:Reference DaysView}}" CommandParameter="{Binding .}"/>
+                                            <Button Grid.Column="1" Text="{Binding day2}" Command="{Binding Path=BindingContext.GetProgramme, Source={x:Reference DaysView}}" CommandParameter="{Binding .}" HorizontalOptions="CenterAndExpand" />
+                                            <Button Grid.Column="2" Text="{Binding day3}" Command="{Binding Path=BindingContext.GetProgramme, Source={x:Reference DaysView}}" CommandParameter="{Binding .}" HorizontalOptions="CenterAndExpand" />
+                                        </Grid>
+
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </ScrollView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

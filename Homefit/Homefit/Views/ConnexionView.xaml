@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Homefit.Views.CustomRenderer"
+             mc:Ignorable="d"             
+             x:Class="Homefit.Views.ConnexionView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontAttributes" Value="Italic"/>
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="TextColor" Value="BlueViolet"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+
+            </Style>
+            <Style x:Key="CustomEntryStyle" TargetType="local:CustomEntry">
+                <Setter Property="TextColor" Value="BlueViolet"/>
+                <Setter Property="FontAttributes" Value="None"/>
+                <Setter Property="Margin" Value="0,0,20,0"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="30"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+            <Style x:Key="FrameImageStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="30"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="WidthRequest" Value="40"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <local:GradientColorStack StartColor="#8A2BE2" EndColor="#87CEEB">
+            </local:GradientColorStack>
+           
+            <StackLayout Orientation="Vertical">
+                <Frame HeightRequest="250" Padding="0" Margin="0">
+                    <Image Source="fitnessHomeFit" Aspect="AspectFill" Margin="0"/>
+                </Frame>
+            </StackLayout>
+            <StackLayout Padding="0" Margin="10,200,10,0">
+                <Frame BackgroundColor="White" HeightRequest="400" HasShadow="True" Padding="0" Margin="0" >
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="HOMEFIT" Style="{StaticResource TitleStyle}" Margin="10"/>
+
+                        <StackLayout Padding="0" Margin="15,10">
+                            <Frame Style="{StaticResource FrameStyle}">
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame Style="{StaticResource FrameImageStyle}">
+                                        <Image Source="avatar.png" Aspect="AspectFill"/>
+                                    </Frame>
+                                    <local:CustomEntry Placeholder="Email" Text="{Binding Email}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame Margin="0,15,0,0" Style="{StaticResource FrameStyle}">
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame Style="{StaticResource FrameImageStyle}">
+                                        <Image Source="lock.jpg" Aspect="AspectFill"/>
+                                    </Frame>
+                                    <local:CustomEntry Placeholder="Password" PlaceholderColor="Black" Text="{Binding Password}" IsPassword="True" Style="{StaticResource CustomEntryStyle}" />
+                                </StackLayout>
+                            </Frame>
+                            <local:GradientColorButton TextColor="White" StartColor="#87CEEB" EndColor="#8A2BE2" HeightRequest="40" WidthRequest="150" CornerRadius="30" Margin="0,20,0,0" Text="SIGN IN" Command="{Binding ConnexionButtonClickedCommand}"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10">
+                                <Label Text="Vous n'avez pas de compte ?" TextColor="Black" FontSize="Subtitle"/>
+                                <Label Text="Inscrivez-Vous" TextColor="BlueViolet" FontAttributes="Bold" FontSize="Subtitle">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding InscriptionCommand}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
