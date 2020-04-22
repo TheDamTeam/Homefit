@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" 
+             android:TabbedPage.IsSmoothScrollEnabled="False"
+             android:TabbedPage.IsSwipePagingEnabled="False"
+             android:TabbedPage.BarItemColor="#999999"
+             android:TabbedPage.BarSelectedItemColor="#2B425B"
+             BarBackgroundColor="#FFFFFF"
+             xmlns:views="clr-namespace:Homefit.Views"
+             x:Class="Homefit.Views.ProgrammesPage"
+            x:Name="tab">
+
+    <TabbedPage.Children>
+        <NavigationPage Title="Programmes Alimentaires">
+            <x:Arguments>
+                <views:ProgrammeAlimentaireView />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Programmes Sportifs" >
+            <x:Arguments>
+                <views:ProgrammeSportifPage />
+            </x:Arguments>
+        </NavigationPage>
+    </TabbedPage.Children>
+</TabbedPage>
+

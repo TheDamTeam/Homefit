@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Homefit.Views.ProfilView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="InfoStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="#758697" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Deconnexion" Order="Primary"
+                     Priority="0" Command="{Binding DeconnexionCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView VerticalScrollBarVisibility="Never" 
+                BackgroundColor="WhiteSmoke">
+            <StackLayout Orientation="Vertical">
+                <Grid RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="150" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Image Source="{Binding Photo}" TranslationY="60"/>
+                </Grid>
+                <StackLayout Orientation="Vertical" Margin="20,20,20,0" >
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Taille" HorizontalOptions="StartAndExpand" Style="{StaticResource TitleStyle}"/>
+                        <Label Text="Poids" HorizontalOptions="EndAndExpand" Style="{StaticResource TitleStyle}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="5,0,15,0">
+                        <Label Style="{StaticResource InfoStyle}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="{Binding Taille}" />
+                                        <Span Text=" cm"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label HorizontalOptions="EndAndExpand" Style="{StaticResource InfoStyle}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="{Binding Poids}" />
+                                        <Span Text=" kg"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+
+                    <Label Text="{Binding NomPrenom}" FontSize="Title" FontAttributes="Italic" HorizontalOptions="Center"/>
+                    <BoxView HeightRequest="1" BackgroundColor="Gray" VerticalOptions="CenterAndExpand"/>
+
+                    <StackLayout>
+                        <Label Text="Informations" Margin="0,20,0,0" Style="{StaticResource TitleStyle}" TextColor="Black"/>
+                        <Image Source="cake.png" />
+                        <Label Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="Née le "/>
+                                        <Span Text="{Binding DateNaiss, StringFormat='{0:dd MMMM yyyy}'}" />
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Image Source="sexe.png" />
+                        <Label Text="{Binding Sexe}" HorizontalOptions="CenterAndExpand" Style="{StaticResource InfoStyle}"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Objectifs" Margin="0,20,0,0" Style="{StaticResource TitleStyle}" TextColor="Black"/>
+                        <Label HorizontalOptions="FillAndExpand" Style="{StaticResource InfoStyle}" Text="{Binding Objectifs}">
+                        </Label>
+                    </StackLayout>
+                </StackLayout>
+                
+                <Button Text="Modifier mon profil" TextColor="White"  BackgroundColor="#66B2FF" VerticalOptions="EndAndExpand" Margin="40,10,40,20" Command="{Binding UpdateCommandButton}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
