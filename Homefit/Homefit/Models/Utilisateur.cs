@@ -11,6 +11,7 @@ namespace Homefit.Models
     {
         [PrimaryKey]
         public int Id { get; set; }
+
         [JsonProperty("email")]
         public string Email { get; set; }
         [JsonProperty("password")]

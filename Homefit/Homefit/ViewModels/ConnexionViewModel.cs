@@ -15,6 +15,7 @@ namespace Homefit.ViewModels
 {
     public class ConnexionViewModel : BaseViewModel
     {
+
         private string email;
         public string Email
         {
@@ -114,9 +115,6 @@ namespace Homefit.ViewModels
                 {
                     await Application.Current.MainPage.DisplayAlert("ERREUR", "Veuillez activer internet avant de continuer", "Ok");
                 }
-
-                
-
             } 
         }
         public async Task ExecuteInitialBDD()

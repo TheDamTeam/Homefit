@@ -13,29 +13,29 @@
              mc:Ignorable="d"
              x:Class="Homefit.Views.MainPage"
              BarBackgroundColor="#FFFFFF">
-    
-    <TabbedPage.Children>       
-        <NavigationPage Title="Programmes">
+
+    <TabbedPage.Children>
+        <NavigationPage Title="Programmes" IconImageSource="tab_programme.png">
             <x:Arguments>
                 <views:ProgrammesPage />
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="Mes Defis" >
+        <NavigationPage Title="Mes Defis" IconImageSource="tab_defi.png">
             <x:Arguments>
                 <views:MesDefisView />
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="Progrès">
+        <NavigationPage Title="Progrès" IconImageSource="tab_progres">
             <x:Arguments>
                 <views:ProgresView />
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="Profil">
+        <NavigationPage Title="Profil" IconImageSource="tab_profil.png">
             <x:Arguments>
                 <views:ProfilView />
             </x:Arguments>
         </NavigationPage>
-    </TabbedPage.Children> 
+    </TabbedPage.Children>
 </TabbedPage>
     
     

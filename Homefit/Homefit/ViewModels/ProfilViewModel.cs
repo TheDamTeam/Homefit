@@ -63,7 +63,7 @@ namespace Homefit.ViewModels
             
             CompteConnect.IsConnect = 0;
             await App.DataBase.UpdateUtilisateurAsync(CompteConnect);
-            _navigationService.SetCurrentPage(new ConnexionView());
+            _navigationService.SetCurrentPage(new NavigationPage( new ConnexionView()));
         }
         public ICommand UpdateCommandButton => new Command(ExecuteUpdateCommand);
 
