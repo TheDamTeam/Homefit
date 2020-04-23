@@ -37,11 +37,11 @@ namespace Homefit.ViewModels
             get { return prenom; }
             set { SetProperty(ref prenom, value); }
         }
-        private string sexe;
-        public string Sexe
+        private string sexeText;
+        public string SexeText
         {
-            get { return sexe; }
-            set { SetProperty(ref sexe, value); }
+            get { return sexeText; }
+            set { SetProperty(ref sexeText, value); }
         }
         private string taille;
         public string Taille
@@ -61,13 +61,31 @@ namespace Homefit.ViewModels
             get { return dateNaiss; }
             set { SetProperty(ref dateNaiss, value); }
         }
+        private bool sexe;
+        public bool Sexe
+        {
+            get { return sexe; }
+            set 
+            { 
+                SetProperty(ref sexe, value);
+                if(Sexe)
+                {
+                    SexeText = "Femme";
+                }
+                else
+                {
+                    SexeText = "Homme";
+                }
+            }
+        }
         public ICommand InscriptionButtonClickedCommand => new Command(ExecuteInscriptionClickedCommandAsync);
+        
 
         private async void ExecuteInscriptionClickedCommandAsync(object obj)
         {
             var client = HttpService.GetInstance();
 
-            Utilisateur item = new Utilisateur(Email, Password, Nom, Prenom, DateNaiss, float.Parse(Poids), int.Parse(Taille), Sexe);
+            Utilisateur item = new Utilisateur(Email, Password, Nom, Prenom, DateNaiss, float.Parse(Poids), int.Parse(Taille), SexeText);
             var json = JsonConvert.SerializeObject(item);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage response = null;
@@ -81,7 +99,8 @@ namespace Homefit.ViewModels
            
         public InscriptionViewModel()
         {
-
+            Sexe = false;
+            SexeText = "Homme";
         }
     }
 }

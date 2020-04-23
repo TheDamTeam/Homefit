@@ -1,14 +1,15 @@
 ﻿using System;
 using Android.Content;
 using Android.Graphics.Drawables;
-using Homefit.Droid.CustomRenderer;
-using Homefit.Views.CustomRenderer;
+using Homefit.Droid.Renderers;
+using Homefit.Views;
+using Homefit.Views.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 
 [assembly: ExportRenderer(typeof(GradientColorButton), typeof(GradientColorButtonRenderer))]
-namespace Homefit.Droid.CustomRenderer
+namespace Homefit.Droid.Renderers
 {
     public class GradientColorButtonRenderer : Xamarin.Forms.Platform.Android.AppCompat.ButtonRenderer
     {

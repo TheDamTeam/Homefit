@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 
-namespace Homefit.Views.CustomRenderer
+namespace Homefit.Views.Controls
 {
     public class GradientColorButton : Button
     {

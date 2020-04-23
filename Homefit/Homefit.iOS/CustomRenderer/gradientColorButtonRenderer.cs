@@ -6,7 +6,7 @@ using CoreAnimation;
 using CoreGraphics;
 using Foundation;
 using Homefit.iOS.CustomRenderer;
-using Homefit.Views.CustomRenderer;
+using Homefit.Views.Controls;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
