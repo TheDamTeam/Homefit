@@ -18,11 +18,27 @@ namespace Homefit.ViewModels
 
         //Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
 
-        public ICommand GetProgramme => new Command(LoadDailyProgram);
-        async void LoadDailyProgram()
+        public ICommand GetProgramme1 => new Command<Days>(LoadDailyProgram);
+        async void LoadDailyProgram(Days obj)
         {
             Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
-            int dayNumber = 1;
+            int dayNumber = int.Parse(obj.day1.Split(' ')[1]);
+
+            await Navigation.PushAsync(new ProgDayView(dayNumber, utilisateur));
+        }
+        public ICommand GetProgramme2 => new Command<Days>(LoadDailyProgram2);
+        async void LoadDailyProgram2(Days obj)
+        {
+            Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
+            int dayNumber = int.Parse(obj.day2.Split(' ')[1]);
+
+            await Navigation.PushAsync(new ProgDayView(dayNumber, utilisateur));
+        }
+        public ICommand GetProgramme3 => new Command<Days>(LoadDailyProgram3);
+        async void LoadDailyProgram3(Days obj)
+        {
+            Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
+            int dayNumber = int.Parse(obj.day3.Split(' ')[1]);
 
             await Navigation.PushAsync(new ProgDayView(dayNumber, utilisateur));
         }

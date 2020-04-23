@@ -86,14 +86,9 @@ namespace Homefit.ViewModels
             DateNaiss = CompteConnect.DateNaiss;
             NomPrenom = CompteConnect.Prenom+" "+CompteConnect.Nom;
             Sexe = CompteConnect.Sexe;
-            if(Sexe == "masculin")
-            {
-                Photo = "gymnast_homme.png";
-            }
-            else
-            {
-                Photo = "gymnast_femme.png";
-            }
+            Photo = "gymnast"+Sexe+".png";
+            
+           
         }
     }
 }

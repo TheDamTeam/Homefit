@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Text;
 using Xamarin.Forms;
 
-namespace Homefit.Views.CustomRenderer
+namespace Homefit.Views.Controls
 {
     public class GradientColorStack : StackLayout
     {

@@ -1,11 +1,11 @@
 ﻿using Android.Content;
-using Homefit.Droid.CustomRenderer;
-using Homefit.Views.CustomRenderer;
+using Homefit.Droid.Renderers;
+using Homefit.Views.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(CustomEntry), typeof(CustomEntryRenderer))]
-namespace Homefit.Droid.CustomRenderer
+namespace Homefit.Droid.Renderers
 {
     public class CustomEntryRenderer : EntryRenderer
     {
