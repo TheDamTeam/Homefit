@@ -32,6 +32,8 @@ namespace Homefit.Models
         [JsonProperty("objectifs")]
         public string Ojectifs { get; set; }
 
+
+        [JsonIgnore]
         public int IsConnect { get; set; }
 
         [Ignore]
@@ -49,7 +51,9 @@ namespace Homefit.Models
         [Ignore]
         public List<string> ParticiperProgrammeSportifs { get; set; }
 
+        [JsonIgnore]
         public string Photo { get; set; } 
+
         public Utilisateur()
         {
             Materiels = new List<string>();
@@ -82,6 +86,7 @@ namespace Homefit.Models
             Taille = taille;
             Sexe = sexe;
             Photo = "";
+            Ojectifs = "";
         }
     }
 }

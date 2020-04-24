@@ -1,6 +1,7 @@
 ﻿using Homefit.Models;
 using Homefit.Services.Http;
 using Homefit.ViewModels.Base;
+using Homefit.Views;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -83,16 +84,34 @@ namespace Homefit.ViewModels
 
         private async void ExecuteInscriptionClickedCommandAsync(object obj)
         {
-            Utilisateur item = new Utilisateur(Email, Password, Nom, Prenom, DateNaiss, float.Parse(Poids), int.Parse(Taille), SexeText);
-            var apiResponse = await App.Client.SaveUtilisateurAsync(item,true);
-            if(apiResponse)
+            IsBusy = true;
+            try
             {
-                await Application.Current.MainPage.DisplayAlert("Bienvenue", "Votre compte a été crée avec succès", "Ok");
+                Utilisateur item = new Utilisateur(Email, Password, Nom, Prenom, DateNaiss, float.Parse(Poids), int.Parse(Taille), SexeText);
+                var apiResponse = await App.Client.SaveUtilisateurAsync(item, true);
+                if (apiResponse)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Bienvenue", "Votre compte a été crée avec succès", "Ok");
+                    item.IsConnect = 1;
+                    await App.DataBase.SaveUtilisateurAsync(item);
+                    _navigationService.SetCurrentPage(new MainPage(item));
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("ERREUR", "Une erreur c'est produite veuillez réessayer plus tard", "Ok");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("ERREUR", "Une erreur c'est produite veuillez réessayer plus tard", "Ok");
+                Console.WriteLine("{0} Exception caught.", ex);
+                await Application.Current.MainPage.DisplayAlert("ERREUR", "Veuillez remplir les champs avant de valider", "Ok");
+
             }
+            finally
+            {
+                IsBusy = false;
+            }
+
         }
            
         public InscriptionViewModel()
