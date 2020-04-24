@@ -4,22 +4,104 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:Homefit.Views.Controls"
              mc:Ignorable="d"
-             x:Class="Homefit.Views.InscriptionView">
+             x:Class="Homefit.Views.InscriptionView"             
+             NavigationPage.HasNavigationBar="false">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontAttributes" Value="Italic"/>
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="TextColor" Value="BlueViolet"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+
+            </Style>
+            <Style x:Key="SubtitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="None"/>
+                <Setter Property="Margin" Value="10,0,0,0"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            </Style>
+            <Style x:Key="CustomEntryStyle" TargetType="local:CustomEntry">
+                <Setter Property="TextColor" Value="BlueViolet"/>
+                <Setter Property="FontAttributes" Value="None"/>
+                <Setter Property="Margin" Value="10,0,20,0"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="30"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+            <Style x:Key="FrameImageStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="30"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="WidthRequest" Value="40"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Entry Placeholder="Nom" Text="{Binding Nom}"/>
-            <Entry Placeholder="Prenom" Text="{Binding Prenom}"/>
-            <DatePicker Date="{Binding DateNaiss}"/>
-            <Entry Placeholder="Poids" Text="{Binding Poids}"/>
-            <Entry Placeholder="Taille" Text="{Binding Taille}"/>
-            <StackLayout Orientation="Horizontal">
-                <Switch IsToggled="{Binding Sexe}"/>
-                <Label Text="{Binding SexeText}" VerticalOptions="CenterAndExpand"/>
-            </StackLayout>
-            <Entry Placeholder="Email" Text="{Binding Email}"/>
-            <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
+        <Grid>
+            <local:GradientColorStack StartColor="#8A2BE2" EndColor="#87CEEB">
+            </local:GradientColorStack>
             
-            <Button Text="SIGN UP" BackgroundColor="HotPink" TextColor="White" CornerRadius="30" Command="{Binding InscriptionButtonClickedCommand}" />
-        </StackLayout>
+            <StackLayout Orientation="Vertical">
+                <Frame HeightRequest="250" Padding="0" Margin="0">
+                    <Image Source="fitnessInscription.jpg" Aspect="AspectFill" Margin="0"/>
+                </Frame>
+            </StackLayout>
+            <ScrollView>
+                <Frame BackgroundColor="White" HasShadow="True" Margin="10,110,10,10" Padding="0">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="HOMEFIT" Style="{StaticResource TitleStyle}" Margin="10"/>
+                        <StackLayout Padding="0" Margin="15,10">
+                            <Frame Style="{StaticResource FrameStyle}">
+                                <local:CustomEntry Placeholder="Nom" Text="{Binding Nom}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                            </Frame>
+                            <Frame Style="{StaticResource FrameStyle}">
+                                <local:CustomEntry Placeholder="Prenom" Text="{Binding Prenom}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                            </Frame>
+                            <Frame Style="{StaticResource FrameStyle}">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Anniversaire" Style="{StaticResource SubtitleStyle}" />
+                                    <DatePicker Date="{Binding DateNaiss}" MinimumDate="01/01/1990" BackgroundColor="Transparent" Opacity="10" HorizontalOptions="StartAndExpand" Margin="0,0,25,0"/>
+                                </StackLayout>                                
+                            </Frame>
+                            <Frame Style="{StaticResource FrameStyle}">                               
+                                <local:CustomEntry Placeholder="Poids" Text="{Binding Poids}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                            </Frame>
+                            <Frame Style="{StaticResource FrameStyle}">
+                                <local:CustomEntry Placeholder="Taille" Text="{Binding Taille}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                            </Frame>
+                            <Frame Style="{StaticResource FrameStyle}">
+                                <StackLayout Orientation="Horizontal" Margin="0,5,0,5">
+                                    <Label Text="Sexe" Style="{StaticResource SubtitleStyle}"/>
+                                    <Switch IsToggled="{Binding Sexe}"/>
+                                    <Label Text="{Binding SexeText}" Style="{StaticResource SubtitleStyle}"/>
+                                </StackLayout>
+                            </Frame>
+                            <Frame Style="{StaticResource FrameStyle}">
+                                <local:CustomEntry Placeholder="Email" Text="{Binding Email}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                            </Frame>
+                            <Frame Style="{StaticResource FrameStyle}">
+                                <local:CustomEntry Placeholder="Password" IsPassword="True" Text="{Binding Password}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                            </Frame>
+
+                            <local:GradientColorButton Text="SIGN UP" StartColor="#87CEEB" EndColor="#8A2BE2" HeightRequest="40" WidthRequest="150" TextColor="White" CornerRadius="30" Margin="0,20,0,10"  Command="{Binding InscriptionButtonClickedCommand}" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
