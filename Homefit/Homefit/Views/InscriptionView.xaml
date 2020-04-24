@@ -12,13 +12,13 @@
             <DatePicker Date="{Binding DateNaiss}"/>
             <Entry Placeholder="Poids" Text="{Binding Poids}"/>
             <Entry Placeholder="Taille" Text="{Binding Taille}"/>
-            <!--<Entry Placeholder="Sexe" Text="{Binding Sexe}"/>-->
             <StackLayout Orientation="Horizontal">
                 <Switch IsToggled="{Binding Sexe}"/>
                 <Label Text="{Binding SexeText}" VerticalOptions="CenterAndExpand"/>
             </StackLayout>
             <Entry Placeholder="Email" Text="{Binding Email}"/>
             <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
+            
             <Button Text="SIGN UP" BackgroundColor="HotPink" TextColor="White" CornerRadius="30" Command="{Binding InscriptionButtonClickedCommand}" />
         </StackLayout>
     </ContentPage.Content>

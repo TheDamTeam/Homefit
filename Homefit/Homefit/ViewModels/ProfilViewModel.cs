@@ -1,9 +1,13 @@
-﻿using Homefit.Models;
+﻿using Homefit.Interfaces;
+using Homefit.Models;
 using Homefit.ViewModels.Base;
 using Homefit.Views;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -41,12 +45,7 @@ namespace Homefit.ViewModels
             get { return sexe; }
             set { SetProperty(ref sexe, value); }
         }
-        private string photo;
-        public string Photo
-        {
-            get { return photo; }
-            set { SetProperty(ref photo, value); }
-        }
+       
         public INavigation Navigation { get; set; }
 
         private Utilisateur compteCo;
@@ -73,7 +72,39 @@ namespace Homefit.ViewModels
             await Navigation.PushAsync(new UpdateProfilView());
            
         }
+        private ImageSource photo;
+        public ImageSource Photo
+        {
+            get { return photo; }
+            set { SetProperty(ref photo, value); }
+        }
+        public ICommand TakePicktureCommand => new Command(TakePicture);
+        private async void TakePicture()
+        {
+            Stream stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
+            string uri = DependencyService.Get<IPhotoPickerService>().GetUriAsync();
+            if (stream != null)
+            {
+                
+                //Photo = ImageSource.FromStream(() => stream);
+                Photo = ImageSource.FromFile(uri);
+                // StreamReader reader = new StreamReader(stream);
+                //Photo = ImageSource.FromStream(() => GetStream(uri));
+               // stream.Dispose();
+                //DependencyService.Get<IPhotoPickerService>().SavePicture("ProfilPicture.jpg", stream, "imagesFolder");
+                /* StreamReader reader = new StreamReader(stream);
+                  CompteConnect.Photo = Convert.ToBase64String(ReadFully(stream));
 
+                  await App.DataBase.UpdateUtilisateurAsync(CompteConnect);*/
+            }
+        }
+        protected Stream GetStream(String gazouUrl)
+        {
+            HttpWebRequest aRequest = (HttpWebRequest)WebRequest.Create(gazouUrl);
+            HttpWebResponse aResponse = (HttpWebResponse)aRequest.GetResponse();
+
+            return aResponse.GetResponseStream();
+        }
         public ProfilViewModel()
         {
             GetUtilisateur();
@@ -86,9 +117,8 @@ namespace Homefit.ViewModels
             DateNaiss = CompteConnect.DateNaiss;
             NomPrenom = CompteConnect.Prenom+" "+CompteConnect.Nom;
             Sexe = CompteConnect.Sexe;
-            Photo = "gymnast"+Sexe+".png";
-            
-           
+
+            Photo = ImageSource.FromFile("gymnast"+CompteConnect.Sexe+".png");
         }
     }
 }

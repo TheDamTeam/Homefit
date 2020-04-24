@@ -44,17 +44,19 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
+        
         <Grid>
+            
             <local:GradientColorStack StartColor="#8A2BE2" EndColor="#87CEEB">
             </local:GradientColorStack>
-           
+
             <StackLayout Orientation="Vertical">
                 <Frame HeightRequest="250" Padding="0" Margin="0">
-                    <Image Source="fitnessHomeFit" Aspect="AspectFill" Margin="0"/>
+                    <Image Source="fitnessHomeFit.jpg" Aspect="AspectFill" Margin="0"/>
                 </Frame>
             </StackLayout>
-            <StackLayout Padding="0" Margin="10,200,10,0">
-                <Frame BackgroundColor="White" HeightRequest="400" HasShadow="True" Padding="0" Margin="0" >
+            <ScrollView>
+                <Frame BackgroundColor="White"  Margin="10,200,10,10" HasShadow="True" Padding="0" >
                     <StackLayout Orientation="Vertical">
                         <Label Text="HOMEFIT" Style="{StaticResource TitleStyle}" Margin="10"/>
 
@@ -77,19 +79,24 @@
                                 </StackLayout>
                             </Frame>
                             <local:GradientColorButton TextColor="White" StartColor="#87CEEB" EndColor="#8A2BE2" HeightRequest="40" WidthRequest="150" CornerRadius="30" Margin="0,20,0,0" Text="SIGN IN" Command="{Binding ConnexionButtonClickedCommand}"/>
-
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10">
-                                <Label Text="Vous n'avez pas de compte ?" TextColor="Black" FontSize="Subtitle"/>
-                                <Label Text="Inscrivez-Vous" TextColor="BlueViolet" FontAttributes="Bold" FontSize="Subtitle">
+                            <StackLayout IsVisible="{Binding IsBusy}" Padding="2">
+                                <ActivityIndicator IsRunning="{Binding IsBusy}" />
+                                <Label Text="Chargement..." HorizontalOptions="CenterAndExpand" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="5">
+                                <Label Text="Vous n'avez pas de compte ?" TextColor="Black"/>
+                                <Label Text="Inscrivez-Vous" TextColor="BlueViolet" FontAttributes="Bold">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding InscriptionCommand}"/>
                                     </Label.GestureRecognizers>
                                 </Label>
                             </StackLayout>
+                            
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-            </StackLayout>
+            </ScrollView>
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

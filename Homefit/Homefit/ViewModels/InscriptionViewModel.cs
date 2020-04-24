@@ -1,5 +1,5 @@
 ﻿using Homefit.Models;
-using Homefit.Services;
+using Homefit.Services.Http;
 using Homefit.ViewModels.Base;
 using Newtonsoft.Json;
 using System;
@@ -83,17 +83,15 @@ namespace Homefit.ViewModels
 
         private async void ExecuteInscriptionClickedCommandAsync(object obj)
         {
-            var client = HttpService.GetInstance();
-
             Utilisateur item = new Utilisateur(Email, Password, Nom, Prenom, DateNaiss, float.Parse(Poids), int.Parse(Taille), SexeText);
-            var json = JsonConvert.SerializeObject(item);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = null;
-
-            response = await client.PostAsync($"https://thedamteam.fr/api/utilisateurs", content);
-            if(response.IsSuccessStatusCode)
+            var apiResponse = await App.Client.SaveUtilisateurAsync(item,true);
+            if(apiResponse)
             {
                 await Application.Current.MainPage.DisplayAlert("Bienvenue", "Votre compte a été crée avec succès", "Ok");
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("ERREUR", "Une erreur c'est produite veuillez réessayer plus tard", "Ok");
             }
         }
            

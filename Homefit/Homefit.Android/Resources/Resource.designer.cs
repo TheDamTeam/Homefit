@@ -5747,10 +5747,10 @@ namespace Homefit.Droid
 			public const int fitnessHomeFit = 2131165285;
 			
 			// aapt resource value: 0x7F070066
-			public const int gymnast_femme = 2131165286;
+			public const int gymnastFeminin = 2131165286;
 			
 			// aapt resource value: 0x7F070067
-			public const int gymnast_homme = 2131165287;
+			public const int gymnastmasculin = 2131165287;
 			
 			// aapt resource value: 0x7F070068
 			public const int ic_mtrl_chip_checked_black = 2131165288;
