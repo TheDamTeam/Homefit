@@ -53,43 +53,45 @@
                     <Image Source="fitnessHomeFit" Aspect="AspectFill" Margin="0"/>
                 </Frame>
             </StackLayout>
-            <StackLayout Padding="0" Margin="10,200,10,0">
-                <Frame BackgroundColor="White" HeightRequest="400" HasShadow="True" Padding="0" Margin="0" >
-                    <StackLayout Orientation="Vertical">
-                        <Label Text="HOMEFIT" Style="{StaticResource TitleStyle}" Margin="10"/>
+            <ScrollView>
+          
+                    <Frame BackgroundColor="White" HasShadow="True" Margin="10,200,10,10" Padding="0" >
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="HOMEFIT" Style="{StaticResource TitleStyle}" Margin="10"/>
 
-                        <StackLayout Padding="0" Margin="15,10">
-                            <Frame Style="{StaticResource FrameStyle}">
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame Style="{StaticResource FrameImageStyle}">
-                                        <Image Source="avatar.png" Aspect="AspectFill"/>
-                                    </Frame>
-                                    <local:CustomEntry Placeholder="Email" Text="{Binding Email}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                            <StackLayout Padding="0" Margin="15,10">
+                                <Frame Style="{StaticResource FrameStyle}">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Frame Style="{StaticResource FrameImageStyle}">
+                                            <Image Source="avatar.png" Aspect="AspectFill"/>
+                                        </Frame>
+                                        <local:CustomEntry Placeholder="Email" Text="{Binding Email}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame Margin="0,15,0,0" Style="{StaticResource FrameStyle}">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Frame Style="{StaticResource FrameImageStyle}">
+                                            <Image Source="lock.jpg" Aspect="AspectFill"/>
+                                        </Frame>
+                                        <local:CustomEntry Placeholder="Password" PlaceholderColor="Black" Text="{Binding Password}" IsPassword="True" Style="{StaticResource CustomEntryStyle}" />
+                                    </StackLayout>
+                                </Frame>
+                                <local:GradientColorButton TextColor="White" StartColor="#87CEEB" EndColor="#8A2BE2" HeightRequest="40" WidthRequest="150" CornerRadius="30" Margin="0,20,0,0" Text="SIGN IN" Command="{Binding ConnexionButtonClickedCommand}"/>
+
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10">
+                                    <Label Text="Vous n'avez pas de compte ?" TextColor="Black"/>
+                                    <Label Text="Inscrivez-Vous" TextColor="BlueViolet" FontAttributes="Bold">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding InscriptionCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
                                 </StackLayout>
-                            </Frame>
-
-                            <Frame Margin="0,15,0,0" Style="{StaticResource FrameStyle}">
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame Style="{StaticResource FrameImageStyle}">
-                                        <Image Source="lock.jpg" Aspect="AspectFill"/>
-                                    </Frame>
-                                    <local:CustomEntry Placeholder="Password" PlaceholderColor="Black" Text="{Binding Password}" IsPassword="True" Style="{StaticResource CustomEntryStyle}" />
-                                </StackLayout>
-                            </Frame>
-                            <local:GradientColorButton TextColor="White" StartColor="#87CEEB" EndColor="#8A2BE2" HeightRequest="40" WidthRequest="150" CornerRadius="30" Margin="0,20,0,0" Text="SIGN IN" Command="{Binding ConnexionButtonClickedCommand}"/>
-
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10">
-                                <Label Text="Vous n'avez pas de compte ?" TextColor="Black" FontSize="Subtitle"/>
-                                <Label Text="Inscrivez-Vous" TextColor="BlueViolet" FontAttributes="Bold" FontSize="Subtitle">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding InscriptionCommand}"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
                             </StackLayout>
                         </StackLayout>
-                    </StackLayout>
-                </Frame>
-            </StackLayout>
+                    </Frame>
+              
+            </ScrollView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
