@@ -99,6 +99,10 @@
 
                             <local:GradientColorButton Text="SIGN UP" StartColor="#87CEEB" EndColor="#8A2BE2" HeightRequest="40" WidthRequest="150" TextColor="White" CornerRadius="30" Margin="0,20,0,10"  Command="{Binding InscriptionButtonClickedCommand}" />
                         </StackLayout>
+                        <StackLayout IsVisible="{Binding IsBusy}" Padding="2">
+                            <ActivityIndicator IsRunning="{Binding IsBusy}" />
+                            <Label Text="Chargement..." HorizontalOptions="CenterAndExpand" />
+                        </StackLayout>
                     </StackLayout>
                 </Frame>
             </ScrollView>
