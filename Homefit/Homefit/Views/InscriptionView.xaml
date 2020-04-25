@@ -57,7 +57,7 @@
             
             <StackLayout Orientation="Vertical">
                 <Frame HeightRequest="250" Padding="0" Margin="0">
-                    <Image Source="fitnessInscription.jpg" Aspect="AspectFill" Margin="0"/>
+                    <Image Source="fitnessInscription.jpeg" Aspect="AspectFill" Margin="0"/>
                 </Frame>
             </StackLayout>
             <ScrollView>
