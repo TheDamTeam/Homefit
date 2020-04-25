@@ -58,7 +58,6 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Renderers\CustomEntryRenderer.cs" />
     <Compile Include="Renderers\GradientColorButtonRenderer.cs" />
     <Compile Include="Renderers\GradientColorStackRenderer.cs" />
@@ -237,9 +236,6 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\tab_progres.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\splash_screen.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\background.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -251,5 +247,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\gymnastHomme.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
