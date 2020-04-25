@@ -53,12 +53,10 @@
                     <Image Source="fitnessHomeFit.jpg" Aspect="AspectFill" Margin="0"/>
                 </Frame>
             </StackLayout>
-            <ScrollView>
-          
+            <ScrollView>          
                     <Frame BackgroundColor="White" HasShadow="True" Margin="10,200,10,10" Padding="0" >
                         <StackLayout Orientation="Vertical">
                             <Label Text="HOMEFIT" Style="{StaticResource TitleStyle}" Margin="10"/>
-
                             <StackLayout Padding="0" Margin="15,10">
                                 <Frame Style="{StaticResource FrameStyle}">
                                     <StackLayout Orientation="Horizontal">
@@ -68,7 +66,6 @@
                                         <local:CustomEntry Placeholder="Email" Text="{Binding Email}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
                                     </StackLayout>
                                 </Frame>
-
                                 <Frame Margin="0,15,0,0" Style="{StaticResource FrameStyle}">
                                     <StackLayout Orientation="Horizontal">
                                         <Frame Style="{StaticResource FrameImageStyle}">
@@ -93,8 +90,7 @@
                                 
                             </StackLayout>
                         </StackLayout>
-                    </Frame>
-              
+                    </Frame>              
             </ScrollView>
         </Grid>
     </ContentPage.Content>
