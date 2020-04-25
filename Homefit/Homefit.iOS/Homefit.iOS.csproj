@@ -63,9 +63,10 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CustomRenderer\gradientColorButtonRenderer.cs" />
+    <Compile Include="Renderers\gradientColorButtonRenderer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Services\PhotoPickerService.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,4 +135,5 @@
       <Name>Homefit</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
 </Project>
