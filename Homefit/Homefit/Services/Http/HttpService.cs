@@ -1,4 +1,5 @@
 ﻿using Homefit.Models;
+using Homefit.Models.ApiResponse;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,53 @@ namespace Homefit.Services.Http
                 return JsonConvert.DeserializeObject<RepasCategorieResponse>(content);
             }
             return null;
+        }
+
+        public async Task<ProgrammeSportifResponse> GetProgrammeSportifAsync()
+        {
+            try
+            {
+
+                var result = await _client.GetAsync($"https://www.thedamteam.fr/api/programme_sportifs/");
+                var serializedResponse = await result.Content.ReadAsStringAsync();
+
+                // var result = await client.GetStringAsync("http://www.thedamteam.fr/api/programme_sportifs/");
+
+
+                var APIResponse = JsonConvert.DeserializeObject<ProgrammeSportifResponse>(serializedResponse);
+                return APIResponse;
+
+            }
+            catch (Exception ey)
+            {
+                return null;
+            }
+
+        }
+
+
+
+        public async Task<EntrainementResponse> GetEntrainementAsync(int idSelected)
+        {
+            try
+            {
+
+                var result = await _client.GetAsync($" https://www.thedamteam.fr/api/programme_sportif/" + idSelected + "/entrainements");
+                var serializedResponse = await result.Content.ReadAsStringAsync();
+
+                // var result = await client.GetStringAsync("http://www.thedamteam.fr/api/programme_sportifs/");
+
+
+                return JsonConvert.DeserializeObject<EntrainementResponse>(serializedResponse);
+
+
+            }
+            catch (Exception ey)
+            {
+                return null;
+
+            }
+
         }
 
     }

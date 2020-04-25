@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Homefit.Models.ApiResponse
 {
-    class EntrainementResponse
+    public class EntrainementResponse
     {
 
         [JsonProperty("@context")]
