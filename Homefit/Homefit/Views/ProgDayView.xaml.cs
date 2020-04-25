@@ -8,10 +8,10 @@ namespace Homefit.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProgDayView : ContentPage
     {
-        public ProgDayView(int dayNb, Utilisateur user)
+        public ProgDayView(int dayNb)
         {
             InitializeComponent();
-            BindingContext = new ProgrammeDayViewModel(dayNb, user);
+            BindingContext = new ProgrammeDayViewModel(dayNb);
         }
     }
 }

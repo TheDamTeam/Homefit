@@ -1,5 +1,7 @@
 ﻿using Homefit.Models;
+using Homefit.Services;
 using Homefit.ViewModels.Base;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +12,11 @@ namespace Homefit.ViewModels
     {
         string contentLabel = "Jour ";
         string dayNb;
+        List<Repas> ptiDej = new List<Repas>();
+        List<Repas> diner = new List<Repas>();
+        List<Repas> dejeuner = new List<Repas>();
+        List<Repas> collation = new List<Repas>();
+        DateTime currentDate = DateTime.Now;
         public string ContentLabel
         {
             get { return contentLabel; }
@@ -22,11 +29,39 @@ namespace Homefit.ViewModels
             set { SetProperty(ref dayNb, value); }
         }
 
-        public ProgrammeDayViewModel(int dayNb, Utilisateur user)
+        public ProgrammeDayViewModel(int dayNb)
         {
             this.dayNb = "";
             contentLabel += dayNb;
             this.dayNb = "Jour " + dayNb;
+            loadRepas();
+        }
+
+        public async void loadRepas()
+        {
+            //var currentDate = DateTime.Now;
+            var client = HttpService.GetInstance();
+            var result = await client.GetAsync($"https://thedamteam.fr/api/repas");
+            var serializedResponse = await result.Content.ReadAsStringAsync();
+            var apiResponse = JsonConvert.DeserializeObject<RepasResponse>(serializedResponse);
+            if (apiResponse.Counter > 0)
+            {
+                var repas = apiResponse.Repas;
+                repas.ForEach(x =>
+                {
+                    //date
+                    if(x.DateRepas.Month.Equals(DateTime.Now.Month) && x.DateRepas.Day.Equals(DateTime.Now.Day))
+                    {
+                        //categorie
+                        if (x.DateRepas.Equals(currentDate))
+                        {
+                            diner.Add(x);
+                        }
+                    }
+                    
+                });
+
+            }
         }
     }
 }
