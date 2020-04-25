@@ -3,6 +3,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Homefit.Models
 {
@@ -28,7 +29,11 @@ namespace Homefit.Models
         public int Taille { get; set; }// taille en cm
         [JsonProperty("sexe")]
         public string Sexe { get; set; }
+        [JsonProperty("objectifs")]
         public string Ojectifs { get; set; }
+
+
+        [JsonIgnore]
         public int IsConnect { get; set; }
 
         [Ignore]
@@ -45,9 +50,14 @@ namespace Homefit.Models
         
         [Ignore]
         public List<string> ParticiperProgrammeSportifs { get; set; }
+
+        [JsonIgnore]
+        public string Photo { get; set; } 
+
         public Utilisateur()
         {
             Materiels = new List<string>();
+            Photo = "";
             ParticiperProgrammeSportifs = new List<string>();
             ParticiperEntrainements = new List<string>();
             MangerRepas = new List<string>();
@@ -62,6 +72,7 @@ namespace Homefit.Models
             ParticiperProgrammeSportifs = new List<string>();
             ParticiperEntrainements = new List<string>();
             MangerRepas = new List<string>();
+            Photo = "";
             ParticiperProgrammeNutritions = new List<string>();
         }
         public Utilisateur(string email, string password, string nom, string prenom, DateTime dateNaiss, float poids, int taille,string sexe)
@@ -74,6 +85,8 @@ namespace Homefit.Models
             Poids = poids;
             Taille = taille;
             Sexe = sexe;
+            Photo = "";
+            Ojectifs = "";
         }
     }
 }

@@ -5,14 +5,14 @@ using System.Text;
 using CoreAnimation;
 using CoreGraphics;
 using Foundation;
-using Homefit.iOS.CustomRenderer;
+using Homefit.iOS.Renderers;
 using Homefit.Views.Controls;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(GradientColorButton), typeof(GradientColorButtonRenderer))]
-namespace Homefit.iOS.CustomRenderer
+namespace Homefit.iOS.Renderers
 {
     public class GradientColorButtonRenderer : ButtonRenderer
     {

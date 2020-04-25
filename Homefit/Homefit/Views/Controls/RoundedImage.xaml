@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Homefit.Views.Controls.RoundedImage">
+    <ContentView.Content>
+        <Frame
+            x:Name="frame"
+            CornerRadius="75"
+                HeightRequest="150"
+                WidthRequest="150"
+                HorizontalOptions="Center"
+                Padding="0"
+                IsClippedToBounds="True">
+            <Image x:Name="image" 
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+        </Frame>
+    </ContentView.Content>
+</ContentView>
