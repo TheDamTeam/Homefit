@@ -1,5 +1,6 @@
 ﻿using Homefit.Models;
 using Homefit.Services;
+using Homefit.Services.Http;
 using Homefit.ViewModels.Base;
 using Newtonsoft.Json;
 using System;
@@ -39,18 +40,15 @@ namespace Homefit.ViewModels
 
         public async void loadRepas()
         {
-            //var currentDate = DateTime.Now;
-            var client = HttpService.GetInstance();
-            var result = await client.GetAsync($"https://thedamteam.fr/api/repas");
-            var serializedResponse = await result.Content.ReadAsStringAsync();
-            var apiResponse = JsonConvert.DeserializeObject<RepasResponse>(serializedResponse);
-            if (apiResponse.Counter > 0)
+            var apiResponse = await App.Client.GetRepasAsync();
+                if (apiResponse.Counter > 0)
             {
                 var repas = apiResponse.Repas;
                 repas.ForEach(x =>
                 {
+                    
                     //date
-                    if(x.DateRepas.Month.Equals(DateTime.Now.Month) && x.DateRepas.Day.Equals(DateTime.Now.Day))
+                    if (x.DateRepas.Month.Equals(DateTime.Now.Month) && x.DateRepas.Day.Equals(DateTime.Now.Day))
                     {
                         //categorie
                         if (x.DateRepas.Equals(currentDate))
@@ -58,10 +56,18 @@ namespace Homefit.ViewModels
                             diner.Add(x);
                         }
                     }
-                    
                 });
-
             }
         }
+
+        public async void loadRepasCategorie(int id)
+        {
+            var apiResponse = await App.Client.GetRepasCategorieAsync(id);
+            if (apiResponse.Counter > 0)
+            {
+                var repasCategorie = apiResponse.Libelle;
+            }
+        }
+
     }
 }

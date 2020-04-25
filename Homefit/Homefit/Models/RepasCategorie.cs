@@ -9,6 +9,6 @@ namespace Homefit.Models
         public int Id { get; set; }
         public string Libelle { get; set; }
 
-        public List<Repas> Repas { get; set; }
+        public List<string> Repas { get; set; }
     }
 }
