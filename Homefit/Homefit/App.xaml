@@ -12,6 +12,18 @@
             <Color x:Key="PrimaryDark">#222D32</Color>
             <Color x:Key="Accent">#00AFF0</Color>
 
+            <!-- FONTS -->
+            <OnPlatform x:Key="BoldFont" x:TypeArguments="x:String" Android="Fonts/OpenSans-Bold.ttf#Open Sans"/>
+            <OnPlatform x:Key="BoldItalicFont" x:TypeArguments="x:String" Android="Fonts/OpenSans-BoldItalic.ttf#Open Sans"/>
+            <OnPlatform x:Key="ExtraBoldFont" x:TypeArguments="x:String" Android="Fonts/OpenSans-ExtraBold.ttf#Open Sans"/>
+            <OnPlatform x:Key="ExtraBoldItalicFont" x:TypeArguments="x:String" Android="Fonts/OpenSans-ExtraBoldItalic.ttf#Open Sans"/>
+            <OnPlatform x:Key="ItalicFont" x:TypeArguments="x:String" Android="Fonts/OpenSans-Italic.ttf#Open Sans"/>
+            <OnPlatform x:Key="LightFont" x:TypeArguments="x:String" Android="Fonts/OpenSans-Light.ttf#Open Sans"/>
+            <OnPlatform x:Key="LightItalicFont" x:TypeArguments="x:String" Android="Fonts/OpenSans-LightItalic.ttf#Open Sans"/>
+            <OnPlatform x:Key="RegularFont" x:TypeArguments="x:String" Android="Fonts/OpenSans-Regular.ttf#Open Sans"/>
+            <OnPlatform x:Key="SemiBoldFont" x:TypeArguments="x:String" Android="Fonts/OpenSans-SemiBold.ttf#Open Sans"/>
+            <OnPlatform x:Key="SemiBoldItalicFont" x:TypeArguments="x:String" Android="Fonts/OpenSans-SemiBoldItalic.ttf#Open Sans"/>
+
             <!-- STYLES -->
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />

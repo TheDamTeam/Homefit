@@ -11,7 +11,8 @@
              android:TabbedPage.BarSelectedItemColor="#2B425B"
              BarBackgroundColor="#FFFFFF"
              xmlns:views="clr-namespace:Homefit.Views"
-             x:Class="Homefit.Views.ProgrammesPage"
+             x:Class="Homefit.Views.ProgrammesPage"            
+             NavigationPage.HasNavigationBar="false"
             x:Name="tab">
 
     <TabbedPage.Children>
