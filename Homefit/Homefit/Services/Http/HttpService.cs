@@ -66,5 +66,30 @@ namespace Homefit.Services.Http
             }
             return response.IsSuccessStatusCode;
         }
+
+
+        public async Task<RepasResponse> GetRepasAsync()
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/repas");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<RepasResponse>(content);
+            }
+            return null;
+        }
+
+        //"/api/repas_categories/1"
+        public async Task<RepasCategorieResponse> GetRepasCategorieAsync(int id)
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/repas/"+id+"/categorie");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<RepasCategorieResponse>(content);
+            }
+            return null;
+        }
+
     }
 }

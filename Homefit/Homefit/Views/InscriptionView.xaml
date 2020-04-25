@@ -15,7 +15,6 @@
                 <Setter Property="FontSize" Value="Title"/>
                 <Setter Property="TextColor" Value="BlueViolet"/>
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
-
             </Style>
             <Style x:Key="SubtitleStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="Black"/>
@@ -30,6 +29,8 @@
                 <Setter Property="FontAttributes" Value="None"/>
                 <Setter Property="Margin" Value="10,0,20,0"/>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="PlaceholderColor" Value="Black"/>
+                <Setter Property="ReturnType" Value="Next"/>
             </Style>
             <Style x:Key="FrameStyle" TargetType="Frame">
                 <Setter Property="CornerRadius" Value="30"/>
@@ -53,8 +54,7 @@
     <ContentPage.Content>
         <Grid>
             <local:GradientColorStack StartColor="#8A2BE2" EndColor="#87CEEB">
-            </local:GradientColorStack>
-            
+            </local:GradientColorStack>            
             <StackLayout Orientation="Vertical">
                 <Frame HeightRequest="250" Padding="0" Margin="0">
                     <Image Source="fitnessInscription.jpeg" Aspect="AspectFill" Margin="0"/>
@@ -66,10 +66,26 @@
                         <Label Text="HOMEFIT" Style="{StaticResource TitleStyle}" Margin="10"/>
                         <StackLayout Padding="0" Margin="15,10">
                             <Frame Style="{StaticResource FrameStyle}">
-                                <local:CustomEntry Placeholder="Nom" Text="{Binding Nom}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                                <local:CustomEntry Placeholder="Nom" Text="{Binding Nom}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}">
+                                    <local:CustomEntry.Keyboard>
+                                        <Keyboard x:FactoryMethod="Create">
+                                            <x:Arguments>
+                                                <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                                            </x:Arguments>
+                                        </Keyboard>
+                                    </local:CustomEntry.Keyboard>
+                                </local:CustomEntry>
                             </Frame>
                             <Frame Style="{StaticResource FrameStyle}">
-                                <local:CustomEntry Placeholder="Prenom" Text="{Binding Prenom}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                                <local:CustomEntry Placeholder="Prenom" Text="{Binding Prenom}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}" ReturnType="Go">
+                                    <local:CustomEntry.Keyboard>
+                                        <Keyboard x:FactoryMethod="Create">
+                                            <x:Arguments>
+                                                <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                                            </x:Arguments>
+                                        </Keyboard>
+                                    </local:CustomEntry.Keyboard>
+                                </local:CustomEntry>
                             </Frame>
                             <Frame Style="{StaticResource FrameStyle}">
                                 <StackLayout Orientation="Horizontal">
@@ -77,11 +93,11 @@
                                     <DatePicker Date="{Binding DateNaiss}" MinimumDate="01/01/1990" BackgroundColor="Transparent" Opacity="10" HorizontalOptions="StartAndExpand" Margin="0,0,25,0"/>
                                 </StackLayout>                                
                             </Frame>
-                            <Frame Style="{StaticResource FrameStyle}">                               
-                                <local:CustomEntry Placeholder="Poids" Text="{Binding Poids}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                            <Frame Style="{StaticResource FrameStyle}">
+                                <local:CustomEntry Placeholder="Poids" Text="{Binding Poids}" PlaceholderColor="Black" Keyboard="Telephone" Style="{StaticResource CustomEntryStyle}"/>
                             </Frame>
                             <Frame Style="{StaticResource FrameStyle}">
-                                <local:CustomEntry Placeholder="Taille" Text="{Binding Taille}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                                <local:CustomEntry Placeholder="Taille" Text="{Binding Taille}" PlaceholderColor="Black" Keyboard="Telephone" Style="{StaticResource CustomEntryStyle}" ReturnType="Go"/>
                             </Frame>
                             <Frame Style="{StaticResource FrameStyle}">
                                 <StackLayout Orientation="Horizontal" Margin="0,5,0,5">
@@ -91,12 +107,19 @@
                                 </StackLayout>
                             </Frame>
                             <Frame Style="{StaticResource FrameStyle}">
-                                <local:CustomEntry Placeholder="Email" Text="{Binding Email}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                                <local:CustomEntry Placeholder="Email" Text="{Binding Email}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}">
+                                    <local:CustomEntry.Keyboard>
+                                        <Keyboard x:FactoryMethod="Create">
+                                            <x:Arguments>
+                                                <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                                            </x:Arguments>
+                                        </Keyboard>
+                                    </local:CustomEntry.Keyboard>
+                                </local:CustomEntry>
                             </Frame>
                             <Frame Style="{StaticResource FrameStyle}">
-                                <local:CustomEntry Placeholder="Password" IsPassword="True" Text="{Binding Password}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                                <local:CustomEntry Placeholder="Password" IsPassword="True" Text="{Binding Password}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}" ReturnType="Go"/>
                             </Frame>
-
                             <local:GradientColorButton Text="SIGN UP" StartColor="#87CEEB" EndColor="#8A2BE2" HeightRequest="40" WidthRequest="150" TextColor="White" CornerRadius="30" Margin="0,20,0,10"  Command="{Binding InscriptionButtonClickedCommand}" />
                         </StackLayout>
                         <StackLayout IsVisible="{Binding IsBusy}" Padding="2">
