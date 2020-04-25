@@ -50,7 +50,7 @@
            
             <StackLayout Orientation="Vertical">
                 <Frame HeightRequest="250" Padding="0" Margin="0">
-                    <Image Source="fitnessHomeFit" Aspect="AspectFill" Margin="0"/>
+                    <Image Source="fitnessHomeFit.jpg" Aspect="AspectFill" Margin="0"/>
                 </Frame>
             </StackLayout>
             <ScrollView>
@@ -78,7 +78,10 @@
                                     </StackLayout>
                                 </Frame>
                                 <local:GradientColorButton TextColor="White" StartColor="#87CEEB" EndColor="#8A2BE2" HeightRequest="40" WidthRequest="150" CornerRadius="30" Margin="0,20,0,0" Text="SIGN IN" Command="{Binding ConnexionButtonClickedCommand}"/>
-
+                                <StackLayout IsVisible="{Binding IsBusy}" Padding="2">
+                                    <ActivityIndicator IsRunning="{Binding IsBusy}" />
+                                    <Label Text="Chargement..." HorizontalOptions="CenterAndExpand" />
+                                </StackLayout>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10">
                                     <Label Text="Vous n'avez pas de compte ?" TextColor="Black"/>
                                     <Label Text="Inscrivez-Vous" TextColor="BlueViolet" FontAttributes="Bold">
@@ -87,6 +90,7 @@
                                         </Label.GestureRecognizers>
                                     </Label>
                                 </StackLayout>
+                                
                             </StackLayout>
                         </StackLayout>
                     </Frame>
