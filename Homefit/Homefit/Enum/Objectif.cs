@@ -9,12 +9,12 @@ namespace Homefit.Enum
     {
 
         [Display(Description = "Perte de poids")]
-        One,
+        One = 1,
         [Display(Description = "Prise de masse")]
-        Two,
+        Two = 2,
         [Display(Description = "Remise en forme")]
-        Three,
+        Three = 3,
         [Display(Description = "Amélioration performance")]
-        Four   
+        Four = 4   
     }
 }

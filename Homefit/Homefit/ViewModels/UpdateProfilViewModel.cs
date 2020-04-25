@@ -1,8 +1,12 @@
 ﻿using Homefit.Enum;
 using Homefit.Models;
 using Homefit.ViewModels.Base;
+using Homefit.Views;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -41,8 +45,8 @@ namespace Homefit.ViewModels
             get { return sexeText; }
             set { SetProperty(ref sexeText, value);}
         }
-        private string objectifs ;
-        public string Objectifs
+        private Objectif objectifs ;
+        public Objectif Objectifs
         {
             get { return objectifs;}
             set { SetProperty(ref objectifs, value); }
@@ -101,7 +105,7 @@ namespace Homefit.ViewModels
             IsBusy = true;
             try
             {
-                Utilisateur item = new Utilisateur(Email, Password, Nom, Prenom, DateNaiss, float.Parse(Poids), int.Parse(Taille), SexeText,Objectifs);
+                Utilisateur item = new Utilisateur(Email, Password, Nom, Prenom, DateNaiss, float.Parse(Poids), int.Parse(Taille), SexeText,Objectifs.GetDescription());
                 foreach(Materiel m in Materiels)
                 {
                     if(m.AvoirMateriel == true)
@@ -117,7 +121,9 @@ namespace Homefit.ViewModels
                     item.Id = CompteConnect.Id;
                     item.IsConnect = 1;
                     await App.DataBase.UpdateUtilisateurAsync(item);
+                    MessagingCenter.Send(this, "RefreshView");
                     await Navigation.PopAsync();
+                    
                 }
                 else
                 {
@@ -142,6 +148,7 @@ namespace Homefit.ViewModels
             
             GetUtilisateur();
         }
+        
         public async void GetUtilisateur()
         {
             CompteConnect = await App.DataBase.GetUtilisateurIsConnect();
@@ -152,7 +159,7 @@ namespace Homefit.ViewModels
             Prenom = CompteConnect.Prenom;
             Email = CompteConnect.Email;
             Password = CompteConnect.Password;
-
+            Objectifs = Enumerations.GetEnumByDescription(Enumerations.GetEnumDescription(CompteConnect.Ojectifs));
             if (CompteConnect.Sexe == "Femme")
             {
                 Sexe = true;
