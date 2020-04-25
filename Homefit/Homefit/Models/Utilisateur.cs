@@ -36,7 +36,10 @@ namespace Homefit.Models
         [JsonIgnore]
         public int IsConnect { get; set; }
 
-        [Ignore]
+        [JsonIgnore,Ignore]
+        public List<Materiel> MyMateriels { get; set; }
+
+        [Ignore,JsonProperty("materiels")]
         public List<string> Materiels { get; set; }
 
         [Ignore]
@@ -51,13 +54,11 @@ namespace Homefit.Models
         [Ignore]
         public List<string> ParticiperProgrammeSportifs { get; set; }
 
-        [JsonIgnore]
-        public string Photo { get; set; } 
+
 
         public Utilisateur()
         {
             Materiels = new List<string>();
-            Photo = "";
             ParticiperProgrammeSportifs = new List<string>();
             ParticiperEntrainements = new List<string>();
             MangerRepas = new List<string>();
@@ -72,10 +73,9 @@ namespace Homefit.Models
             ParticiperProgrammeSportifs = new List<string>();
             ParticiperEntrainements = new List<string>();
             MangerRepas = new List<string>();
-            Photo = "";
             ParticiperProgrammeNutritions = new List<string>();
         }
-        public Utilisateur(string email, string password, string nom, string prenom, DateTime dateNaiss, float poids, int taille,string sexe)
+        public Utilisateur(string email, string password, string nom, string prenom, DateTime dateNaiss, float poids, int taille,string sexe,string objectif)
         {
             Email = email;
             Password = password;
@@ -85,8 +85,12 @@ namespace Homefit.Models
             Poids = poids;
             Taille = taille;
             Sexe = sexe;
-            Photo = "";
-            Ojectifs = "";
+            Ojectifs = objectif;
+            Materiels = new List<string>();
+            ParticiperProgrammeSportifs = new List<string>();
+            ParticiperEntrainements = new List<string>();
+            MangerRepas = new List<string>();
+            ParticiperProgrammeNutritions = new List<string>();
         }
     }
 }

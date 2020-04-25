@@ -107,6 +107,10 @@ namespace Homefit.ViewModels
         }
         public ProfilViewModel()
         {
+            MessagingCenter.Subscribe<UpdateProfilViewModel>(this, "RefreshView", (sender) =>
+            {
+                GetUtilisateur();
+            });
             GetUtilisateur();
         }
         public async void GetUtilisateur()

@@ -1,4 +1,5 @@
 ﻿using Homefit.Models;
+using Homefit.Models.ApiResponse;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,28 @@ namespace Homefit.Services.Http
             _client = new HttpClient();
         }
 
+        public async Task<MaterielResponse> GetMaterielsAsync()
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/materiels");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<MaterielResponse>(content);
+            }
+            return null;
+        }
+
+        public async Task<MaterielResponse> GetUtilisateurMaterielsAsync(int id)
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/utilisateurs/{id}/materiels");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<MaterielResponse>(content);
+            }
+            return null;
+        }
+
         public async Task<UtilisateurResponse> GetUtilisateursAsync()
         {
             var response = await _client.GetAsync($"https://thedamteam.fr/api/utilisateurs");
@@ -28,7 +51,7 @@ namespace Homefit.Services.Http
             return null;
         }
 
-        public async Task<bool> SaveUtilisateurAsync(Utilisateur utilisateur, bool isNew = false)
+        public async Task<bool> SaveUtilisateurAsync(Utilisateur utilisateur, bool isNew = false,int id = 0)
         {
             var json = JsonConvert.SerializeObject(utilisateur);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -39,10 +62,9 @@ namespace Homefit.Services.Http
             }
             else
             {
-                response = await _client.PutAsync($"https://thedamteam.fr/api/utilisateurs", content);
+                response = await _client.PutAsync($"https://thedamteam.fr/api/utilisateurs/{id}", content);
             }
             return response.IsSuccessStatusCode;
-            
         }
 
 

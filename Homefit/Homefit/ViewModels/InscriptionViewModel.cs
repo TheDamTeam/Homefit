@@ -87,7 +87,7 @@ namespace Homefit.ViewModels
             IsBusy = true;
             try
             {
-                Utilisateur item = new Utilisateur(Email, Password, Nom, Prenom, DateNaiss, float.Parse(Poids), int.Parse(Taille), SexeText);
+                Utilisateur item = new Utilisateur(Email, Password, Nom, Prenom, DateNaiss, float.Parse(Poids), int.Parse(Taille), SexeText,"");
                 var apiResponse = await App.Client.SaveUtilisateurAsync(item, true);
                 if (apiResponse)
                 {
