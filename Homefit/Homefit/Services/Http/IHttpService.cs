@@ -12,6 +12,7 @@ namespace Homefit.Services.Http
         Task<UtilisateurResponse> GetUtilisateursAsync();
         Task<ProgrammeSportifResponse> GetProgrammeSportifAsync();
         Task<EntrainementResponse> GetEntrainementAsync(int id);
+        Task<bool> ParticipeProgrammeSportifAsync(ParticiperProgrammeSportif participerProgrammeSportif);
         Task<bool> SaveUtilisateurAsync(Utilisateur utilisateur, bool isNew = false);
     }
 }
