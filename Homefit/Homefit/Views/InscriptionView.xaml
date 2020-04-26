@@ -21,12 +21,13 @@
                 <Setter Property="FontAttributes" Value="None"/>
                 <Setter Property="Margin" Value="10,0,0,0"/>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontSize" Value="14"/>
                 <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
             </Style>
             <Style x:Key="CustomEntryStyle" TargetType="local:CustomEntry">
                 <Setter Property="TextColor" Value="BlueViolet"/>
                 <Setter Property="FontAttributes" Value="None"/>
+                <Setter Property="FontSize" Value="14"/>
                 <Setter Property="Margin" Value="10,0,20,0"/>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
                 <Setter Property="PlaceholderColor" Value="Black"/>
@@ -90,7 +91,7 @@
                             <Frame Style="{StaticResource FrameStyle}">
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Anniversaire" Style="{StaticResource SubtitleStyle}" />
-                                    <DatePicker Date="{Binding DateNaiss}" MinimumDate="01/01/1990" BackgroundColor="Transparent" Opacity="10" HorizontalOptions="StartAndExpand" Margin="0,0,25,0"/>
+                                    <DatePicker Date="{Binding DateNaiss}" MinimumDate="01/01/1990" FontSize="14" BackgroundColor="Transparent" Opacity="10" HorizontalOptions="StartAndExpand" Margin="0,0,25,0"/>
                                 </StackLayout>                                
                             </Frame>
                             <Frame Style="{StaticResource FrameStyle}">

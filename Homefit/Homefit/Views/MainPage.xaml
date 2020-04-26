@@ -20,7 +20,7 @@
                 <views:ProgrammesPage />
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="Mes Defis" IconImageSource="tab_defi.png">
+        <NavigationPage Title="Defis" IconImageSource="tab_defi.png">
             <x:Arguments>
                 <views:MesDefisView />
             </x:Arguments>

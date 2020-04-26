@@ -8,8 +8,7 @@
              x:Class="Homefit.Views.ProfilView">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Deconnexion" Order="Primary"
-                     Priority="0" Command="{Binding DeconnexionCommand}"/>
+        <ToolbarItem IconImageSource="logout.png"  Command="{Binding DeconnexionCommand}"/>
     </ContentPage.ToolbarItems>    
 
     <ContentPage.Resources>
