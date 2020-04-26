@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Homefit.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace Homefit.Views
         public MesDefisView()
         {
             InitializeComponent();
+            BindingContext = new DefisViewModel() { Navigation = Navigation };
         }
     }
 }

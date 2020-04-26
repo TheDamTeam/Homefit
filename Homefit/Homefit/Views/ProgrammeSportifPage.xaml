@@ -7,9 +7,21 @@
              x:Class="Homefit.Views.ProgrammeSportifPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+            <ListView  ItemTapped="lvItemTapped" VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" x:Name="laputaindeliste">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding ProgrammeName}">
+                            </Label>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            
         </StackLayout>
+    
     </ContentPage.Content>
 </ContentPage>

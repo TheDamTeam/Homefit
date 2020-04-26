@@ -8,12 +8,10 @@
     <ContentView.Content>
         <Frame
             x:Name="frame"
-            CornerRadius="75"
-                HeightRequest="150"
-                WidthRequest="150"
-                HorizontalOptions="Center"
-                Padding="0"
-                IsClippedToBounds="True">
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Padding="0"
+            IsClippedToBounds="True">
             <Image x:Name="image" 
                     HorizontalOptions="Center"
                     VerticalOptions="Center"/>

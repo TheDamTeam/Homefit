@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Homefit.Models
+namespace Homefit.Models.ApiResponse
 {
     public class UtilisateurResponse
     {
