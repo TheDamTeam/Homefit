@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using Xamarin.Forms;
 
 namespace Homefit.ViewModels.Base
@@ -13,7 +12,7 @@ namespace Homefit.ViewModels.Base
     {
         protected readonly IDataBase _dataBase = DependencyService.Get<IDataBase>();
         protected readonly INavigationService _navigationService = DependencyService.Get<INavigationService>();
-      
+
         bool isBusy;
         public bool IsBusy
         {
@@ -27,9 +26,14 @@ namespace Homefit.ViewModels.Base
             get { return isEmpty; }
             set { SetProperty(ref isEmpty, value); }
         }
-        public BaseViewModel()
+
+        string title = string.Empty;
+        public string Title
         {
+            get { return title; }
+            set { SetProperty(ref title, value); }
         }
+        public BaseViewModel(){}
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
