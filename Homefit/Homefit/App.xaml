@@ -29,7 +29,7 @@
                 <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="BarTextColor" Value="White" />
                 <Setter Property="BackgroundColor" Value="#FFFFFF" />
-            </Style>
+            </Style>            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
