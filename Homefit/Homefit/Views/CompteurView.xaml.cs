@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Homefit.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace Homefit.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DefisTabbedPage : TabbedPage
+    public partial class CompteurView : ContentPage
     {
-        public DefisTabbedPage()
+        public CompteurView()
         {
             InitializeComponent();
+            BindingContext = new CompteurViewModel() { Navigation = Navigation };
         }
     }
 }

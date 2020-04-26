@@ -10,5 +10,6 @@ namespace Homefit.Models
         public string Libelle { get; set; }
 
         public DateTime Duree { get; set; }
+        public string Description { get; set; }
     }
 }

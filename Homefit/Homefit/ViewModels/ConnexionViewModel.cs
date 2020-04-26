@@ -70,7 +70,7 @@ namespace Homefit.ViewModels
                             int i = 0;
                             while (!find && i < apiResponse.Counter)
                             {
-                                if (apiResponse.Utilisateurs[i].Email == Email && apiResponse.Utilisateurs[i].Password == Password)
+                                if (apiResponse.Liste[i].Email == Email && apiResponse.Liste[i].Password == Password)
                                 {
                                     find = true;
                                 }
@@ -82,7 +82,7 @@ namespace Homefit.ViewModels
                             }
                             if (find)
                             {
-                                Utilisateur mUtilisateur = apiResponse.Utilisateurs[i];
+                                Utilisateur mUtilisateur = apiResponse.Liste[i];
                                 mUtilisateur.IsConnect = 1;
                                 await App.DataBase.SaveUtilisateurAsync(mUtilisateur);
                                 _navigationService.SetCurrentPage(new MainPage(mUtilisateur));

@@ -9,16 +9,16 @@ namespace Homefit.Services.Http
 {
     public interface IHttpService
     {
-        Task<UtilisateurResponse> GetUtilisateursAsync();
-        Task<ProgrammeSportifResponse> GetProgrammeSportifAsync();
-        Task<EntrainementResponse> GetEntrainementAsync(int id);
+        Task<APIResponse<Utilisateur>> GetUtilisateursAsync();
+        Task<APIResponse<ProgrammeSportif>> GetProgrammeSportifAsync();
+        Task<APIResponse<Entrainement>> GetEntrainementAsync(int id);
         Task<bool> SaveUtilisateurAsync( Utilisateur utilisateur, bool isNew = false,int id = 0);
-        Task<RepasResponse> GetRepasAsync();
-        Task<MaterielResponse> GetMaterielsAsync();
-        Task<DefisResponse> GetDefisAsync();
-        Task<RepasCategorieResponse> GetRepasCategorieAsync(int id);
-        Task<MaterielResponse> GetUtilisateurMaterielsAsync(int idUtilisateur);
+        Task<APIResponse<Repas>> GetRepasAsync();
+        Task<APIResponse<Materiel>> GetMaterielsAsync();
+        Task<APIResponse<Defis>> GetDefisAsync();
+        Task<APIResponse<RepasCategorie>> GetRepasCategorieAsync(int id);
+        Task<APIResponse<Materiel>> GetUtilisateurMaterielsAsync(int idUtilisateur);
 
-
+        Task<APIResponse<Classement>> GetClassement(int idDefis);
     }
 }

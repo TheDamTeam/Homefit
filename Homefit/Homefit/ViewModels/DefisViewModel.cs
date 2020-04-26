@@ -24,7 +24,7 @@ namespace Homefit.ViewModels
             set
             {
                 SetProperty(ref defis, value);
-                Height = (Defis.Count * 40) + (Defis.Count * 10);
+                Height = (Defis.Count * 50);
             }
         }
         private Defis defisSelected;
@@ -36,7 +36,7 @@ namespace Homefit.ViewModels
                 SetProperty(ref defisSelected, value);
                 if(value != null)
                 {
-                    Navigation.PushAsync(new DefisTabbedPage());
+                    Navigation.PushAsync(new DetailDefisView(value));
                     DefisSelected = null;
                 }
             }
@@ -48,7 +48,9 @@ namespace Homefit.ViewModels
         public async void GetDefis()
         {
             var apiResponse = await App.Client.GetDefisAsync();
-            Defis = apiResponse.Defis;
+            Defis = apiResponse.Liste;
+            
+
         }
     }
 }

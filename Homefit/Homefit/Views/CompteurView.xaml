@@ -4,12 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Homefit.Views.ClassementDefisView">
+             x:Class="Homefit.Views.CompteurView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Label Text="{Binding Compteur}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="100"></Label>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
