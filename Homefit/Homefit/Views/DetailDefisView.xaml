@@ -2,14 +2,100 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:local="clr-namespace:Homefit.Views.Controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Homefit.Views.DetailDefisView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource BoldItalicFont}" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+            <Style x:Key="InfoStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource RegularFont}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="#758697" />
+            </Style>
+            <Style x:Key="ImageStyle" TargetType="Image">
+                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="Margin" Value="10,0,15,0"/>
+            </Style>
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="120"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="CornerRadius" Value="15"/>
+            </Style>
+            <Style x:Key="StackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Vertical" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <local:GradientColorStack StartColor="#8A2BE2" EndColor="#87CEEB">
+            </local:GradientColorStack>
+            <StackLayout Orientation="Vertical">
+                <Frame HeightRequest="150" Padding="0" Margin="0">
+                    <Image Source="fitness" Aspect="AspectFill" Margin="0"/>
+                </Frame>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" Padding="10,10">
+                <StackLayout Orientation="Vertical">
+                    <Frame Style="{StaticResource FrameStyle}">
+                        <StackLayout Orientation="Vertical">
+                            <Label Padding="5" Text="Description"  Style="{StaticResource TitleStyle}"/>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Style="{StaticResource StackLayoutStyle}">
+                                    <Label Padding="8" Text="{Binding Description}" Style="{StaticResource InfoStyle}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Frame Style="{StaticResource FrameStyle}">
+                        <StackLayout Orientation="Vertical">
+                            <Image Source="timer" HorizontalOptions="Fill" Style="{StaticResource ImageStyle}"/>
+                            <StackLayout Style="{StaticResource StackLayoutStyle}" HorizontalOptions="Center">
+                                <Label Text="{Binding Duree, StringFormat=' {0:mm:ss} minutes'}" Style="{StaticResource InfoStyle}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+                <Button Text="Faire le défis" TextColor="#8A2BE2" BackgroundColor="White" HeightRequest="40" WidthRequest="150" CornerRadius="30" Margin="0,20,0,10"  Command="{Binding ParticiperCommandButton}"/>
+                <StackLayout Orientation="Vertical">
+                    <Frame>
+                        <StackLayout Orientation="Vertical">
+                            <Label Padding="5" Text="Classement"  Style="{StaticResource TitleStyle}"/>
+                            <ListView x:Name="lstClassement" HasUnevenRows="true" HeightRequest="{Binding Height}" ItemsSource="{Binding Classement}" SelectionMode="None">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <StackLayout Orientation="Vertical" >
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding Position}" HorizontalOptions="Start"/>
+                                                    <Label Text="{Binding Name}" HorizontalOptions="Center"/>
+                                                    <Label Text="{Binding Score}" HorizontalOptions="EndAndExpand"/>
+                                                </StackLayout>
+
+                                            </StackLayout>
+
+                                        </ViewCell>
+
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

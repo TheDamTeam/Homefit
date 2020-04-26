@@ -23,14 +23,11 @@ namespace Homefit.Views
             
         }
 
-
-        
-
-            protected async void Load(int idSelected)
-            {
-                var APIResponse = await App.Client.GetEntrainementAsync(idSelected);
-                laputaindeliste.ItemsSource = APIResponse.Entrainements;
-            }
+        protected async void Load(int idSelected)
+        {
+            var APIResponse = await App.Client.GetEntrainementAsync(idSelected);
+            laputaindeliste.ItemsSource = APIResponse.Liste;
+        }
 
         
     }

@@ -18,35 +18,35 @@ namespace Homefit.Services.Http
             _client = new HttpClient();
         }
 
-        public async Task<MaterielResponse> GetMaterielsAsync()
+        public async Task<APIResponse<Materiel>> GetMaterielsAsync()
         {
             var response = await _client.GetAsync($"https://thedamteam.fr/api/materiels");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<MaterielResponse>(content);
+                return JsonConvert.DeserializeObject<APIResponse<Materiel>>(content);
             }
             return null;
         }
 
-        public async Task<MaterielResponse> GetUtilisateurMaterielsAsync(int id)
+        public async Task<APIResponse<Materiel>> GetUtilisateurMaterielsAsync(int id)
         {
             var response = await _client.GetAsync($"https://thedamteam.fr/api/utilisateurs/{id}/materiels");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<MaterielResponse>(content);
+                return JsonConvert.DeserializeObject<APIResponse<Materiel>>(content);
             }
             return null;
         }
 
-        public async Task<UtilisateurResponse> GetUtilisateursAsync()
+        public async Task<APIResponse<Utilisateur>> GetUtilisateursAsync()
         {
             var response = await _client.GetAsync($"https://thedamteam.fr/api/utilisateurs");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<UtilisateurResponse>(content);
+                return JsonConvert.DeserializeObject<APIResponse<Utilisateur>>(content);
             }
             return null;
         }
@@ -68,29 +68,29 @@ namespace Homefit.Services.Http
         }
 
 
-        public async Task<RepasResponse> GetRepasAsync()
+        public async Task<APIResponse<Repas>> GetRepasAsync()
         {
             var response = await _client.GetAsync($"https://thedamteam.fr/api/repas");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<RepasResponse>(content);
+                return JsonConvert.DeserializeObject<APIResponse<Repas>>(content);
             }
             return null;
         }
 
         //"/api/repas_categories/1"
-        public async Task<RepasCategorieResponse> GetRepasCategorieAsync(int id)
+        public async Task<APIResponse<RepasCategorie>> GetRepasCategorieAsync(int id)
         {
             var response = await _client.GetAsync($"https://thedamteam.fr/api/repas/{id}/categorie");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<RepasCategorieResponse>(content);
+                return JsonConvert.DeserializeObject<APIResponse<RepasCategorie>>(content);
             }
             return null;
         }
-        public async Task<ProgrammeSportifResponse> GetProgrammeSportifAsync()
+        public async Task<APIResponse<ProgrammeSportif>> GetProgrammeSportifAsync()
         {
             try
             {
@@ -101,7 +101,7 @@ namespace Homefit.Services.Http
                 // var result = await client.GetStringAsync("http://www.thedamteam.fr/api/programme_sportifs/");
 
 
-                var APIResponse = JsonConvert.DeserializeObject<ProgrammeSportifResponse>(serializedResponse);
+                var APIResponse = JsonConvert.DeserializeObject<APIResponse<ProgrammeSportif>>(serializedResponse);
                 return APIResponse;
 
             }
@@ -114,7 +114,7 @@ namespace Homefit.Services.Http
 
 
 
-        public async Task<EntrainementResponse> GetEntrainementAsync(int idSelected)
+        public async Task<APIResponse<Entrainement>> GetEntrainementAsync(int idSelected)
         {
             try
             {
@@ -125,7 +125,7 @@ namespace Homefit.Services.Http
                 // var result = await client.GetStringAsync("http://www.thedamteam.fr/api/programme_sportifs/");
 
 
-                return JsonConvert.DeserializeObject<EntrainementResponse>(serializedResponse);
+                return JsonConvert.DeserializeObject<APIResponse<Entrainement>>(serializedResponse);
 
 
             }
@@ -138,16 +138,35 @@ namespace Homefit.Services.Http
         }
 
 
-        public async Task<DefisResponse> GetDefisAsync()
+        public async Task<APIResponse<Defis>> GetDefisAsync()
         {
             var response = await _client.GetAsync($"https://thedamteam.fr/api/defis");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<DefisResponse>(content);
+                return JsonConvert.DeserializeObject<APIResponse<Defis>>(content);
             }
             return null;
         }
-
+        public async Task<AlimentResponse> GetAlimentAsync(string id)
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/aliments/"+id );
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<AlimentResponse>(content);
+            }
+            return null;
+        }
+        public async Task<APIResponse<Classement>> GetClassement(int idDefis)
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/defis/{idDefis}/classement");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<APIResponse<Classement>>(content);
+            }
+            return null;
+        }
     }
 }

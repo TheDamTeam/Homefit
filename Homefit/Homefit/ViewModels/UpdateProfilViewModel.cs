@@ -167,7 +167,11 @@ namespace Homefit.ViewModels
             Prenom = CompteConnect.Prenom;
             Email = CompteConnect.Email;
             Password = CompteConnect.Password;
-            Objectifs = Enumerations.GetEnumByDescription(Enumerations.GetEnumDescription(CompteConnect.Ojectifs));
+            if (CompteConnect.Ojectifs != "" && CompteConnect.Ojectifs != null)
+            {
+                Objectifs = Enumerations.GetEnumByDescription(Enumerations.GetEnumDescription(CompteConnect.Ojectifs));
+            }
+            
             if (CompteConnect.Sexe == "Femme")
             {
                 Sexe = true;
@@ -181,9 +185,9 @@ namespace Homefit.ViewModels
         public async void GetMateriel()
         {
             var apiResponse = await App.Client.GetUtilisateurMaterielsAsync(CompteConnect.Id);
-            CompteConnect.MyMateriels = apiResponse.Materiels;
+            CompteConnect.MyMateriels = apiResponse.Liste;
             apiResponse = await App.Client.GetMaterielsAsync();
-            foreach (Materiel m in apiResponse.Materiels)
+            foreach (Materiel m in apiResponse.Liste)
             {
                 if (CompteConnect.MyMateriels.Exists(x => x.Id == m.Id))
                 {
@@ -194,7 +198,7 @@ namespace Homefit.ViewModels
                     m.AvoirMateriel = false;
                 }
             }
-            Materiels = apiResponse.Materiels;
+            Materiels = apiResponse.Liste;
 
             
             

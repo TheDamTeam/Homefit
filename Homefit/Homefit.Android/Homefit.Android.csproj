@@ -265,13 +265,14 @@
     <AndroidResource Include="Resources\drawable\gymnastHomme.png" />
   </ItemGroup>
   <ItemGroup>
-
     <AndroidResource Include="Resources\drawable\fitness.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\IMG_1712.jpg" />
-
     <AndroidResource Include="Resources\drawable\healthImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\timer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

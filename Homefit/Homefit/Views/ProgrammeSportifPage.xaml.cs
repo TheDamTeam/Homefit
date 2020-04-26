@@ -37,7 +37,7 @@ namespace Homefit.Views
             protected async void Load()
             {
                 var APIResponse = await App.Client.GetProgrammeSportifAsync();
-                laputaindeliste.ItemsSource = APIResponse.ProgrammeSportifs;
+                laputaindeliste.ItemsSource = APIResponse.Liste;
             }
 
 

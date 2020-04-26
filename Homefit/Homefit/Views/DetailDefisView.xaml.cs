@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Homefit.Models;
+using Homefit.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,11 @@ namespace Homefit.Views
         public DetailDefisView()
         {
             InitializeComponent();
+        }
+        public DetailDefisView(Defis item)
+        {
+            InitializeComponent();
+            BindingContext = new DetailDefisViewModel(item) { Navigation = Navigation };
         }
     }
 }
