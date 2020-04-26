@@ -14,7 +14,9 @@ namespace Homefit.ViewModels
     public class ProgrammeAlimentaireViewModel : BaseViewModel
     {
         public INavigation Navigation { get; set; }
-
+        ProgrammeNutrition currentProgramme;
+        bool participe;
+        int dayNumber;
 
         //Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
 
@@ -22,9 +24,21 @@ namespace Homefit.ViewModels
         async void LoadDailyProgram(Days obj)
         {
             Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
-            int dayNumber = int.Parse(obj.day1.Split(' ')[1]);
+            dayNumber = int.Parse(obj.day1.Split(' ')[1]);
 
-            await Navigation.PushAsync(new ProgDayView(dayNumber));
+            //participeProgramme();
+
+            var apiResponse = await App.Client.GetUserProgNutritionAsync(utilisateur.Id);
+
+            if (apiResponse.Counter > 0)
+            {
+                await Navigation.PushAsync(new ProgDayView(dayNumber));
+            }
+            else
+            {
+                await Navigation.PushAsync(new ParticpeProgView(dayNumber));
+            }
+            
         }
         public ICommand GetProgramme2 => new Command<Days>(LoadDailyProgram2);
         async void LoadDailyProgram2(Days obj)
@@ -32,7 +46,16 @@ namespace Homefit.ViewModels
             Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
             int dayNumber = int.Parse(obj.day2.Split(' ')[1]);
 
-            await Navigation.PushAsync(new ProgDayView(dayNumber));
+            var apiResponse = await App.Client.GetUserProgNutritionAsync(utilisateur.Id);
+
+            if (apiResponse.Counter > 0)
+            {
+                await Navigation.PushAsync(new ProgDayView(dayNumber));
+            }
+            else
+            {
+                await Navigation.PushAsync(new ParticpeProgView(dayNumber));
+            }
         }
         public ICommand GetProgramme3 => new Command<Days>(LoadDailyProgram3);
         async void LoadDailyProgram3(Days obj)
@@ -40,7 +63,16 @@ namespace Homefit.ViewModels
             Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
             int dayNumber = int.Parse(obj.day3.Split(' ')[1]);
 
-            await Navigation.PushAsync(new ProgDayView(dayNumber));
+            var apiResponse = await App.Client.GetUserProgNutritionAsync(utilisateur.Id);
+
+            if (apiResponse.Counter > 0)
+            {
+                await Navigation.PushAsync(new ProgDayView(dayNumber));
+            }
+            else
+            {
+                await Navigation.PushAsync(new ParticpeProgView(dayNumber));
+            }
         }
 
         List<Days> days = new List<Days>();
@@ -51,6 +83,7 @@ namespace Homefit.ViewModels
         }
         public ProgrammeAlimentaireViewModel()
         {
+            participe = false;
             ListDays = new List<Days>()
             {
                 new Days("Jour 1","Jour 2","Jour 3"),
@@ -79,5 +112,31 @@ namespace Homefit.ViewModels
                 }
             }
         }
+
+        public async void participeProgramme()
+        {
+            Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
+            var apiResponse = await App.Client.GetParticipeProgNutritifAsync();
+            if (apiResponse.Counter > 0)
+            {
+                var participes = apiResponse.Participe;
+                participes.ForEach(async w =>
+                {
+                    var userUrlLength = w.Utilisateur.Length;
+                    var userId = w.Utilisateur[userUrlLength - 1];
+                    if (userId == utilisateur.Id)
+                    {
+                        this.participe = true;
+                        var programmeId = w.Id;
+                        var programme = await App.Client.GetProgNutritionAsync(programmeId);
+                        currentProgramme = new ProgrammeNutrition() { Id = Int32.Parse(programme.Id), ProgrammeName = programme.ProgrammeName, };
+                        await Navigation.PushAsync(new ProgDayView(dayNumber));
+                    }
+                });
+            }
+        }
+
+        
+
     }
 }

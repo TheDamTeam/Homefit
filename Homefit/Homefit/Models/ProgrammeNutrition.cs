@@ -8,7 +8,7 @@ namespace Homefit.Models
     {
         public int Id { get; set; }
         public string ProgrammeName { get; set; }
-        public List<Repas> Repas { get; set; }
-        public List<ParticiperProgrammeNutrition> ParticiperProgrammeNutritions { get; set; }
+        public List<string> Repas { get; set; }
+        public List<string> ParticiperProgrammeNutritions { get; set; }
     }
 }

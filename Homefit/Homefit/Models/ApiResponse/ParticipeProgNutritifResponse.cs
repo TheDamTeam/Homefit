@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Homefit.Models
 {
-    public class AlimentResponse
+    public class ParticipeProgNutritifResponse
     {
         [JsonProperty("@context")]
         public string Context { get; set; }
@@ -16,22 +16,8 @@ namespace Homefit.Models
         [JsonProperty("@type")]
         public string Type { get; set; }
 
-        [JsonProperty("alimentName")]
-        public string AlimentName { get; set; }
-        [JsonProperty("calorie")]
-        public float Calorie { get; set; }
-        [JsonProperty("proteine")]
-        public float Proteine { get; set; }
-        [JsonProperty("glucide")]
-        public float Glucide { get; set; }
-        [JsonProperty("quantite")]
-        public float Quantite { get; set; }
-
-
-
         [JsonProperty("hydra:member")]
-        public List<Repas> Repas { get; set; }
-
+        public List<ParticiperProgrammeNutrition> Participe { get; set; }
 
         [JsonProperty("hydra:totalItems")]
         public int Counter { get; set; }
