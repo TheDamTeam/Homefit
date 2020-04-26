@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Homefit.Models.ApiResponse
 {
-    public class UtilisateurResponse
+    public class MaterielResponse
     {
         [JsonProperty("@context")]
         public string Context { get; set; }
@@ -17,12 +17,10 @@ namespace Homefit.Models.ApiResponse
         public string Type { get; set; }
 
         [JsonProperty("hydra:member")]
-        public List<Utilisateur> Utilisateurs { get; set; }
+        public List<Materiel> Materiels { get; set; }
 
 
         [JsonProperty("hydra:totalItems")]
         public int Counter { get; set; }
-
-
     }
 }

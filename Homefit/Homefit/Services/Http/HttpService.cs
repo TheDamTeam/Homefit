@@ -18,6 +18,28 @@ namespace Homefit.Services.Http
             _client = new HttpClient();
         }
 
+        public async Task<MaterielResponse> GetMaterielsAsync()
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/materiels");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<MaterielResponse>(content);
+            }
+            return null;
+        }
+
+        public async Task<MaterielResponse> GetUtilisateurMaterielsAsync(int id)
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/utilisateurs/{id}/materiels");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<MaterielResponse>(content);
+            }
+            return null;
+        }
+
         public async Task<UtilisateurResponse> GetUtilisateursAsync()
         {
             var response = await _client.GetAsync($"https://thedamteam.fr/api/utilisateurs");
@@ -29,7 +51,7 @@ namespace Homefit.Services.Http
             return null;
         }
 
-        public async Task<bool> SaveUtilisateurAsync(Utilisateur utilisateur, bool isNew = false)
+        public async Task<bool> SaveUtilisateurAsync(Utilisateur utilisateur, bool isNew = false,int id = 0)
         {
             var json = JsonConvert.SerializeObject(utilisateur);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -40,10 +62,9 @@ namespace Homefit.Services.Http
             }
             else
             {
-                response = await _client.PutAsync($"https://thedamteam.fr/api/utilisateurs", content);
+                response = await _client.PutAsync($"https://thedamteam.fr/api/utilisateurs/{id}", content);
             }
             return response.IsSuccessStatusCode;
-            
         }
 
 
@@ -61,7 +82,7 @@ namespace Homefit.Services.Http
         //"/api/repas_categories/1"
         public async Task<RepasCategorieResponse> GetRepasCategorieAsync(int id)
         {
-            var response = await _client.GetAsync($"https://thedamteam.fr/api/repas/"+id+"/categorie");
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/repas/{id}/categorie");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -69,7 +90,6 @@ namespace Homefit.Services.Http
             }
             return null;
         }
-
         public async Task<ProgrammeSportifResponse> GetProgrammeSportifAsync()
         {
             try
@@ -115,6 +135,18 @@ namespace Homefit.Services.Http
 
             }
 
+        }
+
+
+        public async Task<DefisResponse> GetDefisAsync()
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/defis");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<DefisResponse>(content);
+            }
+            return null;
         }
 
     }

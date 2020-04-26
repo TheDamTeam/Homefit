@@ -1,5 +1,4 @@
-﻿using Homefit.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace Homefit.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class UpdateProfilView : ContentPage
+    public partial class ClassementDefisView : ContentPage
     {
-        public UpdateProfilView()
+        public ClassementDefisView()
         {
             InitializeComponent();
-            BindingContext = new UpdateProfilViewModel() { Navigation = Navigation };
         }
     }
 }
