@@ -207,6 +207,16 @@ namespace Homefit.Services.Http
             }
             return null;
         }
+        public async Task<APIResponse<Aliment>> GetRepasAlimentAsync(int id)
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/repas/{id}/aliments");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<APIResponse<Aliment>>(content);
+            }
+            return null;
+        }
         public async Task<APIResponse<Classement>> GetClassement(int idDefis)
         {
             var response = await _client.GetAsync($"https://thedamteam.fr/api/defis/{idDefis}/classement");

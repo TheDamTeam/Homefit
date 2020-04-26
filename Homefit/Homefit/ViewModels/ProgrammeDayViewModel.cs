@@ -17,7 +17,7 @@ namespace Homefit.ViewModels
         int currentDayNb;
         bool participe;
 
-        List<Aliment> ptiDej = new List<Aliment>();
+        private List<Aliment> ptiDej = new List<Aliment>();
         List<Aliment> diner = new List<Aliment>();
         List<Aliment> dejeuner = new List<Aliment>();
         List<Aliment> collation = new List<Aliment>();
@@ -71,137 +71,47 @@ namespace Homefit.ViewModels
             this.currentDayNb = dayNb;
             contentLabel += dayNb;
             this.dayNb = "Jour " + dayNb;
-            loadRepas();
+            LoadRepas();
             //PtiDej.Add(new Aliment() { AlimentName = "banane", Calorie = 100, Glucide = 10 });
             //PtiDej.Add(new Aliment() { AlimentName = "Pomme", Calorie = 100, Glucide = 10 });
         }
 
-        public async void loadRepas()
+        public async void LoadRepas()
         {
             var apiResponse = await App.Client.GetRepasAsync();
             if (apiResponse.Counter > 0)
             {
-
-                var repas = apiResponse.Liste;
- 
-                foreach(Repas x in repas)
+                var LesRepas = apiResponse.Liste;
+                foreach (Repas r in LesRepas)
                 {
-                    var repasCategorie = await App.Client.GetRepasCategorieAsync(x.Id);
-                    if (repasCategorie.Counter > 0)
+                    if (r.Jour == currentDayNb)
                     {
-                        string currentRepasCategorie = repasCategorie.Liste[0].Libelle;
-                        if (x.Jour == currentDayNb && currentRepasCategorie.Equals("Petit déjeuner"))
+                        var apiCategorie = await App.Client.GetRepasCategorieAsync(r.Id);
+                        if (apiCategorie.Counter > 0)
                         {
-                            x.Aliments.ForEach(async a =>
+                            var cat = apiCategorie.Liste;
+                            var apiAliment = await App.Client.GetRepasAlimentAsync(r.Id);
+                            switch(cat[0].Libelle)
                             {
-                                var lenght = a.Length;
-                                var id = a[lenght - 1];
-                                var aliment = await App.Client.GetAlimentAsync(id.ToString());
-                                Aliment currentAliment = new Aliment() { AlimentName = aliment.AlimentName, Calorie = aliment.Calorie, Glucide = aliment.Glucide, Proteine = aliment.Proteine, Quantite = aliment.Quantite };
-                                PtiDej.Add(currentAliment);
-                            });
-
+                                case "Petit déjeuner":
+                                    PtiDej = apiAliment.Liste;
+                                    break;
+                                case "Diner":
+                                    Diner = apiAliment.Liste;
+                                    break;
+                                case "Déjeuner":
+                                    Dejeuner = apiAliment.Liste;
+                                    break;
+                                case "Collation":
+                                    Collation = apiAliment.Liste;
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
-                        if (x.Jour == currentDayNb && currentRepasCategorie.Equals("Diner"))
-                        {
-                            x.Aliments.ForEach(async a =>
-                            {
-                                var lenght = a.Length;
-                                var id = a[lenght - 1];
-                                var aliment = await App.Client.GetAlimentAsync(id.ToString());
-                                Aliment currentAliment = new Aliment() { AlimentName = aliment.AlimentName, Calorie = aliment.Calorie, Glucide = aliment.Glucide, Proteine = aliment.Proteine, Quantite = aliment.Quantite };
-                                Diner.Add(currentAliment);
-                            });
-                        }
-                        if (x.Jour == currentDayNb && currentRepasCategorie.Equals("Déjeuner"))
-                        {
-                            x.Aliments.ForEach(async a =>
-                            {
-                                var lenght = a.Length;
-                                var id = a[lenght - 1];
-                                var aliment = await App.Client.GetAlimentAsync(id.ToString());
-                                Aliment currentAliment = new Aliment() { AlimentName = aliment.AlimentName, Calorie = aliment.Calorie, Glucide = aliment.Glucide, Proteine = aliment.Proteine, Quantite = aliment.Quantite };
-                                Dejeuner.Add(currentAliment);
-                            });
-                        }
-                        if (x.Jour == currentDayNb && currentRepasCategorie.Equals("Collation"))
-                        {
-                            List<Aliment> currentCollation = new List<Aliment>();
-                            x.Aliments.ForEach(async a =>
-                            {
-                                var lenght = a.Length;
-                                var id = a[lenght - 1];
-                                var aliment = await App.Client.GetAlimentAsync(id.ToString());
-                                Aliment currentAliment = new Aliment() { AlimentName = aliment.AlimentName, Calorie = aliment.Calorie, Glucide = aliment.Glucide, Proteine = aliment.Proteine, Quantite = aliment.Quantite };
-                                currentCollation.Add(currentAliment);
-                            });
-                            Collation = currentCollation;
-                        }
-
                     }
                 }
-               /* repas.ForEach(async (x) =>
-                {
-                    var repasCategorie = await App.Client.GetRepasCategorieAsync(x.Id);
-                    if (repasCategorie.Counter > 0)
-                    {
-                        string currentRepasCategorie = repasCategorie.Liste[0].Libelle;
-                        if (x.Jour == currentDayNb && currentRepasCategorie.Equals("Petit déjeuner"))
-                        {
-                            x.Aliments.ForEach(async a =>
-                            {
-                                var lenght = a.Length;
-                                var id = a[lenght - 1];
-                                var aliment = await App.Client.GetAlimentAsync(id.ToString());
-                                Aliment currentAliment = new Aliment() { AlimentName = aliment.AlimentName, Calorie = aliment.Calorie, Glucide = aliment.Glucide, Proteine = aliment.Proteine, Quantite = aliment.Quantite };
-                                PtiDej.Add(currentAliment);
-                            });
-
-                        }
-                        if (x.Jour == currentDayNb && currentRepasCategorie.Equals("Diner"))
-                        {
-                            x.Aliments.ForEach(async a =>
-                            {
-                                var lenght = a.Length;
-                                var id = a[lenght - 1];
-                                var aliment = await App.Client.GetAlimentAsync(id.ToString());
-                                Aliment currentAliment = new Aliment() { AlimentName = aliment.AlimentName, Calorie = aliment.Calorie, Glucide = aliment.Glucide, Proteine = aliment.Proteine, Quantite = aliment.Quantite };
-                                Diner.Add(currentAliment);
-                            });
-                        }
-                        if (x.Jour == currentDayNb && currentRepasCategorie.Equals("Déjeuner"))
-                        {
-                            x.Aliments.ForEach(async a =>
-                            {
-                                var lenght = a.Length;
-                                var id = a[lenght - 1];
-                                var aliment = await App.Client.GetAlimentAsync(id.ToString());
-                                Aliment currentAliment = new Aliment() { AlimentName = aliment.AlimentName, Calorie = aliment.Calorie, Glucide = aliment.Glucide, Proteine = aliment.Proteine, Quantite = aliment.Quantite };
-                                Dejeuner.Add(currentAliment);
-                            });
-                        }
-                        if (x.Jour == currentDayNb && currentRepasCategorie.Equals("Collation"))
-                        {
-                            List<Aliment> currentCollation = new List<Aliment>();
-                            x.Aliments.ForEach(async a =>
-                            {
-                                var lenght = a.Length;
-                                var id = a[lenght - 1];
-                                var aliment = await App.Client.GetAlimentAsync(id.ToString());
-                                Aliment currentAliment = new Aliment() { AlimentName = aliment.AlimentName, Calorie = aliment.Calorie, Glucide = aliment.Glucide, Proteine = aliment.Proteine, Quantite = aliment.Quantite };
-                                currentCollation.Add(currentAliment);
-                            });
-                            Collation = currentCollation;
-                        }
-
-                    }
-
-                });*/
             }
         }
-
-
-
-
     }
 }
