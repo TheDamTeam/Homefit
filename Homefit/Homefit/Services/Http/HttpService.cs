@@ -66,7 +66,14 @@ namespace Homefit.Services.Http
             }
             return response.IsSuccessStatusCode;
         }
+        public async Task<bool> SaveParticiperDefisAsync(ParticiperDefis defis)
+        {
+            var json = JsonConvert.SerializeObject(defis);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await _client.PostAsync($"https://thedamteam.fr/api/participer_defis", content);
 
+            return response.IsSuccessStatusCode;
+        }
 
         public async Task<APIResponse<Repas>> GetRepasAsync()
         {

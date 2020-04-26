@@ -21,6 +21,14 @@ namespace Homefit.ViewModels
             set { SetProperty(ref defis, value); }
         }
 
+        public ICommand ParticiperCommandButton => new Command(ExecuteClickedCommandAsync);
+
+        private void ExecuteClickedCommandAsync(object obj)
+        {
+            Navigation.PushAsync(new CompteurView(Defis));
+        }
+
+
         private string description;
         public string Description
         {

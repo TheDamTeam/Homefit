@@ -75,7 +75,8 @@
                             </StackLayout>
                         </StackLayout>
                     </Frame>
-                    <Button Text="Faire le défis" TextColor="#8A2BE2" BackgroundColor="White" HeightRequest="40" WidthRequest="150" CornerRadius="30" Margin="0,20,0,10"  Command="{Binding ParticiperCommandButton}"/>
+
+                    <Button Text="Faire le défi" TextColor="#8A2BE2" BackgroundColor="White" HeightRequest="40" WidthRequest="150" CornerRadius="30" Margin="0,20,0,10"  Command="{Binding ParticiperCommandButton}"/>
                     <Frame Style="{StaticResource FrameStyle}">
                         <StackLayout Orientation="Vertical" Style="{StaticResource StackLayoutStyle}">
                             <Label Text="Classement" Style="{StaticResource TitleStyle}"/>
