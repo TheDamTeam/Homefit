@@ -25,14 +25,16 @@ namespace Homefit.Models
         public Categorie Categorie { get; set; }
 
         [JsonProperty("id_materiel_id")]
-        public int Materiel { get; set; }
+      
+        public int? Materiel { get; set; }
+
 
         [JsonIgnore]
         public List<ProgrammeSportif> ProgrammeSportifs { get; set; }
 
         [JsonIgnore]
         public List<ParticiperEntrainement> ParticiperEntrainements { get; set; }
-        
+
         public Entrainement()
         {
 
