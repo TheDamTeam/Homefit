@@ -5,7 +5,9 @@
              xmlns:local="clr-namespace:Homefit.Views.Controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Homefit.Views.DetailDefisView">
+             x:Class="Homefit.Views.DetailDefisView"
+             Title="{Binding Title}">
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="TitleStyle" TargetType="Label">
@@ -18,13 +20,17 @@
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="TextColor" Value="#758697" />
             </Style>
+            <Style x:Key="SubtitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="None"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
             <Style x:Key="ImageStyle" TargetType="Image">
-                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="HeightRequest" Value="50"/>
                 <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
                 <Setter Property="Margin" Value="10,0,15,0"/>
             </Style>
             <Style x:Key="FrameStyle" TargetType="Frame">
-                <Setter Property="HeightRequest" Value="120"/>
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="Margin" Value="0"/>
                 <Setter Property="CornerRadius" Value="15"/>
@@ -32,8 +38,15 @@
             <Style x:Key="StackLayoutStyle" TargetType="StackLayout">
                 <Setter Property="Orientation" Value="Vertical" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="Margin" Value="10,5,10,10"/>
             </Style>
-
+            <Style x:Key="ListStyle" TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HasUnevenRows" Value="True" />
+                <Setter Property="SeparatorVisibility" Value="None" />
+                <Setter Property="SelectionMode" Value="None" />
+                <Setter Property="IsPullToRefreshEnabled" Value="True" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -43,59 +56,49 @@
             </local:GradientColorStack>
             <StackLayout Orientation="Vertical">
                 <Frame HeightRequest="150" Padding="0" Margin="0">
-                    <Image Source="fitness" Aspect="AspectFill" Margin="0"/>
+                    <Image Source="{Binding Libelle}" Aspect="AspectFill" Margin="0"/>
                 </Frame>
             </StackLayout>
-            <StackLayout Orientation="Vertical" Padding="10,10">
-                <StackLayout Orientation="Vertical">
-                    <Frame Style="{StaticResource FrameStyle}">
-                        <StackLayout Orientation="Vertical">
-                            <Label Padding="5" Text="Description"  Style="{StaticResource TitleStyle}"/>
-                            <StackLayout Orientation="Horizontal">
-                                <StackLayout Style="{StaticResource StackLayoutStyle}">
-                                    <Label Padding="8" Text="{Binding Description}" Style="{StaticResource InfoStyle}"/>
-                                </StackLayout>
-                            </StackLayout>
+            <ScrollView HorizontalScrollBarVisibility="Never">
+                <StackLayout Orientation="Vertical" Padding="10,10">
+                    <Frame Style="{StaticResource FrameStyle}" Margin="0,130,0,0" Padding="0">
+                        <StackLayout Orientation="Vertical" Style="{StaticResource StackLayoutStyle}">
+                            <Label Text="Description" Style="{StaticResource TitleStyle}"/>
+                            <Label Text="{Binding Description}" Style="{StaticResource InfoStyle}" HorizontalTextAlignment="Center"/>
                         </StackLayout>
                     </Frame>
-                </StackLayout>
-                <StackLayout Orientation="Vertical">
                     <Frame Style="{StaticResource FrameStyle}">
-                        <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal" Style="{StaticResource StackLayoutStyle}">
                             <Image Source="timer" HorizontalOptions="Fill" Style="{StaticResource ImageStyle}"/>
                             <StackLayout Style="{StaticResource StackLayoutStyle}" HorizontalOptions="Center">
                                 <Label Text="{Binding Duree, StringFormat=' {0:mm:ss} minutes'}" Style="{StaticResource InfoStyle}"/>
                             </StackLayout>
                         </StackLayout>
                     </Frame>
-                </StackLayout>
-                <Button Text="Faire le défis" TextColor="#8A2BE2" BackgroundColor="White" HeightRequest="40" WidthRequest="150" CornerRadius="30" Margin="0,20,0,10"  Command="{Binding ParticiperCommandButton}"/>
-                <StackLayout Orientation="Vertical">
-                    <Frame>
-                        <StackLayout Orientation="Vertical">
-                            <Label Padding="5" Text="Classement"  Style="{StaticResource TitleStyle}"/>
-                            <ListView x:Name="lstClassement" HasUnevenRows="true" HeightRequest="{Binding Height}" ItemsSource="{Binding Classement}" SelectionMode="None">
+                    <Button Text="Faire le défis" TextColor="#8A2BE2" BackgroundColor="White" HeightRequest="40" WidthRequest="150" CornerRadius="30" Margin="0,20,0,10"  Command="{Binding ParticiperCommandButton}"/>
+                    <Frame Style="{StaticResource FrameStyle}">
+                        <StackLayout Orientation="Vertical" Style="{StaticResource StackLayoutStyle}">
+                            <Label Text="Classement" Style="{StaticResource TitleStyle}"/>
+                            <ListView HeightRequest="{Binding Height}" ItemsSource="{Binding Classement}" Style="{StaticResource ListStyle}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
                                             <StackLayout Orientation="Vertical" >
                                                 <StackLayout Orientation="Horizontal">
-                                                    <Label Text="{Binding Position}" HorizontalOptions="Start"/>
-                                                    <Label Text="{Binding Name}" HorizontalOptions="Center"/>
-                                                    <Label Text="{Binding Score}" HorizontalOptions="EndAndExpand"/>
+                                                    <Label Text="{Binding Position}" HorizontalOptions="StartAndExpand" Style="{StaticResource SubtitleStyle}"/>
+                                                    <Label Text="{Binding Name}" HorizontalOptions="CenterAndExpand" Style="{StaticResource InfoStyle}" />
+                                                    <Label Text="{Binding Score}" HorizontalOptions="EndAndExpand" Style="{StaticResource InfoStyle}"/>
+                                                    <Label Text="{Binding DefiName}"/>
                                                 </StackLayout>
-
                                             </StackLayout>
-
                                         </ViewCell>
-
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
                         </StackLayout>
                     </Frame>
                 </StackLayout>
-            </StackLayout>
+            </ScrollView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
