@@ -16,13 +16,15 @@
                 <Setter Property="FontSize" Value="Title"/>
                 <Setter Property="TextColor" Value="BlueViolet"/>
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
-
             </Style>
             <Style x:Key="CustomEntryStyle" TargetType="local:CustomEntry">
                 <Setter Property="TextColor" Value="BlueViolet"/>
                 <Setter Property="FontAttributes" Value="None"/>
+                <Setter Property="FontSize" Value="14"/>
                 <Setter Property="Margin" Value="0,0,20,0"/>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="PlaceholderColor" Value="Black"/>
+                <Setter Property="ReturnType" Value="Next"/>
             </Style>
             <Style x:Key="FrameStyle" TargetType="Frame">
                 <Setter Property="CornerRadius" Value="30"/>
@@ -43,20 +45,16 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.Content>
-        
-        <Grid>
-            
+    <ContentPage.Content>        
+        <Grid>            
             <local:GradientColorStack StartColor="#8A2BE2" EndColor="#87CEEB">
             </local:GradientColorStack>
-
             <StackLayout Orientation="Vertical">
                 <Frame HeightRequest="250" Padding="0" Margin="0">
                     <Image Source="fitnessHomeFit.jpg" Aspect="AspectFill" Margin="0"/>
                 </Frame>
             </StackLayout>
             <ScrollView>
-
                 <Frame BackgroundColor="White" HasShadow="True" Margin="10,200,10,10" Padding="0" >
                     <StackLayout Orientation="Vertical">
                         <Label Text="HOMEFIT" Style="{StaticResource TitleStyle}" Margin="10"/>
@@ -66,7 +64,8 @@
                                     <Frame Style="{StaticResource FrameImageStyle}">
                                         <Image Source="avatar.png" Aspect="AspectFill"/>
                                     </Frame>
-                                    <local:CustomEntry Placeholder="Email" Text="{Binding Email}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
+                                    <local:CustomEntry Placeholder="Email" Text="{Binding Email}" Style="{StaticResource CustomEntryStyle}"/>
+
 
                                 </StackLayout>
                             </Frame>
@@ -75,29 +74,26 @@
                                     <Frame Style="{StaticResource FrameImageStyle}">
                                         <Image Source="lock.jpg" Aspect="AspectFill"/>
                                     </Frame>
-                                    <local:CustomEntry Placeholder="Password" PlaceholderColor="Black" Text="{Binding Password}" IsPassword="True" Style="{StaticResource CustomEntryStyle}" />
+                                    <local:CustomEntry Placeholder="Password" Text="{Binding Password}" IsPassword="True" Style="{StaticResource CustomEntryStyle}"/>
                                 </StackLayout>
                             </Frame>
                             <local:GradientColorButton TextColor="White" StartColor="#87CEEB" EndColor="#8A2BE2" HeightRequest="40" WidthRequest="150" CornerRadius="30" Margin="0,20,0,0" Text="SIGN IN" Command="{Binding ConnexionButtonClickedCommand}"/>
                             <StackLayout IsVisible="{Binding IsBusy}" Padding="2">
                                 <ActivityIndicator IsRunning="{Binding IsBusy}" />
                                 <Label Text="Chargement..." HorizontalOptions="CenterAndExpand" />
-
                             </StackLayout>
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10">
-                                <Label Text="Vous n'avez pas de compte ?" TextColor="Black"/>
-                                <Label Text="Inscrivez-Vous" TextColor="BlueViolet" FontAttributes="Bold">
+                            <StackLayout HorizontalOptions="CenterAndExpand" Margin="0,20,0,0">
+                                <Label Text="Vous n'avez pas de compte ?" TextColor="Black" FontSize="14"/>
+                                <Label Text="Inscrivez-Vous" TextColor="BlueViolet" FontAttributes="Bold" FontSize="14" HorizontalOptions="CenterAndExpand">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding InscriptionCommand}"/>
                                     </Label.GestureRecognizers>
                                 </Label>
                             </StackLayout>
-                            
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-            </ScrollView>
-            
+            </ScrollView>            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

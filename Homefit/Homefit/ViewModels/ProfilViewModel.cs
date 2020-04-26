@@ -1,4 +1,5 @@
-﻿using Homefit.Interfaces;
+﻿using Homefit.Enum;
+using Homefit.Interfaces;
 using Homefit.Models;
 using Homefit.ViewModels.Base;
 using Homefit.Views;
@@ -72,6 +73,12 @@ namespace Homefit.ViewModels
             await Navigation.PushAsync(new UpdateProfilView());
            
         }
+        private string objectifs;
+        public string Objectifs
+        {
+            get { return objectifs; }
+            set { SetProperty(ref objectifs, value); }
+        }
         private ImageSource photo;
         public ImageSource Photo
         {
@@ -107,6 +114,10 @@ namespace Homefit.ViewModels
         }
         public ProfilViewModel()
         {
+            MessagingCenter.Subscribe<UpdateProfilViewModel>(this, "RefreshView", (sender) =>
+            {
+                GetUtilisateur();
+            });
             GetUtilisateur();
         }
         public async void GetUtilisateur()
@@ -117,7 +128,14 @@ namespace Homefit.ViewModels
             DateNaiss = CompteConnect.DateNaiss;
             NomPrenom = CompteConnect.Prenom+" "+CompteConnect.Nom;
             Sexe = CompteConnect.Sexe;
-
+            if(CompteConnect.Ojectifs != "" && CompteConnect.Ojectifs != null)
+            {
+                Objectifs = Enumerations.GetEnumDescription(CompteConnect.Ojectifs);
+            }
+            else
+            {
+                Objectifs = "-";
+            }
             Photo = ImageSource.FromFile("gymnast"+CompteConnect.Sexe+".png");
         }
     }

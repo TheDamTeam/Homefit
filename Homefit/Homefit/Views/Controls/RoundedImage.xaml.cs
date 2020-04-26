@@ -24,7 +24,7 @@ namespace Homefit.Views.Controls
             if (newValue is Size size && bindable is RoundedImage)
             {
                 ((RoundedImage)bindable).frame.HeightRequest = size.Height;
-                ((RoundedImage)bindable).frame.WidthRequest = size.Height;
+                ((RoundedImage)bindable).frame.WidthRequest = size.Width;
                 ((RoundedImage)bindable).frame.CornerRadius = (float)size.Height / 2;
             }
         });

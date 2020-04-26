@@ -19,35 +19,19 @@ namespace Homefit.Views
 		public ProgrammeSportifDetail (int idSelected)
 		{
 			InitializeComponent ();
-           // int idSelected = Int32.Parse(v);
             Load(idSelected);
             
         }
 
 
-        protected async void Load(int idSelected)
-        {
+        
 
-            try
+            protected async void Load(int idSelected)
             {
-                var client = HttpService.GetInstance();
-                var result = await client.GetAsync($" https://www.thedamteam.fr/api/programme_sportif/"+ idSelected + "/entrainements");
-                var serializedResponse = await result.Content.ReadAsStringAsync();
-
-                // var result = await client.GetStringAsync("http://www.thedamteam.fr/api/programme_sportifs/");
-
-
-                var APIResponse = JsonConvert.DeserializeObject<EntrainementResponse>(serializedResponse);
-                Debug.WriteLine("FONCTIONNE" + APIResponse.Entrainements[idSelected].EntrainementName);
+                var APIResponse = await App.Client.GetEntrainementAsync(idSelected);
                 laputaindeliste.ItemsSource = APIResponse.Entrainements;
-             Debug.WriteLine("COUNT" + APIResponse.Entrainements.Count);
-
-            }
-            catch (Exception ey)
-            {
-                Debug.WriteLine("NOTFONCTIONNE" + ey);
             }
 
-        }
+        
     }
 }

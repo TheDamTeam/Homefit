@@ -7,9 +7,24 @@
              x:Class="Homefit.Views.MesDefisView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ListView x:Name="lstDefis" HasUnevenRows="true" HeightRequest="{Binding Height}" ItemsSource="{Binding Defis}" SelectedItem="{Binding DefisSelected, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" >
+                                <Image Source="fitness" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center"></Image>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Libelle}"/>
+                                    <Label Text="{Binding Duree, StringFormat=' {0:mm:ss} minutes'}"/>
+                                </StackLayout>
+                                
+                            </StackLayout>
+                            
+                        </ViewCell>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
