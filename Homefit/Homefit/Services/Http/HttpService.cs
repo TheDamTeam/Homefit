@@ -42,7 +42,6 @@ namespace Homefit.Services.Http
                 response = await _client.PutAsync($"https://thedamteam.fr/api/utilisateurs", content);
             }
             return response.IsSuccessStatusCode;
-            
         }
 
 
@@ -57,7 +56,17 @@ namespace Homefit.Services.Http
             return null;
         }
 
-        //"/api/repas_categories/1"
+        public async Task<RepasResponse> GetAlimentsRepasAsync(int id)
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/repas/"+id+"/aliments");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<RepasResponse>(content);
+            }
+            return null;
+        }
+
         public async Task<RepasCategorieResponse> GetRepasCategorieAsync(int id)
         {
             var response = await _client.GetAsync($"https://thedamteam.fr/api/repas/"+id+"/categorie");
@@ -69,5 +78,70 @@ namespace Homefit.Services.Http
             return null;
         }
 
+        public async Task<AlimentResponse> GetAlimentAsync(string id)
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/aliments/"+id );
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<AlimentResponse>(content);
+            }
+            return null;
+        }
+
+        public async Task<ParticipeProgNutritifResponse> GetParticipeProgNutritifAsync()
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/participer_programme_nutritions");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ParticipeProgNutritifResponse>(content);
+            }
+            return null;
+        }
+
+        public async Task<ProgrammeNutritifResponse> GetProgNutritionAsync(int id)
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/programme_nutritions/"+id);
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ProgrammeNutritifResponse>(content);
+            }
+            return null;
+        }
+
+        public async Task<ProgrammeNutritifResponses> GetProgNutritionsAsync()
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/programme_nutritions");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ProgrammeNutritifResponses>(content);
+            }
+            return null;
+        }
+
+        public async Task<bool> SaveParticipeProgNutritionAsync(ParticiperProgrammeNutrition prog)
+        {
+            var json = JsonConvert.SerializeObject(prog);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = null;
+
+            response = await _client.PostAsync($"https://thedamteam.fr/api/participer_programme_nutritions", content);
+
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<UserProgNutritionResponse> GetUserProgNutritionAsync(int id)
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/utilisateurs/"+id+"/programme_nutritions");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<UserProgNutritionResponse>(content);
+            }
+            return null;
+        }
     }
 }

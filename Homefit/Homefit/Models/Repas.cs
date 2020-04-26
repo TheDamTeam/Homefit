@@ -19,5 +19,6 @@ namespace Homefit.Models
         {
             Aliments = new List<string>();
         }
+        public int Jour { get; set; }
     }
 }

@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Homefit.Models
 {
-    public class RepasCategorieResponse
+    
+    public class UserProgNutritionResponse
     {
         [JsonProperty("@context")]
         public string Context { get; set; }
@@ -17,7 +18,7 @@ namespace Homefit.Models
         public string Type { get; set; }
 
         [JsonProperty("hydra:member")]
-        public List<RepasCategorie> RepasCategorie { get; set; }
+        public List<ProgrammeNutrition> Prog { get; set; }
 
 
         [JsonProperty("hydra:totalItems")]
