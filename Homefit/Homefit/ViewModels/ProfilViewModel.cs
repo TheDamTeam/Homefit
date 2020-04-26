@@ -128,7 +128,14 @@ namespace Homefit.ViewModels
             DateNaiss = CompteConnect.DateNaiss;
             NomPrenom = CompteConnect.Prenom+" "+CompteConnect.Nom;
             Sexe = CompteConnect.Sexe;
-            Objectifs = Enumerations.GetEnumDescription(CompteConnect.Ojectifs);
+            if(CompteConnect.Ojectifs != "" && CompteConnect.Ojectifs != null)
+            {
+                Objectifs = Enumerations.GetEnumDescription(CompteConnect.Ojectifs);
+            }
+            else
+            {
+                Objectifs = "-";
+            }
             Photo = ImageSource.FromFile("gymnast"+CompteConnect.Sexe+".png");
         }
     }

@@ -15,7 +15,7 @@
                                 <Image Source="fitness" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center"></Image>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Libelle}"/>
-                                    <Label Text="{Binding Duree, StringFormat=' {0:mm:ss} minutes'}}"/>
+                                    <Label Text="{Binding Duree, StringFormat=' {0:mm:ss} minutes'}"/>
                                 </StackLayout>
                                 
                             </StackLayout>
