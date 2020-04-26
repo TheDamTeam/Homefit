@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace Homefit.Services.Http
 {
-    public class HttpService : IHttpService
+    public class HttpService 
     {
         HttpClient _client;
         public  HttpService()
@@ -111,8 +111,57 @@ namespace Homefit.Services.Http
             }
 
         }
+        public async Task<ParticipeProgNutritifResponse> GetParticipeProgNutritifAsync()
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/participer_programme_nutritions");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ParticipeProgNutritifResponse>(content);
+            }
+            return null;
+        }
+        public async Task<UserProgNutritionResponse> GetUserProgNutritionAsync(int id)
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/utilisateurs/" + id + "/programme_nutritions");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<UserProgNutritionResponse>(content);
+            }
+            return null;
+        }
+        public async Task<bool> SaveParticipeProgNutritionAsync(ParticiperProgrammeNutrition prog)
+        {
+            var json = JsonConvert.SerializeObject(prog);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = null;
 
+            response = await _client.PostAsync($"https://thedamteam.fr/api/participer_programme_nutritions", content);
 
+            return response.IsSuccessStatusCode;
+        }
+        public async Task<ProgrammeNutritifResponse> GetProgNutritionAsync(int id)
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/programme_nutritions/" + id);
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ProgrammeNutritifResponse>(content);
+            }
+            return null;
+        }
+
+        public async Task<ProgrammeNutritifResponses> GetProgNutritionsAsync()
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/programme_nutritions");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ProgrammeNutritifResponses>(content);
+            }
+            return null;
+        }
 
         public async Task<APIResponse<Entrainement>> GetEntrainementAsync(int idSelected)
         {
