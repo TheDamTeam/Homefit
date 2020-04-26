@@ -22,7 +22,7 @@ namespace Homefit.ViewModels
 
         private void ExecuteClickedCommandAsync(object obj)
         {
-            Navigation.PushAsync(new CompteurView());
+            Navigation.PushAsync(new CompteurView(Defis));
         }
 
         private string description;

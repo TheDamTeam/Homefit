@@ -69,7 +69,7 @@
                         </StackLayout>
                     </Frame>
                 </StackLayout>
-                <Button Text="Faire le défis" TextColor="#8A2BE2" BackgroundColor="White" HeightRequest="40" WidthRequest="150" CornerRadius="30" Margin="0,20,0,10"  Command="{Binding ParticiperCommandButton}"/>
+                <Button Text="Faire le défi" TextColor="#8A2BE2" BackgroundColor="White" HeightRequest="40" WidthRequest="150" CornerRadius="30" Margin="0,20,0,10"  Command="{Binding ParticiperCommandButton}"/>
                 <StackLayout Orientation="Vertical">
                     <Frame>
                         <StackLayout Orientation="Vertical">

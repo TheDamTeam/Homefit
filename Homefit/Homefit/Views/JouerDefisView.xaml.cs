@@ -1,5 +1,4 @@
-﻿
-using Homefit.Models;
+﻿using Homefit.Models;
 using Homefit.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,12 +12,16 @@ using Xamarin.Forms.Xaml;
 namespace Homefit.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CompteurView : ContentPage
+    public partial class JouerDefisView : ContentPage
     {
-        public CompteurView(Defis defis)
+        public JouerDefisView()
         {
             InitializeComponent();
-            BindingContext = new CompteurViewModel(defis) { Navigation = Navigation };
+        }
+        public JouerDefisView(Defis defis)
+        {
+            InitializeComponent();
+            BindingContext = new JouerDefisViewModel(defis) { Navigation = Navigation };
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Homefit.ViewModels.Base;
+﻿using Homefit.Models;
+using Homefit.ViewModels.Base;
+using Homefit.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,13 +21,19 @@ namespace Homefit.ViewModels
                 SetProperty(ref compteur, value);
                 if (Compteur == 0)
                 {
-                    Navigation.PopAsync();
-                    Alert();
+                    _navigationService.SetCurrentPage(new JouerDefisView(Defis));
                 }
             }
         }
-        public CompteurViewModel()
+        private Defis defis;
+        public Defis Defis
         {
+            get { return defis; }
+            set { SetProperty(ref defis,value); }
+        }
+        public CompteurViewModel(Defis defis)
+        {
+            Defis = defis;
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 Compteur--;
@@ -37,10 +45,6 @@ namespace Homefit.ViewModels
              });
 
         }
-        private async void Alert()
-        {
-            
-            string result = await Application.Current.MainPage.DisplayPromptAsync("Score", "Quel est votre score ?");
-        }
+       
     }
 }
