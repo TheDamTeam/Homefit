@@ -11,9 +11,10 @@ namespace Homefit.Services.Http
     {
         Task<UtilisateurResponse> GetUtilisateursAsync();
         Task<bool> SaveUtilisateurAsync( Utilisateur utilisateur, bool isNew = false,int id = 0);
-
+        Task<RepasResponse> GetRepasAsync();
         Task<MaterielResponse> GetMaterielsAsync();
-
+        Task<DefisResponse> GetDefisAsync();
+        Task<RepasCategorieResponse> GetRepasCategorieAsync(int id);
         Task<MaterielResponse> GetUtilisateurMaterielsAsync(int idUtilisateur);
 
     }

@@ -82,7 +82,7 @@ namespace Homefit.Services.Http
         //"/api/repas_categories/1"
         public async Task<RepasCategorieResponse> GetRepasCategorieAsync(int id)
         {
-            var response = await _client.GetAsync($"https://thedamteam.fr/api/repas/"+id+"/categorie");
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/repas/{id}/categorie");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -91,5 +91,15 @@ namespace Homefit.Services.Http
             return null;
         }
 
+        public async Task<DefisResponse> GetDefisAsync()
+        {
+            var response = await _client.GetAsync($"https://thedamteam.fr/api/defis");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<DefisResponse>(content);
+            }
+            return null;
+        }
     }
 }
