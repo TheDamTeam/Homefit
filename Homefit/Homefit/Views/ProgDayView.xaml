@@ -7,7 +7,7 @@
              x:Class="Homefit.Views.ProgDayView"
              >
 
-    <StackLayout>
+    <StackLayout Margin="10,10,10,10">
         <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Text="{Binding DayNb}" />
 
         <Label HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Text="PETIT-DÉJEUNER" />
@@ -17,8 +17,6 @@
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
                             <StackLayout Orientation="Vertical" HeightRequest="100">
-                                <Label Grid.Column="0" Text="{Binding Length}" HorizontalOptions="CenterAndExpand" 
-                                       TextColor="Black"/>
                                 <Label Grid.Column="0" Text="{Binding AlimentName}" HorizontalOptions="CenterAndExpand"/>
                             </StackLayout>
                         </StackLayout>
@@ -33,7 +31,6 @@
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
                             <StackLayout Orientation="Vertical" HeightRequest="100">
-                                <Label Grid.Column="0" Text="Oui" HorizontalOptions="CenterAndExpand"/>
                                 <Label Grid.Column="0" Text="{Binding AlimentName}" HorizontalOptions="CenterAndExpand" />
                             </StackLayout>
 
@@ -49,7 +46,6 @@
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
                             <StackLayout Orientation="Vertical" HeightRequest="100">
-                                <Label Grid.Column="0" Text="Oui" HorizontalOptions="CenterAndExpand"/>
                                 <Label Grid.Column="0" Text="{Binding AlimentName}" HorizontalOptions="CenterAndExpand"/>
                             </StackLayout>
 
@@ -65,7 +61,6 @@
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
                             <StackLayout Orientation="Vertical" HeightRequest="100">
-                                <Label Grid.Column="0" Text="Oui" HorizontalOptions="CenterAndExpand"/>
                                 <Label Grid.Column="0" Text="{Binding AlimentName}" HorizontalOptions="CenterAndExpand"/>
                             </StackLayout>
                         </StackLayout>
