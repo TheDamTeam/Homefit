@@ -96,8 +96,8 @@
                                 <local:CustomEntry Placeholder="Password" IsPassword="True" Text="{Binding Password}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}"/>
                             </Frame>
                             <local:EnumBindablePicker x:TypeArguments="enums:Objectif" SelectedItem="{Binding Objectifs}" />
- 
-                            <ListView x:Name="lstMateriels" ItemsSource="{Binding Materiels}" >
+
+                            <ListView x:Name="lstMateriels" HasUnevenRows="true" HeightRequest="{Binding Height}" ItemsSource="{Binding Materiels}" SelectionMode="None" >
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>

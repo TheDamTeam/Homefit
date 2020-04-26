@@ -92,12 +92,20 @@ namespace Homefit.ViewModels
                 }
             }
         }
+        private int height;
+        public int Height
+        {
+            get{ return height; }
+            set{ SetProperty(ref height, value); }
+        }
         public INavigation Navigation { get; set; }
         private List<Materiel> materiels = new List<Materiel>();
         public List<Materiel> Materiels
         {
             get { return materiels; }
-            set { SetProperty(ref materiels, value);}
+            set { SetProperty(ref materiels, value);
+                Height = (Materiels.Count * 40) + (Materiels.Count * 10);
+            }
         }
         public ICommand UpdateButtonClickedCommand => new Command(ExecuteUpdateClickedCommandAsync);
         private async void ExecuteUpdateClickedCommandAsync(object obj)
