@@ -46,17 +46,15 @@ namespace Homefit.ViewModels
             Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
             int dayNumber = int.Parse(obj.day2.Split(' ')[1]);
 
-            participeProgramme();
+            var apiResponse = await App.Client.GetUserProgNutritionAsync(utilisateur.Id);
 
-            var pp = App.Client.GetUserProgNutritionAsync(utilisateur.Id);
-
-            if (!participe)
+            if (apiResponse.Counter > 0)
             {
-                await Navigation.PushAsync(new ParticpeProgView(dayNumber));
+                await Navigation.PushAsync(new ProgDayView(dayNumber));
             }
             else
             {
-                await Navigation.PushAsync(new ProgDayView(dayNumber));
+                await Navigation.PushAsync(new ParticpeProgView(dayNumber));
             }
         }
         public ICommand GetProgramme3 => new Command<Days>(LoadDailyProgram3);
@@ -65,14 +63,15 @@ namespace Homefit.ViewModels
             Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
             int dayNumber = int.Parse(obj.day3.Split(' ')[1]);
 
-            participeProgramme();
-            if (!participe)
+            var apiResponse = await App.Client.GetUserProgNutritionAsync(utilisateur.Id);
+
+            if (apiResponse.Counter > 0)
             {
-                await Navigation.PushAsync(new ParticpeProgView(dayNumber));
+                await Navigation.PushAsync(new ProgDayView(dayNumber));
             }
             else
             {
-                await Navigation.PushAsync(new ProgDayView(dayNumber));
+                await Navigation.PushAsync(new ParticpeProgView(dayNumber));
             }
         }
 
