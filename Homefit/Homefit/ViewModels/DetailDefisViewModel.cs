@@ -80,6 +80,10 @@ namespace Homefit.ViewModels
         public DetailDefisViewModel(Defis defisParam)
         {
             Defis = defisParam;
+            MessagingCenter.Subscribe<JouerDefisViewModel>(this, "RefreshView", (sender) =>
+            {
+                GetInformationViewModel();
+            });
             GetInformationViewModel();
             Title = $"{defis.Libelle}";
         }

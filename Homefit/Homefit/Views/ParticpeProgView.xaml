@@ -3,23 +3,78 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Homefit.Views.Controls"
              mc:Ignorable="d"
              x:Class="Homefit.Views.ParticpeProgView">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource BoldItalicFont}" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+            <Style x:Key="InfoStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource RegularFont}" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="#758697" />
+            </Style>
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="Margin" Value="10,100,10,10" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            </Style>            
+            <Style x:Key="ListStyle" TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HasUnevenRows" Value="True" />
+                <Setter Property="SeparatorVisibility" Value="None" />
+                <Setter Property="SelectionMode" Value="None" />
+                <Setter Property="IsPullToRefreshEnabled" Value="True" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout Margin="10,10,10,10">
-            <ListView x:Name="progView" ItemsSource="{Binding ProgNutritionList}" SelectedItem="{Binding ProgSelected}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
-                                <Label Text="{Binding ProgrammeName}" HorizontalOptions="CenterAndExpand"/>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <Button Text="Select" HorizontalOptions="CenterAndExpand" Command="{Binding GetSelectedProg}"/>
-        </StackLayout>
+        <Grid>
+            <local:GradientColorStack StartColor="#8A2BE2" EndColor="#87CEEB">
+            </local:GradientColorStack>
+            <StackLayout Orientation="Vertical">
+                <Frame HeightRequest="150" Padding="0" Margin="0">
+                    <Image Source="healthyList.jpg" Aspect="AspectFill" Margin="0"/>
+                </Frame>
+            </StackLayout>
+            <ScrollView>
+                <Frame Style="{StaticResource FrameStyle}">
+                    <StackLayout Orientation="Vertical" Margin="10,10,10,10">
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="Liste Pour spécialiser vos repas:" Style="{StaticResource TitleStyle}" />
+                            <ListView ItemsSource="{Binding ProgNutritionList}" SelectedItem="{Binding ProgSelected}" HeightRequest="{Binding Height}" Style="{StaticResource ListStyle}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <StackLayout Orientation="Vertical" Margin="10,10,10,10">
+                                                <Label >
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <FormattedString.Spans>
+                                                                <Span Text="-  "/>
+                                                                <Span Text="{Binding ProgrammeName}" Style="{StaticResource InfoStyle}"/>
+                                                            </FormattedString.Spans>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                        <Button Text="Select" TextColor="Black" BackgroundColor="Transparent" Margin="10,0,0,0" Command="{Binding GetSelectedProg}"/>
+                    </StackLayout>                   
+                </Frame>               
+            </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

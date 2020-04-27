@@ -18,7 +18,18 @@ namespace Homefit.ViewModels
         public List<ProgrammeNutrition> ProgNutritionList
         {
             get { return progNutritionList; }
-            set { SetProperty(ref progNutritionList, value); }
+            set 
+            { 
+                SetProperty(ref progNutritionList, value);
+                Height = (ProgNutritionList.Count * 40);
+            }
+        }
+
+        private int height;
+        public int Height
+        {
+            get { return height; }
+            set { SetProperty(ref height, value); }
         }
 
         int dayNumber = 0;
