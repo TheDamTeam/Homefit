@@ -64,7 +64,7 @@ namespace Homefit.ViewModels
                 var apiResponse = await App.Client.SaveParticipeProgNutritionAsync(pp);
                 if (apiResponse)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Participer à un programme", "Votre demande à bien été prise en compte !", "Ok");
+                    //await Application.Current.MainPage.DisplayAlert("Participer à un programme", "Votre demande à bien été prise en compte !", "Ok");
                     await Navigation.PushAsync(new ProgDayView(dayNumber));
                 }
             }
