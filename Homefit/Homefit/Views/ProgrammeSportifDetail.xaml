@@ -1,59 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Homefit.Views.Controls"
              x:Class="Homefit.Views.ProgrammeSportifDetail">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource BoldItalicFont}" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+            <Style x:Key="InfoStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource RegularFont}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="#758697" />
+            </Style>
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="Margin" Value="0,20,0,10" />
+                <Setter Property="HeightRequest" Value="420" />
+                <Setter Property="WidthRequest" Value="400" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout>
-
-
-          
-
-            <CarouselView x:Name="laputaindeliste" >
-                <CarouselView.ItemTemplate>
+        <Grid>    
+             <local:GradientColorStack StartColor="#8A2BE2" EndColor="#87CEEB">
+            </local:GradientColorStack>
+            <CarouselView x:Name="laList" >
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20"/>
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>                    
                     <DataTemplate>
                         <StackLayout>
-                            <Frame HasShadow="True"
-                       BorderColor="DarkGray"
-                       CornerRadius="5"
-                       Margin="20"
-                       HeightRequest="300"
-                       HorizontalOptions="Center"
-                       VerticalOptions="CenterAndExpand">
-                                <StackLayout>
-                                    <Label Text="{Binding EntrainementName}"
-                               FontAttributes="Bold"
-                               FontSize="Large"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                                    <Label Text="{Binding Niveau , StringFormat='Niveau :{0}'}"
-                               FontAttributes="Bold"
-                               FontSize="Large"
-                               HorizontalOptions="Start"
-                               VerticalOptions="Center" />
-
-                                    <Label Text="{Binding Duree, StringFormat='Durée :{0}'}"
-                               FontAttributes="Bold"
-                               FontSize="Large"
-                               HorizontalOptions="Start"
-                               VerticalOptions="Center" />
-
-                                    <Label Text="{Binding Description}"
-                               FontAttributes="Italic"
-                               HorizontalOptions="Center"
-                               MaxLines="5"
-                               LineBreakMode="TailTruncation" />
-                                    <Label Text="{Binding EntrainementName}"
-                               FontAttributes="Italic"
-                               HorizontalOptions="Center"
-                               MaxLines="5"
-                               LineBreakMode="TailTruncation" />
+                            <Frame Style="{StaticResource FrameStyle}">
+                                <StackLayout Orientation="Vertical">
+                                    <Image Source="Planche" Aspect="AspectFill" HeightRequest="200"/>
+                                    <Label Text="{Binding EntrainementName}" Style="{StaticResource TitleStyle}" HorizontalOptions="CenterAndExpand"  />
+                                    <Label Text="{Binding Niveau , StringFormat='Niveau :{0}'}" Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand"/>
+                                    <Label Text="{Binding Duree, StringFormat='Durée :{0}'}"  Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand"/>
+                                    <Label Text="{Binding Description}" Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand" />
+                                    <Label Text="{Binding EntrainementName}" Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand"/>
                                 </StackLayout>
                             </Frame>
                         </StackLayout>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
-        </StackLayout>
+        </Grid>
 
     </ContentPage.Content>
 </ContentPage>
