@@ -18,6 +18,12 @@ namespace Homefit.ViewModels
         bool participe;
         int dayNumber;
 
+        private int height;
+        public int Height
+        {
+            get { return height; }
+            set { SetProperty(ref height, value); }
+        }
         //Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
 
         public ICommand GetProgramme1 => new Command<Days>(LoadDailyProgram);
@@ -79,7 +85,11 @@ namespace Homefit.ViewModels
         public List<Days> ListDays
         {
             get { return days; }
-            set { SetProperty(ref days, value); }
+            set 
+            { 
+                SetProperty(ref days, value);
+                Height = (ListDays.Count * 50);
+            }
         }
         public ProgrammeAlimentaireViewModel()
         {

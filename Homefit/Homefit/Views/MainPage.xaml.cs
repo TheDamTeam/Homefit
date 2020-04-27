@@ -20,5 +20,10 @@ namespace Homefit.Views
             InitializeComponent();
             BindingContext = mv = new MainPageViewModel(compte);
         }
+        public MainPage()
+        {
+            InitializeComponent();
+            
+        }
     }
 }
