@@ -19,6 +19,8 @@ namespace Homefit.Services.Http
         Task<APIResponse<RepasCategorie>> GetRepasCategorieAsync(int id);
         Task<APIResponse<Materiel>> GetUtilisateurMaterielsAsync(int idUtilisateur);
 
+        Task<bool> ParticipeProgrammeSportifAsync(ParticiperProgrammeSportif participerProgrammeSportif);
+
         Task<APIResponse<Classement>> GetClassement(int idDefis);
     }
 }
