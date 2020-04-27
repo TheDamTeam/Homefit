@@ -47,13 +47,14 @@
                                     <Label Text="{Binding Duree, StringFormat='Durée :{0}'}"  Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand"/>
                                     <Label Text="{Binding Description}" Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand" />
                                     <Label Text="{Binding EntrainementName}" Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand"/>
-                                </StackLayout>
+                                 <Button Text="Je viens de participer a se programme!" VerticalOptions="CenterAndExpand"
+                                         HorizontalOptions="Center" Clicked="OnButtonClicked" />
+                               </StackLayout>
                             </Frame>
                         </StackLayout>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
-            </CarouselView>
+            </CarouselView>           
         </Grid>
-
     </ContentPage.Content>
 </ContentPage>
