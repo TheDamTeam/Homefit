@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Homefit.Models
 {
@@ -8,5 +9,18 @@ namespace Homefit.Models
         public string Libelle { get; set; }
         public DateTime Duree { get; set; }
         public string Description { get; set; }
+
+        [JsonIgnore]
+        public string Devise
+        {
+            get 
+            {
+                if(Duree.Minute < 1)
+                {
+                    return "secondes";
+                }
+                return "minutes";
+            }
+        }
     }
 }

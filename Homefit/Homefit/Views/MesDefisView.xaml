@@ -47,7 +47,10 @@
                                 <StackLayout Orientation="Vertical">
                                     <Image Source="{Binding Libelle}" Aspect="AspectFill" HeightRequest="300"/>
                                     <Label Text="{Binding Libelle}" Style="{StaticResource TitleStyle}" HorizontalOptions="CenterAndExpand"/>
-                                    <Label Text="{Binding Duree, StringFormat=' {0:mm:ss} minutes'}" Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand"/>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                        <Label Text="{Binding Duree, StringFormat=' {0:mm:ss}'}" Style="{StaticResource InfoStyle}" />
+                                        <Label Text="{Binding Devise}" Style="{StaticResource InfoStyle}"/>
+                                    </StackLayout>
                                     <Button Text="Let's go" Command="{Binding Path=BindingContext.DetailViewCommand, Source={x:Reference CarouselName}}" CommandParameter="{Binding .}" BackgroundColor="Transparent" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>
                                 </StackLayout>
                             </Frame>

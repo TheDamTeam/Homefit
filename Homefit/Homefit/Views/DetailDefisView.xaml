@@ -70,8 +70,9 @@
                     <Frame Style="{StaticResource FrameStyle}">
                         <StackLayout Orientation="Horizontal" Style="{StaticResource StackLayoutStyle}">
                             <Image Source="timer" HorizontalOptions="Fill" Style="{StaticResource ImageStyle}"/>
-                            <StackLayout Style="{StaticResource StackLayoutStyle}" HorizontalOptions="Center">
-                                <Label Text="{Binding Duree, StringFormat=' {0:mm:ss} minutes'}" Style="{StaticResource InfoStyle}"/>
+                            <StackLayout Style="{StaticResource StackLayoutStyle}" HorizontalOptions="Center" Orientation="Horizontal">
+                                <Label Text="{Binding Duree, StringFormat=' {0:mm:ss}'}" Style="{StaticResource InfoStyle}"/>
+                                <Label Text="{Binding Devise}" Style="{StaticResource InfoStyle}"/>
                             </StackLayout>
                         </StackLayout>
                     </Frame>

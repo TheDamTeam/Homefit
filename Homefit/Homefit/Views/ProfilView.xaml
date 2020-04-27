@@ -39,7 +39,13 @@
                 <Setter Property="Orientation" Value="Vertical" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />              
             </Style>
-           
+            <Style x:Key="ListStyle" TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HasUnevenRows" Value="True" />
+                <Setter Property="SeparatorVisibility" Value="None" />
+                <Setter Property="SelectionMode" Value="None" />
+                <Setter Property="IsPullToRefreshEnabled" Value="True" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>   
 
@@ -115,7 +121,23 @@
                         <StackLayout Orientation="Horizontal">
                             <Image Source="materiauxImage" Style="{StaticResource ImageStyle}"/>
                             <StackLayout Style="{StaticResource StackLayoutStyle}">
-                                <Label Text="Materiaux" Style="{StaticResource InfoStyle}"/>
+                                <ScrollView>
+                                    <ListView x:Name="lstMateriels" ItemsSource="{Binding Materiels}" Style="{StaticResource ListStyle}" Margin="5,10,5,0" >
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ViewCell>
+                                                    <Grid>
+                                                        <StackLayout Orientation="Vertical">
+                                                            <StackLayout Orientation="Horizontal" >
+                                                                <Label Text="{Binding MaterielName}" Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand"/>
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                    </Grid>
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </ScrollView>
                             </StackLayout>
                         </StackLayout>
                     </Frame>

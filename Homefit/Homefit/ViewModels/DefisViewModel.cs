@@ -29,11 +29,12 @@ namespace Homefit.ViewModels
                 Height = (Defis.Count * 50);
             }
         }
+
         public ICommand DetailViewCommand => new Command(ExecuteDetailViewCommandAsync);
         private void ExecuteDetailViewCommandAsync(object obj)
         {
             var item = (Models.Defis)obj;
-            Navigation.PushAsync(new DetailDefisView(item));
+            await Navigation.PushAsync(new DetailDefisView(item));
         }
         public DefisViewModel()
         {
