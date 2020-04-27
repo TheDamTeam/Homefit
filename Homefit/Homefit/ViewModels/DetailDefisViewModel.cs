@@ -41,7 +41,12 @@ namespace Homefit.ViewModels
             get { return height; }
             set { SetProperty(ref height, value); }
         }
-
+        private string devise;
+        public string Devise
+        {
+            get { return devise; }
+            set { SetProperty(ref devise,value); }
+        }
         private string libelle;
         public string Libelle
         {
@@ -90,6 +95,14 @@ namespace Homefit.ViewModels
             Description = Defis.Description;
             Duree = Defis.Duree;
             Libelle = Defis.Libelle;
+            if(Duree.Minute < 1)
+            {
+                Devise = "secondes";
+            }
+            else
+            {
+                Devise = "minutes";
+            }
             var apiResponse = await App.Client.GetClassement(Defis.Id);
             Classement = apiResponse.Liste;
             for (int i = 0; i < Classement.Count; i++)

@@ -55,7 +55,15 @@ namespace Homefit.ViewModels
             get { return compteCo; }
             set { SetProperty(ref compteCo, value); }
         }
-
+        private List<Materiel> materiels = new List<Materiel>();
+        public List<Materiel> Materiels
+        {
+            get { return materiels; }
+            set
+            {
+                SetProperty(ref materiels, value);
+            }
+        }
         public ICommand DeconnexionCommand => new Command(ExecuteDeconnexionCommand);
 
         private async void ExecuteDeconnexionCommand(object obj)
@@ -128,6 +136,11 @@ namespace Homefit.ViewModels
             DateNaiss = CompteConnect.DateNaiss;
             NomPrenom = CompteConnect.Prenom+" "+CompteConnect.Nom;
             Sexe = CompteConnect.Sexe;
+            var apiR = await App.Client.GetUtilisateurMaterielsAsync(CompteConnect.Id);
+            if(apiR.Counter > 0)
+            {
+                Materiels = apiR.Liste;
+            }
             if(CompteConnect.Ojectifs != "" && CompteConnect.Ojectifs != null)
             {
                 Objectifs = Enumerations.GetEnumDescription(CompteConnect.Ojectifs);

@@ -9,7 +9,7 @@ namespace Homefit.Models
     public class Aliment
     {
         public int Id { get; set; }
-        [JsonProperty("aliment_name")]
+        [JsonProperty("alimentName")]
         public string AlimentName { get; set; }
         public float Calorie { get; set; }
         public float Proteine { get; set; }
