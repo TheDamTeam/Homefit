@@ -39,7 +39,7 @@ namespace Homefit.Views
         protected async void Load(int idSelected)
         {
             var APIResponse = await App.Client.GetEntrainementAsync(idSelected);
-            laputaindeliste.ItemsSource = APIResponse.Liste;
+            laList.ItemsSource = APIResponse.Liste;
         }
 
         protected async void Participe(int idSelected)
