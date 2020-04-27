@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -16,38 +14,43 @@ namespace Homefit.ViewModels
 {
     public class ProfilViewModel : BaseViewModel
     {
+        #region Properties
+        public INavigation Navigation { get; set; }
+
         private string taille;
         public string Taille
         {
             get { return taille; }
             set { SetProperty(ref taille, value); }
         }
+
         private string poids;
         public string Poids
         {
             get { return poids; }
             set { SetProperty(ref poids, value); }
         }
+
         private string nomPrenom;
         public string NomPrenom
         {
             get { return nomPrenom; }
             set { SetProperty(ref nomPrenom, value); }
         }
+
         private DateTime dateNaiss;
         public DateTime DateNaiss
         {
             get { return dateNaiss; }
             set { SetProperty(ref dateNaiss,value); }
         }
+
         private string sexe;
         public string Sexe
         {
             get { return sexe; }
             set { SetProperty(ref sexe, value); }
-        }
-       
-        public INavigation Navigation { get; set; }
+        }               
 
         private Utilisateur compteCo;
         public Utilisateur CompteConnect
@@ -55,6 +58,7 @@ namespace Homefit.ViewModels
             get { return compteCo; }
             set { SetProperty(ref compteCo, value); }
         }
+
         private List<Materiel> materiels = new List<Materiel>();
         public List<Materiel> Materiels
         {
@@ -64,8 +68,38 @@ namespace Homefit.ViewModels
                 SetProperty(ref materiels, value);
             }
         }
-        public ICommand DeconnexionCommand => new Command(ExecuteDeconnexionCommand);
 
+        private string objectifs;
+        public string Objectifs
+        {
+            get { return objectifs; }
+            set { SetProperty(ref objectifs, value); }
+        }
+
+        private ImageSource photo;
+        public ImageSource Photo
+        {
+            get { return photo; }
+            set { SetProperty(ref photo, value); }
+        }
+        #endregion
+
+        #region Commands
+        public ICommand DeconnexionCommand => new Command(ExecuteDeconnexionCommand);
+        public ICommand UpdateCommandButton => new Command(ExecuteUpdateCommand);
+        public ICommand TakePicktureCommand => new Command(TakePicture);
+        #endregion
+
+        public ProfilViewModel()
+        {
+            MessagingCenter.Subscribe<UpdateProfilViewModel>(this, "RefreshView", (sender) =>
+            {
+                GetUtilisateur();
+            });
+            GetUtilisateur();
+        }
+
+        #region ExecuteCommand
         private async void ExecuteDeconnexionCommand(object obj)
         {
             
@@ -73,27 +107,12 @@ namespace Homefit.ViewModels
             await App.DataBase.UpdateUtilisateurAsync(CompteConnect);
             _navigationService.SetCurrentPage(new NavigationPage( new ConnexionView()));
         }
-        public ICommand UpdateCommandButton => new Command(ExecuteUpdateCommand);
-
+        
         private async void ExecuteUpdateCommand(object obj)
         {
-
-            await Navigation.PushAsync(new UpdateProfilView());
-           
-        }
-        private string objectifs;
-        public string Objectifs
-        {
-            get { return objectifs; }
-            set { SetProperty(ref objectifs, value); }
-        }
-        private ImageSource photo;
-        public ImageSource Photo
-        {
-            get { return photo; }
-            set { SetProperty(ref photo, value); }
-        }
-        public ICommand TakePicktureCommand => new Command(TakePicture);
+            await Navigation.PushAsync(new UpdateProfilView());           
+        }       
+       
         private async void TakePicture()
         {
             Stream stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
@@ -120,14 +139,7 @@ namespace Homefit.ViewModels
 
             return aResponse.GetResponseStream();
         }
-        public ProfilViewModel()
-        {
-            MessagingCenter.Subscribe<UpdateProfilViewModel>(this, "RefreshView", (sender) =>
-            {
-                GetUtilisateur();
-            });
-            GetUtilisateur();
-        }
+      
         public async void GetUtilisateur()
         {
             CompteConnect = await App.DataBase.GetUtilisateurIsConnect();
@@ -151,5 +163,6 @@ namespace Homefit.ViewModels
             }
             Photo = ImageSource.FromFile("gymnast"+CompteConnect.Sexe+".png");
         }
+        #endregion
     }
 }

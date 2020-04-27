@@ -1,7 +1,4 @@
-﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Homefit.Models
 {
@@ -9,9 +6,7 @@ namespace Homefit.Models
     {
         public int Id { get; set; }
         public string Libelle { get; set; }
-
         public List<Entrainement> Entrainements { get; set; }
-
         public List<ProgrammeSportif> ProgrammeSportifs { get; set; }
 
     }

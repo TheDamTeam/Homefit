@@ -1,12 +1,7 @@
 ﻿using Homefit.Models;
-using Homefit.Services.Http;
 using Homefit.ViewModels.Base;
 using Homefit.Views;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -15,22 +10,45 @@ namespace Homefit.ViewModels
 {
     public class ConnexionViewModel : BaseViewModel
     {
-
+        #region Properties
         private string email;
         public string Email
         {
             get { return email; }
             set { SetProperty(ref email, value); }
         }
+
         private string password;
         public string Password
         {
             get { return password; }
             set { SetProperty(ref password, value); }
         }
+
+        #endregion
+
+        #region Commands
         public ICommand ConnexionButtonClickedCommand => new Command(ExecuteConnexionButtonClickedCommandAsync);
         public ICommand InscriptionCommand => new Command(ExecuteNewInscriptionClickedCommand);
+        #endregion
 
+        public ConnexionViewModel()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+
+                Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
+                if (utilisateur != null)
+                {
+                    if (utilisateur.IsConnect == 1)
+                    {
+                        _navigationService.SetCurrentPage(new MainPage(utilisateur));
+                    }
+                }
+            });
+        }
+
+        #region ExecuteCommands
         private void ExecuteNewInscriptionClickedCommand(object obj)
         {
             Device.BeginInvokeOnMainThread(async () => {
@@ -114,21 +132,7 @@ namespace Homefit.ViewModels
                 IsBusy = false;
             }
         } 
-        public ConnexionViewModel()
-        {
-            
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                
-                Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
-                if (utilisateur != null)
-                {
-                    if (utilisateur.IsConnect == 1)
-                    {
-                        _navigationService.SetCurrentPage(new MainPage(utilisateur));
-                    }
-                }
-            });
-        }
+        #endregion
+        
     }
 }

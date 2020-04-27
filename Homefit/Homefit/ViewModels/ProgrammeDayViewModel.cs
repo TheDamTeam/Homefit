@@ -1,11 +1,6 @@
 ﻿using Homefit.Models;
-using Homefit.Services;
-using Homefit.Services.Http;
 using Homefit.ViewModels.Base;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace Homefit.ViewModels
@@ -27,6 +22,7 @@ namespace Homefit.ViewModels
             get { return participe; }
             set { SetProperty(ref participe, value); }
         }
+
         //List<Repas> repas = new List<Repas>();
         //ProgrammeNutrition currentProgramme;
 
@@ -51,7 +47,7 @@ namespace Homefit.ViewModels
         {
             get { return ptiDej; }
             set
-            { 
+            {
                 SetProperty(ref ptiDej, value);
                 Height = (PtiDej.Count * 30);
             }
@@ -61,8 +57,8 @@ namespace Homefit.ViewModels
         public List<Aliment> Diner
         {
             get { return diner; }
-            set 
-            { 
+            set
+            {
                 SetProperty(ref diner, value);
                 Height = (Diner.Count * 30);
             }
@@ -72,8 +68,8 @@ namespace Homefit.ViewModels
         public List<Aliment> Dejeuner
         {
             get { return dejeuner; }
-            set 
-            { 
+            set
+            {
                 SetProperty(ref dejeuner, value);
                 Height = (Dejeuner.Count * 30);
             }
@@ -83,9 +79,9 @@ namespace Homefit.ViewModels
         public List<Aliment> Collation
         {
             get { return collation; }
-            set 
-            { 
-                SetProperty(ref collation, value);               
+            set
+            {
+                SetProperty(ref collation, value);
                 Height = (Collation.Count * 30);
             }
         }
@@ -106,15 +102,16 @@ namespace Homefit.ViewModels
         #endregion
 
         public ProgrammeDayViewModel(int dayNb)
-        {            
+        {
             Participe = false;
             DayNb = "";
             CurrentDayNb = dayNb;
             ContentLabel += dayNb;
             DayNb = "Jour " + dayNb;
-            LoadRepas();         
+            LoadRepas();
         }
 
+        #region ExecuteCommand
         public async void LoadRepas()
         {
             var apiResponse = await App.Client.GetRepasAsync();
@@ -130,10 +127,10 @@ namespace Homefit.ViewModels
                         {
                             var cat = apiCategorie.Liste;
                             var apiAliment = await App.Client.GetRepasAlimentAsync(r.Id);
-                            switch(cat[0].Libelle)
+                            switch (cat[0].Libelle)
                             {
                                 case "Petit déjeuner":
-                                    PtiDej = apiAliment.Liste;                                    
+                                    PtiDej = apiAliment.Liste;
                                     break;
                                 case "Diner":
                                     Diner = apiAliment.Liste;
@@ -142,7 +139,7 @@ namespace Homefit.ViewModels
                                     Dejeuner = apiAliment.Liste;
                                     break;
                                 case "Collation":
-                                    Collation = apiAliment.Liste;                                   
+                                    Collation = apiAliment.Liste;
                                     break;
                                 default:
                                     break;
@@ -150,7 +147,8 @@ namespace Homefit.ViewModels
                         }
                     }
                 }
-            }          
+            }
         }
+        #endregion
     }
 }

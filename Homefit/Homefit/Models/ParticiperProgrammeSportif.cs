@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Homefit.Models
 {
@@ -16,7 +14,6 @@ namespace Homefit.Models
         public string Utilisateur { get; set; }
         [JsonProperty("programmeSportif")]
         public string ProgrammeSportif { get; set; }
-
 
         public ParticiperProgrammeSportif(DateTime DateParticipation, string Utilisateur, string ProgrammeSportif)
         {

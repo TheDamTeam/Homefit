@@ -1,12 +1,7 @@
 ﻿using Homefit.Models;
-using Homefit.Services.Http;
 using Homefit.ViewModels.Base;
 using Homefit.Views;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -14,6 +9,7 @@ namespace Homefit.ViewModels
 {
     public class InscriptionViewModel : BaseViewModel
     {
+        #region Properties
         private string email;
         public string Email
         {
@@ -66,10 +62,10 @@ namespace Homefit.ViewModels
         public bool Sexe
         {
             get { return sexe; }
-            set 
-            { 
+            set
+            {
                 SetProperty(ref sexe, value);
-                if(Sexe)
+                if (Sexe)
                 {
                     SexeText = "Femme";
                 }
@@ -79,15 +75,25 @@ namespace Homefit.ViewModels
                 }
             }
         }
-        public ICommand InscriptionButtonClickedCommand => new Command(ExecuteInscriptionClickedCommandAsync);
-        
+        #endregion
 
+        #region Commands
+        public ICommand InscriptionButtonClickedCommand => new Command(ExecuteInscriptionClickedCommandAsync);
+        #endregion
+
+        public InscriptionViewModel()
+        {
+            Sexe = false;
+            SexeText = "Homme";
+        }
+
+        #region ExecuteCommands
         private async void ExecuteInscriptionClickedCommandAsync(object obj)
         {
             IsBusy = true;
             try
             {
-                Utilisateur item = new Utilisateur(Email, Password, Nom, Prenom, DateNaiss, float.Parse(Poids), int.Parse(Taille), SexeText,"");
+                Utilisateur item = new Utilisateur(Email, Password, Nom, Prenom, DateNaiss, float.Parse(Poids), int.Parse(Taille), SexeText, "");
                 var apiResponse = await App.Client.SaveUtilisateurAsync(item, true);
                 if (apiResponse)
                 {
@@ -136,11 +142,6 @@ namespace Homefit.ViewModels
             }
 
         }
-           
-        public InscriptionViewModel()
-        {
-            Sexe = false;
-            SexeText = "Homme";
-        }
+        #endregion
     }
 }

@@ -13,10 +13,40 @@ namespace Homefit.ViewModels
 {
     public class ProgrammeAlimentaireViewModel : BaseViewModel
     {
+        #region Properties
         public INavigation Navigation { get; set; }
-        ProgrammeNutrition currentProgramme;
-        bool participe;
-        int dayNumber;
+
+        private ProgrammeNutrition currentProgramme;
+        public ProgrammeNutrition CurrentProgramme
+        {
+            get { return currentProgramme; }
+            set { SetProperty(ref currentProgramme, value); }
+        }
+        
+        private List<Days> days = new List<Days>();
+        public List<Days> ListDays
+        {
+            get { return days; }
+            set
+            {
+                SetProperty(ref days, value);
+                Height = (ListDays.Count * 50);
+            }
+        }
+
+        private bool participe;
+        public bool Participe
+        {
+            get { return participe; }
+            set { SetProperty(ref participe, value); }
+        }
+
+        private int dayNumber;
+        public int DayNumber
+        {
+            get { return dayNumber; }
+            set { SetProperty(ref dayNumber, value); }
+        }
 
         private int height;
         public int Height
@@ -24,76 +54,24 @@ namespace Homefit.ViewModels
             get { return height; }
             set { SetProperty(ref height, value); }
         }
-        //Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
+        
+        private Days daysSelectec;
+        public Days DaysSelected
+        {
+            get { return daysSelectec; }
+            set { SetProperty(ref daysSelectec, value); }
+        }
+        #endregion
 
+        #region Commands
         public ICommand GetProgramme1 => new Command<Days>(LoadDailyProgram);
-        async void LoadDailyProgram(Days obj)
-        {
-            Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
-            dayNumber = int.Parse(obj.day1.Split(' ')[1]);
-
-            //participeProgramme();
-
-            var apiResponse = await App.Client.GetUserProgNutritionAsync(utilisateur.Id);
-
-            if (apiResponse.Counter > 0)
-            {
-                await Navigation.PushAsync(new ProgDayView(dayNumber));
-            }
-            else
-            {
-                await Navigation.PushAsync(new ParticpeProgView(dayNumber));
-            }
-            
-        }
         public ICommand GetProgramme2 => new Command<Days>(LoadDailyProgram2);
-        async void LoadDailyProgram2(Days obj)
-        {
-            Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
-            int dayNumber = int.Parse(obj.day2.Split(' ')[1]);
-
-            var apiResponse = await App.Client.GetUserProgNutritionAsync(utilisateur.Id);
-
-            if (apiResponse.Counter > 0)
-            {
-                await Navigation.PushAsync(new ProgDayView(dayNumber));
-            }
-            else
-            {
-                await Navigation.PushAsync(new ParticpeProgView(dayNumber));
-            }
-        }
         public ICommand GetProgramme3 => new Command<Days>(LoadDailyProgram3);
-        async void LoadDailyProgram3(Days obj)
-        {
-            Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
-            int dayNumber = int.Parse(obj.day3.Split(' ')[1]);
+        #endregion
 
-            var apiResponse = await App.Client.GetUserProgNutritionAsync(utilisateur.Id);
-
-            if (apiResponse.Counter > 0)
-            {
-                await Navigation.PushAsync(new ProgDayView(dayNumber));
-            }
-            else
-            {
-                await Navigation.PushAsync(new ParticpeProgView(dayNumber));
-            }
-        }
-
-        List<Days> days = new List<Days>();
-        public List<Days> ListDays
-        {
-            get { return days; }
-            set 
-            { 
-                SetProperty(ref days, value);
-                Height = (ListDays.Count * 50);
-            }
-        }
         public ProgrammeAlimentaireViewModel()
         {
-            participe = false;
+            Participe = false;
             ListDays = new List<Days>()
             {
                 new Days("Jour 1","Jour 2","Jour 3"),
@@ -109,17 +87,57 @@ namespace Homefit.ViewModels
             };
         }
 
-        Days daysSelectec;
-
-        public Days DaysSelected
+        #region ExecuteCommands
+      
+        async void LoadDailyProgram(Days obj)
         {
-            get { return daysSelectec; }
-            set
+            Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
+            DayNumber = int.Parse(obj.Day1.Split(' ')[1]);
+            
+            var apiResponse = await App.Client.GetUserProgNutritionAsync(utilisateur.Id);
+
+            if (apiResponse.Counter > 0)
             {
-                SetProperty(ref daysSelectec, value);
-                if (value != null)
-                {
-                }
+                await Navigation.PushAsync(new ProgDayView(dayNumber));
+            }
+            else
+            {
+                await Navigation.PushAsync(new ParticpeProgView(dayNumber));
+            }
+            
+        }
+        
+        async void LoadDailyProgram2(Days obj)
+        {
+            Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
+            int dayNumber = int.Parse(obj.Day2.Split(' ')[1]);
+
+            var apiResponse = await App.Client.GetUserProgNutritionAsync(utilisateur.Id);
+
+            if (apiResponse.Counter > 0)
+            {
+                await Navigation.PushAsync(new ProgDayView(dayNumber));
+            }
+            else
+            {
+                await Navigation.PushAsync(new ParticpeProgView(dayNumber));
+            }
+        }
+       
+        async void LoadDailyProgram3(Days obj)
+        {
+            Utilisateur utilisateur = await App.DataBase.GetUtilisateurIsConnect();
+            int dayNumber = int.Parse(obj.Day3.Split(' ')[1]);
+
+            var apiResponse = await App.Client.GetUserProgNutritionAsync(utilisateur.Id);
+
+            if (apiResponse.Counter > 0)
+            {
+                await Navigation.PushAsync(new ProgDayView(dayNumber));
+            }
+            else
+            {
+                await Navigation.PushAsync(new ParticpeProgView(dayNumber));
             }
         }
 
@@ -136,17 +154,16 @@ namespace Homefit.ViewModels
                     var userId = w.Utilisateur[userUrlLength - 1];
                     if (userId == utilisateur.Id)
                     {
-                        this.participe = true;
+                        Participe = true;
                         var programmeId = w.Id;
                         var programme = await App.Client.GetProgNutritionAsync(programmeId);
-                        currentProgramme = new ProgrammeNutrition() { Id = Int32.Parse(programme.Id), ProgrammeName = programme.ProgrammeName, };
+                        CurrentProgramme = new ProgrammeNutrition() { Id = Int32.Parse(programme.Id), ProgrammeName = programme.ProgrammeName, };
                         await Navigation.PushAsync(new ProgDayView(dayNumber));
                     }
                 });
             }
         }
 
-        
-
+        #endregion
     }
 }

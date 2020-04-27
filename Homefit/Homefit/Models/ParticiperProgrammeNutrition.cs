@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
-using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Homefit.Models
 {
@@ -15,7 +12,7 @@ namespace Homefit.Models
         [JsonProperty("dateParticipation")]
         public DateTime DateParticipation { get; set; }
         [JsonProperty("programmeNutrition")]
-        public string ProgrammeNutrition{ get; set; }
+        public string ProgrammeNutrition { get; set; }
 
-}
+    }
 }

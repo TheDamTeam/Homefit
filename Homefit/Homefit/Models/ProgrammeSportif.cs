@@ -3,7 +3,7 @@
 namespace Homefit.Models
 {
     public class ProgrammeSportif
-    {        
+    {
         public int Id { get; set; }
         public string ProgrammeName { get; set; }
         public string Niveau { get; set; }

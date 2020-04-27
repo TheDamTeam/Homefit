@@ -1,13 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Homefit.Models
 {
     public class ParticiperDefis
     {
-
         [JsonIgnore]
         public int Id { get; set; }
         [JsonProperty("dateParticipation")]
@@ -19,7 +16,7 @@ namespace Homefit.Models
         [JsonProperty("score")]
         public int Score { get; set; }
 
-        public ParticiperDefis(DateTime date, string utilisateur, string defis,int score)
+        public ParticiperDefis(DateTime date, string utilisateur, string defis, int score)
         {
             Id = 0;
             DateParticipation = date;

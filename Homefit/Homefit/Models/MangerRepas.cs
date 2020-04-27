@@ -1,7 +1,4 @@
-﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace Homefit.Models
 {
@@ -11,6 +8,6 @@ namespace Homefit.Models
         public DateTime DateManger { get; set; }
         public Utilisateur Utilisateur { get; set; }
         public Repas Repas { get; set; }
-        
+
     }
 }

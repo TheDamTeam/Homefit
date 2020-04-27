@@ -9,13 +9,12 @@ namespace Homefit.Models
         public string Libelle { get; set; }
         public DateTime Duree { get; set; }
         public string Description { get; set; }
-
         [JsonIgnore]
         public string Devise
         {
-            get 
+            get
             {
-                if(Duree.Minute < 1)
+                if (Duree.Minute < 1)
                 {
                     return "secondes";
                 }
