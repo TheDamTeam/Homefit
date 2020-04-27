@@ -18,7 +18,6 @@ namespace Homefit.Views
 
     public partial class ProgrammeSportifPage : ContentPage
     {
-
         public ProgrammeSportifPage()
         {
             InitializeComponent();
@@ -30,18 +29,11 @@ namespace Homefit.Views
             Debug.WriteLine("ID :" + content.Id);
             await Navigation.PushAsync(new ProgrammeSportifDetail(content.Id));
         }
-
-      
-
-     
-            protected async void Load()
-            {
-                var APIResponse = await App.Client.GetProgrammeSportifAsync();
-                laputaindeliste.ItemsSource = APIResponse.Liste;
-            }
-
-
-        
+        protected async void Load()
+        {
+            var APIResponse = await App.Client.GetProgrammeSportifAsync();
+            laList.ItemsSource = APIResponse.Liste;
+        }       
 
     }
 
