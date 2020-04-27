@@ -3,28 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Homefit.Views.Controls"
              mc:Ignorable="d"
-             x:Class="Homefit.Views.MesDefisView">
+             x:Class="Homefit.Views.MesDefisView"
+             Title="Vos Défis">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource BoldItalicFont}" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+            <Style x:Key="InfoStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource RegularFont}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="#758697" />
+            </Style>
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="Margin" Value="0,20,0,10" />
+                <Setter Property="HeightRequest" Value="420" />
+                <Setter Property="WidthRequest" Value="400" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <ListView x:Name="lstDefis" HasUnevenRows="true" HeightRequest="{Binding Height}" ItemsSource="{Binding Defis}" SelectedItem="{Binding DefisSelected, Mode=TwoWay}">
-                <ListView.ItemTemplate>
+        <Grid>
+            <local:GradientColorStack StartColor="#8A2BE2" EndColor="#87CEEB">
+            </local:GradientColorStack>
+            <CarouselView x:Name="CarouselName" ItemsSource="{Binding Defis}" >
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20"/>
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Orientation="Vertical" >
-                                <Image Source="fitness" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center"></Image>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Libelle}"/>
-                                    <Label Text="{Binding Duree, StringFormat=' {0:mm:ss} minutes'}"/>
+                        <StackLayout>
+                            <Frame Style="{StaticResource FrameStyle}">
+                                <StackLayout Orientation="Vertical">
+                                    <Image Source="{Binding Libelle}" Aspect="AspectFill" HeightRequest="300"/>
+                                    <Label Text="{Binding Libelle}" Style="{StaticResource TitleStyle}" HorizontalOptions="CenterAndExpand"/>
+                                    <Label Text="{Binding Duree, StringFormat=' {0:mm:ss} minutes'}" Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand"/>
+                                    <Button Text="Let's go" Command="{Binding Path=BindingContext.DetailViewCommand, Source={x:Reference CarouselName}}" CommandParameter="{Binding .}" BackgroundColor="Transparent" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>
                                 </StackLayout>
-                                
-                            </StackLayout>
-                            
-                        </ViewCell>
-                        
+                            </Frame>
+                        </StackLayout>                       
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView x:Name="indicatorView" IndicatorColor="Black" SelectedIndicatorColor="DarkGray" HorizontalOptions="CenterAndExpand" Margin="0,30,0,0" IndicatorView.ItemsSourceBy="CarouselName"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

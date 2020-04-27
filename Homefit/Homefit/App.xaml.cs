@@ -38,6 +38,11 @@ namespace Homefit
         public App()
         {
             InitializeComponent();
+            Device.SetFlags(new[] {
+                "CarouselView_Experimental",
+                "IndicatorView_Experimental"
+            });
+
             DependencyService.Register<INavigationService, NavigationService>();
             MainPage = new NavigationPage(new ConnexionView());
         }
