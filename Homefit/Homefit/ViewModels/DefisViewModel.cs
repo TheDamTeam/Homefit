@@ -34,7 +34,7 @@ namespace Homefit.ViewModels
         private void ExecuteDetailViewCommandAsync(object obj)
         {
             var item = (Models.Defis)obj;
-            await Navigation.PushAsync(new DetailDefisView(item));
+            Navigation.PushAsync(new DetailDefisView(item));
         }
         public DefisViewModel()
         {
