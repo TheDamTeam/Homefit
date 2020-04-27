@@ -44,22 +44,18 @@
                                     <Grid>
                                         <StackLayout Orientation="Vertical">
                                             <StackLayout Orientation="Horizontal" Margin="15,0,15,0">
-                                                <Button Text="{Binding day1}" HorizontalOptions="CenterAndExpand" Command="{Binding Path=BindingContext.GetProgramme1, Source={x:Reference DaysView}}" CommandParameter="{Binding .}" HeightRequest="80" WidthRequest="100"/>
-                                                <Button Text="{Binding day2}" Command="{Binding Path=BindingContext.GetProgramme2, Source={x:Reference DaysView}}" CommandParameter="{Binding .}" HorizontalOptions="CenterAndExpand" HeightRequest="80" WidthRequest="100"/>
-                                                <Button Text="{Binding day3}" Command="{Binding Path=BindingContext.GetProgramme3, Source={x:Reference DaysView}}" CommandParameter="{Binding .}" HorizontalOptions="CenterAndExpand" HeightRequest="80" WidthRequest="100"/>
+                                                <Button Text="{Binding Day1}" HorizontalOptions="CenterAndExpand" Command="{Binding Path=BindingContext.GetProgramme1, Source={x:Reference DaysView}}" CommandParameter="{Binding .}" HeightRequest="80" WidthRequest="100"/>
+                                                <Button Text="{Binding Day2}" Command="{Binding Path=BindingContext.GetProgramme2, Source={x:Reference DaysView}}" CommandParameter="{Binding .}" HorizontalOptions="CenterAndExpand" HeightRequest="80" WidthRequest="100"/>
+                                                <Button Text="{Binding Day3}" Command="{Binding Path=BindingContext.GetProgramme3, Source={x:Reference DaysView}}" CommandParameter="{Binding .}" HorizontalOptions="CenterAndExpand" HeightRequest="80" WidthRequest="100"/>
                                             </StackLayout>
-
                                         </StackLayout>
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-
                 </ScrollView>
-
-            </StackLayout>
-            
+            </StackLayout>            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

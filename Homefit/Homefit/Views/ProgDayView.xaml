@@ -52,13 +52,13 @@
                                                 <StackLayout Orientation="Vertical" Margin="20,0,0,0">
                                                     <Label Text="{Binding AlimentName}" Style="{StaticResource InfoStyle}" />
                                                 </StackLayout>
-                                            </Grid>  
+                                            </Grid>
                                         </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
-                            </ListView>                            
-                        </StackLayout>                        
-                        <StackLayout Orientation="Vertical">                            
+                            </ListView>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical">
                             <Label Text="ENCAS" Style="{StaticResource TitleStyle}"/>
                             <ListView IsVisible="{Binding IsVisible}" CachingStrategy="RecycleElement" ItemsSource="{Binding Collation}" IsRefreshing="{Binding IsRefreshing}" HeightRequest="{Binding Height}" Style="{StaticResource ListStyle}">
                                 <ListView.ItemTemplate>
@@ -72,11 +72,11 @@
                                         </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
-                            </ListView>                          
+                            </ListView>
                         </StackLayout>
-                        <!--<Label IsVisible="{Binding IsEmpty}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="No items" BackgroundColor="Aqua" />-->                        
-                        <StackLayout Orientation="Vertical">                            
-                        <Label Text="DÉJEUNER" Style="{StaticResource TitleStyle}" />
+                        <!--<Label IsVisible="{Binding IsEmpty}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="No items" BackgroundColor="Aqua" />-->
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="DÉJEUNER" Style="{StaticResource TitleStyle}" />
                             <ListView ItemsSource="{Binding Dejeuner}" CachingStrategy="RecycleElement" IsRefreshing="{Binding IsRefreshing}" HeightRequest="{Binding Height}" Style="{StaticResource ListStyle}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -89,10 +89,10 @@
                                         </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
-                            </ListView>                         
+                            </ListView>
                         </StackLayout>
-                        <StackLayout Orientation="Vertical">                            
-                        <Label Text="DINER" Style="{StaticResource TitleStyle}" />
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="DINER" Style="{StaticResource TitleStyle}" />
                             <ListView ItemsSource="{Binding Diner}" CachingStrategy="RecycleElement" HeightRequest="{Binding Height}" Style="{StaticResource ListStyle}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -108,7 +108,7 @@
                             </ListView>
                         </StackLayout>
                     </StackLayout>
-                </Frame>                
+                </Frame>
             </ScrollView>
         </Grid>
     </ContentPage.Content>

@@ -3,7 +3,6 @@ using Homefit.ViewModels.Base;
 using Homefit.Views;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -45,7 +44,7 @@ namespace Homefit.ViewModels
         public string Devise
         {
             get { return devise; }
-            set { SetProperty(ref devise,value); }
+            set { SetProperty(ref devise, value); }
         }
         private string libelle;
         public string Libelle
@@ -99,7 +98,7 @@ namespace Homefit.ViewModels
             Description = Defis.Description;
             Duree = Defis.Duree;
             Libelle = Defis.Libelle;
-            if(Duree.Minute < 1)
+            if (Duree.Minute < 1)
             {
                 Devise = "secondes";
             }

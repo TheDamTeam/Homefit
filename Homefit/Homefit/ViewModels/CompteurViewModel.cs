@@ -2,8 +2,6 @@
 using Homefit.ViewModels.Base;
 using Homefit.Views;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace Homefit.ViewModels
@@ -11,13 +9,13 @@ namespace Homefit.ViewModels
     public class CompteurViewModel : BaseViewModel
     {
         public INavigation Navigation { get; set; }
+
         private int compteur = 3;
         public int Compteur
         {
             get { return compteur; }
-            set 
-            { 
-             
+            set
+            {
                 SetProperty(ref compteur, value);
                 if (Compteur == 0)
                 {
@@ -25,26 +23,27 @@ namespace Homefit.ViewModels
                 }
             }
         }
+
         private Defis defis;
         public Defis Defis
         {
             get { return defis; }
-            set { SetProperty(ref defis,value); }
+            set { SetProperty(ref defis, value); }
         }
+
         public CompteurViewModel(Defis defis)
         {
             Defis = defis;
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 Compteur--;
-                if(Compteur == 0)
+                if (Compteur == 0)
                 {
                     return false;
                 }
                 return true;
-             });
-
+            });
         }
-       
+
     }
 }

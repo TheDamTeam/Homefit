@@ -2,8 +2,6 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
 
 namespace Homefit.Models
 {
@@ -32,29 +30,26 @@ namespace Homefit.Models
         [JsonProperty("objectifs")]
         public string Ojectifs { get; set; }
 
-
         [JsonIgnore]
         public int IsConnect { get; set; }
 
-        [JsonIgnore,Ignore]
+        [JsonIgnore, Ignore]
         public List<Materiel> MyMateriels { get; set; }
 
-        [Ignore,JsonProperty("materiels")]
+        [Ignore, JsonProperty("materiels")]
         public List<string> Materiels { get; set; }
 
         [Ignore, JsonProperty("participerEntrainements")]
-        public List<string> ParticiperEntrainements{get; set;}
-        
+        public List<string> ParticiperEntrainements { get; set; }
+
         [Ignore, JsonProperty("participerProgrammeNutrition")]
         public List<string> ParticiperProgrammeNutritions { get; set; }
 
         [Ignore, JsonProperty("mangerRepas")]
         public List<string> MangerRepas { get; set; }
-        
+
         [Ignore, JsonProperty("participerProgrammeSportifs")]
         public List<string> ParticiperProgrammeSportifs { get; set; }
-
-
 
         public Utilisateur()
         {
@@ -75,7 +70,7 @@ namespace Homefit.Models
             MangerRepas = new List<string>();
             ParticiperProgrammeNutritions = new List<string>();
         }
-        public Utilisateur(string email, string password, string nom, string prenom, DateTime dateNaiss, float poids, int taille,string sexe,string objectif)
+        public Utilisateur(string email, string password, string nom, string prenom, DateTime dateNaiss, float poids, int taille, string sexe, string objectif)
         {
             Email = email;
             Password = password;

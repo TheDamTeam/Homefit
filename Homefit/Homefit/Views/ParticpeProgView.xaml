@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Homefit.Views.Controls"
              mc:Ignorable="d"
              x:Class="Homefit.Views.ParticpeProgView">
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="TitleStyle" TargetType="Label">
@@ -25,17 +25,16 @@
                 <Setter Property="Margin" Value="10,100,10,10" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-            </Style>            
+            </Style>
             <Style x:Key="ListStyle" TargetType="ListView">
                 <Setter Property="BackgroundColor" Value="Transparent" />
                 <Setter Property="HasUnevenRows" Value="True" />
                 <Setter Property="SeparatorVisibility" Value="None" />
-                <Setter Property="SelectionMode" Value="None" />
                 <Setter Property="IsPullToRefreshEnabled" Value="True" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <Grid>
             <local:GradientColorStack StartColor="#8A2BE2" EndColor="#87CEEB">
@@ -72,8 +71,8 @@
                             </ListView>
                         </StackLayout>
                         <Button Text="Select" TextColor="Black" BackgroundColor="Transparent" Margin="10,0,0,0" Command="{Binding GetSelectedProg}"/>
-                    </StackLayout>                   
-                </Frame>               
+                    </StackLayout>
+                </Frame>
             </ScrollView>
         </Grid>
     </ContentPage.Content>

@@ -1,13 +1,8 @@
 ﻿using Homefit.Enum;
 using Homefit.Models;
 using Homefit.ViewModels.Base;
-using Homefit.Views;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -15,6 +10,9 @@ namespace Homefit.ViewModels
 {
     public class UpdateProfilViewModel : BaseViewModel
     {
+        #region Properties
+        public INavigation Navigation { get; set; }
+
         private string email;
         public string Email
         {
@@ -39,42 +37,49 @@ namespace Homefit.ViewModels
             get { return prenom; }
             set { SetProperty(ref prenom, value); }
         }
+
         private string sexeText;
         public string SexeText
         {
             get { return sexeText; }
-            set { SetProperty(ref sexeText, value);}
+            set { SetProperty(ref sexeText, value); }
         }
-        private Objectif objectifs ;
+
+        private Objectif objectifs;
         public Objectif Objectifs
         {
-            get { return objectifs;}
+            get { return objectifs; }
             set { SetProperty(ref objectifs, value); }
         }
+
         private string taille;
         public string Taille
         {
             get { return taille; }
             set { SetProperty(ref taille, value); }
         }
-        private string poids;
+
         private Utilisateur compteCo;
         public Utilisateur CompteConnect
         {
             get { return compteCo; }
             set { SetProperty(ref compteCo, value); }
         }
+
+        private string poids;
         public string Poids
         {
             get { return poids; }
             set { SetProperty(ref poids, value); }
         }
+
         private DateTime dateNaiss;
         public DateTime DateNaiss
         {
             get { return dateNaiss; }
             set { SetProperty(ref dateNaiss, value); }
         }
+
         private bool sexe;
         public bool Sexe
         {
@@ -92,40 +97,54 @@ namespace Homefit.ViewModels
                 }
             }
         }
+
         private int height;
         public int Height
         {
-            get{ return height; }
-            set{ SetProperty(ref height, value); }
+            get { return height; }
+            set { SetProperty(ref height, value); }
         }
-        public INavigation Navigation { get; set; }
+
         private List<Materiel> materiels = new List<Materiel>();
         public List<Materiel> Materiels
         {
             get { return materiels; }
-            set { SetProperty(ref materiels, value);
+            set
+            {
+                SetProperty(ref materiels, value);
                 Height = (Materiels.Count * 40) + (Materiels.Count * 10);
             }
         }
+        #endregion
+
+        #region Command
         public ICommand UpdateButtonClickedCommand => new Command(ExecuteUpdateClickedCommandAsync);
+        #endregion
+
+        public UpdateProfilViewModel()
+        {
+            GetUtilisateur();
+        }
+
+        #region ExecuteCommands
         private async void ExecuteUpdateClickedCommandAsync(object obj)
         {
             IsBusy = true;
             try
             {
                 Utilisateur item = new Utilisateur(Email, Password, Nom, Prenom, DateNaiss, float.Parse(Poids), int.Parse(Taille), SexeText, Objectifs.GetDescription());
-                if(item.Ojectifs == "0")
+                if (item.Ojectifs == "0")
                 {
                     item.Ojectifs = "";
                 }
-                foreach(Materiel m in Materiels)
+                foreach (Materiel m in Materiels)
                 {
-                    if(m.AvoirMateriel == true)
+                    if (m.AvoirMateriel == true)
                     {
-                        item.Materiels.Add("/api/materiels/"+ m.Id);
+                        item.Materiels.Add("/api/materiels/" + m.Id);
                     }
                 }
-                var apiResponse = await App.Client.SaveUtilisateurAsync(item, false,CompteConnect.Id);
+                var apiResponse = await App.Client.SaveUtilisateurAsync(item, false, CompteConnect.Id);
                 if (apiResponse)
                 {
                     await Application.Current.MainPage.DisplayAlert("Modification", "Votre compte a été mis a jour", "Ok");
@@ -135,7 +154,7 @@ namespace Homefit.ViewModels
                     await App.DataBase.UpdateUtilisateurAsync(item);
                     MessagingCenter.Send(this, "RefreshView");
                     await Navigation.PopAsync();
-                    
+
                 }
                 else
                 {
@@ -155,12 +174,6 @@ namespace Homefit.ViewModels
 
         }
 
-        public UpdateProfilViewModel()
-        {
-            
-            GetUtilisateur();
-        }
-        
         public async void GetUtilisateur()
         {
             CompteConnect = await App.DataBase.GetUtilisateurIsConnect();
@@ -171,11 +184,12 @@ namespace Homefit.ViewModels
             Prenom = CompteConnect.Prenom;
             Email = CompteConnect.Email;
             Password = CompteConnect.Password;
+
             if (CompteConnect.Ojectifs != "" && CompteConnect.Ojectifs != null)
             {
                 Objectifs = Enumerations.GetEnumByDescription(Enumerations.GetEnumDescription(CompteConnect.Ojectifs));
             }
-            
+
             if (CompteConnect.Sexe == "Femme")
             {
                 Sexe = true;
@@ -186,6 +200,7 @@ namespace Homefit.ViewModels
             }
             GetMateriel();
         }
+
         public async void GetMateriel()
         {
             var apiResponse = await App.Client.GetUtilisateurMaterielsAsync(CompteConnect.Id);
@@ -203,10 +218,7 @@ namespace Homefit.ViewModels
                 }
             }
             Materiels = apiResponse.Liste;
-
-            
-            
-           
         }
+        #endregion
     }
 }

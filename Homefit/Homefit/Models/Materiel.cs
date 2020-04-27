@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
-using SQLite;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Homefit.Models
 {
@@ -10,6 +7,7 @@ namespace Homefit.Models
     {
         [JsonProperty("id")]
         public int Id { get; set; }
+
         [JsonProperty("materielName")]
         public string MaterielName { get; set; }
 
@@ -21,13 +19,13 @@ namespace Homefit.Models
         {
             get
             {
-                return MaterielName +" "+AvoirMateriel;
+                return MaterielName + " " + AvoirMateriel;
             }
         }
 
         [JsonIgnore]
         public List<Entrainement> Entrainements { get; set; }
-        
+
         [JsonIgnore]
         public List<Utilisateur> Utilisateurs { get; set; }
 

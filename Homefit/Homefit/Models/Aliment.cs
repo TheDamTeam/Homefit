@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
-using SQLite;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Homefit.Models
 {
@@ -15,13 +12,8 @@ namespace Homefit.Models
         public float Proteine { get; set; }
         public float Glucide { get; set; }
         public float Quantite { get; set; }
-
         [JsonIgnore]
         public List<Repas> repas { get; set; }
-
-        public Aliment()
-        {
-
-        }
+        public Aliment(){ }
     }
 }

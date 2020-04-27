@@ -1,30 +1,36 @@
 ﻿using Homefit.Models;
 using Homefit.ViewModels.Base;
-using Homefit.Views;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using Xamarin.Forms;
 
 namespace Homefit.ViewModels
 {
     public class JouerDefisViewModel : BaseViewModel
     {
+        #region Properties 
         public INavigation Navigation { get; set; }
+
         private Defis defis;
         public Defis Defis
         {
             get { return defis; }
             set { SetProperty(ref defis, value); }
         }
+
         private string tempEcoule;
         public string TempEcoule
         {
             get { return tempEcoule; }
             set { SetProperty(ref tempEcoule, value); }
         }
+
         private Stopwatch stopwatch = new Stopwatch();
+        public Stopwatch Stopwatch
+        {
+            get { return stopwatch; }
+            set { SetProperty(ref stopwatch, value); }
+        }
 
         private string libelle;
         public string Libelle
@@ -32,12 +38,14 @@ namespace Homefit.ViewModels
             get { return libelle; }
             set { SetProperty(ref libelle, value); }
         }
+
         private string duree;
         public string Duree
         {
             get { return duree; }
             set { SetProperty(ref duree, value); }
         }
+
         private bool chrono = true;
         public bool Chrono
         {
@@ -51,33 +59,35 @@ namespace Homefit.ViewModels
                 }
             }
         }
+        #endregion
+
         public JouerDefisViewModel(Defis defis)
         {
-            
-
             Defis = defis;
             Title = $"Défi - {defis.Libelle}";
-            stopwatch.Start();
+            Stopwatch.Start();
             Libelle = Defis.Libelle;
             Duree = String.Format("{0:00}:{1:00}", defis.Duree.Minute, defis.Duree.Second);
             Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
             {
                 TempEcoule = String.Format("{0:00}:{1:00}.{2:00}",
-                stopwatch.Elapsed.Minutes, stopwatch.Elapsed.Seconds,
-                stopwatch.Elapsed.Milliseconds / 10);
+                Stopwatch.Elapsed.Minutes, Stopwatch.Elapsed.Seconds,
+                Stopwatch.Elapsed.Milliseconds / 10);
                 if (TempEcoule.Contains(Duree))
                 {
                     Chrono = false;
-                    stopwatch.Stop();
+                    Stopwatch.Stop();
                 }
                 return Chrono;
             });
         }
+
+        #region ExecuteCommands
         private async void Alert()
         {
             var utilisateur = await App.DataBase.GetUtilisateurIsConnect();
             string result = await Application.Current.MainPage.DisplayPromptAsync("Score", "Quel est votre score ?", keyboard: Keyboard.Numeric);
-            if(result != null)
+            if (result != null)
             {
                 ParticiperDefis participerDefis = new ParticiperDefis(DateTime.Now, "/api/utilisateurs/" + utilisateur.Id, "/api/defis/" + Defis.Id, Int32.Parse(result));
                 var apiResponse = await App.Client.SaveParticiperDefisAsync(participerDefis);
@@ -93,12 +103,13 @@ namespace Homefit.ViewModels
             else
             {
                 await Application.Current.MainPage.DisplayAlert("Information", "Vous venez d'annuler la participation au défi", "Ok");
-                
+
             }
             MessagingCenter.Send(this, "RefreshView");
-            Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count-2]);
+            Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
             await Navigation.PopAsync();
-            
+
         }
+        #endregion
     }
 }
