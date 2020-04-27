@@ -4,6 +4,7 @@ using Homefit.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Homefit.ViewModels
@@ -17,6 +18,7 @@ namespace Homefit.ViewModels
             set { SetProperty(ref height, value); }
         }
         public INavigation Navigation { get; set; }
+
         private List<Defis> defis = new List<Defis>();
         public List<Defis> Defis
         {
@@ -27,19 +29,11 @@ namespace Homefit.ViewModels
                 Height = (Defis.Count * 50);
             }
         }
-        private Defis defisSelected;
-        public Defis DefisSelected
+        public ICommand DetailViewCommand => new Command(ExecuteDetailViewCommandAsync);
+        private async void ExecuteDetailViewCommandAsync(object obj)
         {
-            get { return defisSelected; }
-            set
-            {
-                SetProperty(ref defisSelected, value);
-                if(value != null)
-                {
-                    Navigation.PushAsync(new DetailDefisView(value));
-                    DefisSelected = null;
-                }
-            }
+            var item = (Models.Defis)obj;
+            Navigation.PushAsync(new DetailDefisView(item));
         }
         public DefisViewModel()
         {
