@@ -42,17 +42,18 @@
                                HorizontalOptions="Center"
                                MaxLines="5"
                                LineBreakMode="TailTruncation" />
-                                    <Label Text="{Binding EntrainementName}"
-                               FontAttributes="Italic"
-                               HorizontalOptions="Center"
-                               MaxLines="5"
-                               LineBreakMode="TailTruncation" />
+                              
                                 </StackLayout>
                             </Frame>
                         </StackLayout>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
+
+            <Button Text="Je viens de participer a se programme!"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="OnButtonClicked" />
         </StackLayout>
 
     </ContentPage.Content>

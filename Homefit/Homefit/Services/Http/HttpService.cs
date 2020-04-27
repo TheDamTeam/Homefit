@@ -234,5 +234,26 @@ namespace Homefit.Services.Http
             }
             return null;
         }
+
+        public async Task<bool> ParticipeProgrammeSportifAsync(ParticiperProgrammeSportif participerProgrammeSportif)
+        {
+            try
+            {
+                var json = JsonConvert.SerializeObject(participerProgrammeSportif);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = null;
+                response = await _client.PostAsync($"https://thedamteam.fr/api/participer_programme_sportifs", content);
+                return response.IsSuccessStatusCode;
+
+            }
+            catch (Exception ey)
+            {
+
+                return false;
+
+
+            }
+
+        }
     }
 }
