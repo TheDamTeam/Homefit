@@ -95,6 +95,7 @@ namespace Homefit.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Information", "Vous venez d'annuler la participation au défi", "Ok");
                 
             }
+            MessagingCenter.Send(this, "RefreshView");
             Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count-2]);
             await Navigation.PopAsync();
             
