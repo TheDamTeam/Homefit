@@ -92,8 +92,31 @@ namespace Homefit.ViewModels
                 if (apiResponse)
                 {
                     await Application.Current.MainPage.DisplayAlert("Bienvenue", "Votre compte a été crée avec succès", "Ok");
-                    item.IsConnect = 1;
-                    await App.DataBase.SaveUtilisateurAsync(item);
+                    var apiRep = await App.Client.GetUtilisateursAsync();
+                    if (apiRep.Counter > 0)
+                    {
+                        bool find = false;
+                        int i = 0;
+                        while (!find && i < apiRep.Counter)
+                        {
+                            if (apiRep.Liste[i].Email == Email && apiRep.Liste[i].Password == Password)
+                            {
+                                find = true;
+                            }
+                            else
+                            {
+                                i++;
+                            }
+
+                        }
+                        if (find)
+                        {
+                            Utilisateur mUtilisateur = apiRep.Liste[i];
+                            mUtilisateur.IsConnect = 1;
+                            await App.DataBase.SaveUtilisateurAsync(mUtilisateur);
+                            _navigationService.SetCurrentPage(new MainPage(mUtilisateur));
+                        }
+                    }
                     _navigationService.SetCurrentPage(new MainPage(item));
                 }
                 else

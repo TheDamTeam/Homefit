@@ -42,16 +42,16 @@ namespace Homefit.Models
         [Ignore,JsonProperty("materiels")]
         public List<string> Materiels { get; set; }
 
-        [Ignore]
+        [Ignore, JsonProperty("participerEntrainements")]
         public List<string> ParticiperEntrainements{get; set;}
         
-        [Ignore]
+        [Ignore, JsonProperty("participerProgrammeNutrition")]
         public List<string> ParticiperProgrammeNutritions { get; set; }
 
-        [Ignore]
+        [Ignore, JsonProperty("mangerRepas")]
         public List<string> MangerRepas { get; set; }
         
-        [Ignore]
+        [Ignore, JsonProperty("participerProgrammeSportifs")]
         public List<string> ParticiperProgrammeSportifs { get; set; }
 
 

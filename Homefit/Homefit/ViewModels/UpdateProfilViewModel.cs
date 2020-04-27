@@ -113,7 +113,11 @@ namespace Homefit.ViewModels
             IsBusy = true;
             try
             {
-                Utilisateur item = new Utilisateur(Email, Password, Nom, Prenom, DateNaiss, float.Parse(Poids), int.Parse(Taille), SexeText,Objectifs.GetDescription());
+                Utilisateur item = new Utilisateur(Email, Password, Nom, Prenom, DateNaiss, float.Parse(Poids), int.Parse(Taille), SexeText, Objectifs.GetDescription());
+                if(item.Ojectifs == "0")
+                {
+                    item.Ojectifs = "";
+                }
                 foreach(Materiel m in Materiels)
                 {
                     if(m.AvoirMateriel == true)

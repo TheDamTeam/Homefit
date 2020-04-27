@@ -128,7 +128,7 @@
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="Objectif:" Style="{StaticResource SubtitleStyle}"/>
                                 <Frame Style="{StaticResource FrameStyle}">
-                                    <local:EnumBindablePicker x:TypeArguments="enums:Objectif" FontSize="14" HorizontalOptions="StartAndExpand" Margin="5,0,0,0" SelectedItem="{Binding Objectifs}" />
+                                    <local:EnumBindablePicker x:TypeArguments="enums:Objectif" FontSize="14"  HorizontalOptions="StartAndExpand" WidthRequest="190" Margin="5,0,0,0" SelectedItem="{Binding Objectifs}" />
                                 </Frame>
                             </StackLayout>
                             <Label Text="Materiaux:" Style="{StaticResource SubtitleStyle}" Margin="10,10,0,0"/>
