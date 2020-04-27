@@ -22,6 +22,8 @@ namespace Homefit.Views
         {
             InitializeComponent();
             BindingContext = new JouerDefisViewModel(defis) { Navigation = Navigation };
+            NavigationPage.SetHasBackButton(this,false);
         }
+     
     }
 }

@@ -19,6 +19,7 @@ namespace Homefit.Views
         {
             InitializeComponent();
             BindingContext = new CompteurViewModel(defis) { Navigation = Navigation };
+            NavigationPage.SetHasBackButton(this, false);
         }
     }
 }

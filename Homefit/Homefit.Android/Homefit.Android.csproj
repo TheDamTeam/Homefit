@@ -379,5 +379,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\Pompes.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\fitnessHomeFit.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

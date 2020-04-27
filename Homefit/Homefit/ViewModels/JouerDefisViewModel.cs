@@ -1,5 +1,6 @@
 ﻿using Homefit.Models;
 using Homefit.ViewModels.Base;
+using Homefit.Views;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -52,10 +53,11 @@ namespace Homefit.ViewModels
         }
         public JouerDefisViewModel(Defis defis)
         {
-            stopwatch.Start();
+            
 
             Defis = defis;
-
+            Title = $"Défi - {defis.Libelle}";
+            stopwatch.Start();
             Libelle = Defis.Libelle;
             Duree = String.Format("{0:00}:{1:00}", defis.Duree.Minute, defis.Duree.Second);
             Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
@@ -66,6 +68,7 @@ namespace Homefit.ViewModels
                 if (TempEcoule.Contains(Duree))
                 {
                     Chrono = false;
+                    stopwatch.Stop();
                 }
                 return Chrono;
             });
@@ -74,16 +77,27 @@ namespace Homefit.ViewModels
         {
             var utilisateur = await App.DataBase.GetUtilisateurIsConnect();
             string result = await Application.Current.MainPage.DisplayPromptAsync("Score", "Quel est votre score ?", keyboard: Keyboard.Numeric);
-            ParticiperDefis participerDefis = new ParticiperDefis(DateTime.Now, "/api/utilisateurs/" + utilisateur.Id, "/api/defis/" + Defis.Id, Int32.Parse(result));
-            var apiResponse = await App.Client.SaveParticiperDefisAsync(participerDefis);
-            if (apiResponse)
+            if(result != null)
             {
-                await Application.Current.MainPage.DisplayAlert("Félicitation", "Vous venez de participer à ce défi", "Ok");
+                ParticiperDefis participerDefis = new ParticiperDefis(DateTime.Now, "/api/utilisateurs/" + utilisateur.Id, "/api/defis/" + Defis.Id, Int32.Parse(result));
+                var apiResponse = await App.Client.SaveParticiperDefisAsync(participerDefis);
+                if (apiResponse)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Félicitation", "Vous venez de participer à ce défi", "Ok");
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("ERREUR", "Une erreur c'est produite veuillez réessayer plus tard", "Ok");
+                }
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("ERREUR", "Une erreur c'est produite veuillez réessayer plus tard", "Ok");
+                await Application.Current.MainPage.DisplayAlert("Information", "Vous venez d'annuler la participation au défi", "Ok");
+                
             }
+            Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count-2]);
+            await Navigation.PopAsync();
+            
         }
     }
 }

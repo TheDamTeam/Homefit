@@ -21,7 +21,7 @@ namespace Homefit.ViewModels
                 SetProperty(ref compteur, value);
                 if (Compteur == 0)
                 {
-                    _navigationService.SetCurrentPage(new JouerDefisView(Defis));
+                    Navigation.PushAsync(new JouerDefisView(Defis));
                 }
             }
         }
