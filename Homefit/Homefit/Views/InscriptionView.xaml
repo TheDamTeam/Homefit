@@ -108,14 +108,7 @@
                                 </StackLayout>
                             </Frame>
                             <Frame Style="{StaticResource FrameStyle}">
-                                <local:CustomEntry Placeholder="Email" Text="{Binding Email}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}">
-                                    <local:CustomEntry.Keyboard>
-                                        <Keyboard x:FactoryMethod="Create">
-                                            <x:Arguments>
-                                                <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
-                                            </x:Arguments>
-                                        </Keyboard>
-                                    </local:CustomEntry.Keyboard>
+                                <local:CustomEntry Placeholder="Email" Text="{Binding Email}" PlaceholderColor="Black" Style="{StaticResource CustomEntryStyle}">                                  
                                 </local:CustomEntry>
                             </Frame>
                             <Frame Style="{StaticResource FrameStyle}">
