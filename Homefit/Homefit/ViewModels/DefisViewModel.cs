@@ -38,6 +38,7 @@ namespace Homefit.ViewModels
         }
         public DefisViewModel()
         {
+            
             GetDefis();
         }
         public async void GetDefis()
