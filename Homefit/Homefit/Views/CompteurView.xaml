@@ -4,10 +4,11 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+              xmlns:local="clr-namespace:Homefit.Views.Controls"
              x:Class="Homefit.Views.CompteurView">
     <ContentPage.Content>
         <Grid>
-            <Label Text="{Binding Compteur}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="100"></Label>
+            <Label Text="{Binding Compteur}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="150" ></Label>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
