@@ -19,8 +19,8 @@
             <Style x:Key="FrameStyle" TargetType="Frame">
                 <Setter Property="HasShadow" Value="True" />
                 <Setter Property="CornerRadius" Value="15" />
-                <Setter Property="Margin" Value="0,20,0,10" />
-                <Setter Property="HeightRequest" Value="420" />
+                <Setter Property="Margin" Value="0,10,0,10" />
+                <Setter Property="HeightRequest" Value="350" />
                 <Setter Property="WidthRequest" Value="400" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
@@ -32,29 +32,35 @@
         <Grid>    
              <local:GradientColorStack StartColor="#8A2BE2" EndColor="#87CEEB">
             </local:GradientColorStack>
-            <CarouselView x:Name="laList" >
-                <CarouselView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20"/>
-                </CarouselView.ItemsLayout>
-                <CarouselView.ItemTemplate>                    
-                    <DataTemplate>
-                        <StackLayout>
-                            <Frame Style="{StaticResource FrameStyle}">
-                                <StackLayout Orientation="Vertical">
-                                    <Image Source="Planche" Aspect="AspectFill" HeightRequest="200"/>
-                                    <Label Text="{Binding EntrainementName}" Style="{StaticResource TitleStyle}" HorizontalOptions="CenterAndExpand"  />
-                                    <Label Text="{Binding Niveau , StringFormat='Niveau :{0}'}" Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand"/>
-                                    <Label Text="{Binding Duree, StringFormat='Durée :{0}'}"  Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand"/>
-                                    <Label Text="{Binding Description}" Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand" />
-                                    <Label Text="{Binding EntrainementName}" Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand"/>
-                                 <Button Text="Je viens de participer a se programme!" VerticalOptions="CenterAndExpand"
-                                         HorizontalOptions="Center" Clicked="OnButtonClicked" />
-                               </StackLayout>
-                            </Frame>
+            <StackLayout Orientation="Vertical">               
+                    <Grid>
+                        <StackLayout Orientation="Vertical">     
+                            <CarouselView x:Name="laList" >
+                                <CarouselView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20"/>
+                                </CarouselView.ItemsLayout>
+                                <CarouselView.ItemTemplate>                    
+                                    <DataTemplate>
+                                        <StackLayout>
+                                            <Frame Style="{StaticResource FrameStyle}">
+                                                <StackLayout Orientation="Vertical">
+                                                    <Image Source="shoes" Aspect="AspectFill" HeightRequest="200"/>
+                                                    <Label Text="{Binding EntrainementName}" Style="{StaticResource TitleStyle}" HorizontalOptions="CenterAndExpand"  />
+                                                    <Label Text="{Binding Niveau , StringFormat='Niveau :{0}'}" Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand"/>
+                                                    <Label Text="{Binding Duree, StringFormat='Durée :{0}'}"  Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand"/>
+                                                    <Label Text="{Binding Description}" Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand" />
+                                                    <Label Text="{Binding EntrainementName}" Style="{StaticResource InfoStyle}" HorizontalOptions="CenterAndExpand"/>                                   
+                                               </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                        
+                            <Button Text="Je viens de participer a se programme!" BackgroundColor="Transparent" BorderColor="White" BorderWidth="3" TextColor="White" Clicked="OnButtonClicked" Margin="10,0,10,20" />
                         </StackLayout>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>           
+                    </Grid>                
+            </StackLayout>            
         </Grid>
     </ContentPage.Content>
 </ContentPage>
