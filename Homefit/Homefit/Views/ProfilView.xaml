@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Homefit.Views.Controls"
              mc:Ignorable="d"
-             x:Class="Homefit.Views.ProfilView">
+             x:Class="Homefit.Views.ProfilView"
+             Title="Profil">
     
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="logout.png"  Command="{Binding DeconnexionCommand}"/>

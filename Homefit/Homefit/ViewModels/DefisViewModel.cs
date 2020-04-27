@@ -30,7 +30,7 @@ namespace Homefit.ViewModels
             }
         }
         public ICommand DetailViewCommand => new Command(ExecuteDetailViewCommandAsync);
-        private async void ExecuteDetailViewCommandAsync(object obj)
+        private void ExecuteDetailViewCommandAsync(object obj)
         {
             var item = (Models.Defis)obj;
             Navigation.PushAsync(new DetailDefisView(item));

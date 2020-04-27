@@ -4,70 +4,112 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Homefit.Views.ProgDayView"
-             >
+             xmlns:local="clr-namespace:Homefit.Views.Controls"
+             x:Class="Homefit.Views.ProgDayView"             
+             Title="{Binding DayNb}">
 
-    <StackLayout Margin="10,10,10,10">
-        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Text="{Binding DayNb}" />
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource BoldItalicFont}" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+            <Style x:Key="InfoStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource RegularFont}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="#758697" />
+            </Style>
+            <Style x:Key="ListStyle" TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HasUnevenRows" Value="True" />
+                <Setter Property="SeparatorVisibility" Value="None" />
+                <Setter Property="SelectionMode" Value="None" />
+                <Setter Property="IsPullToRefreshEnabled" Value="True" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-        <Label HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Text="PETIT-DÉJEUNER" />
-        <ListView x:Name="PtiDejView" ItemsSource="{Binding PtiDej}" BackgroundColor="YellowGreen">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
-                            <StackLayout Orientation="Vertical" HeightRequest="100">
-                                <Label Grid.Column="0" Text="{Binding AlimentName}" HorizontalOptions="CenterAndExpand"/>
-                            </StackLayout>
+    <ContentPage.Content>
+        <Grid>
+            <local:GradientColorStack StartColor="#8A2BE2" EndColor="#87CEEB">
+            </local:GradientColorStack>
+            <StackLayout Orientation="Vertical">
+                <Frame HeightRequest="150" Padding="0" Margin="0">
+                    <Image Source="healthyDay.jpg" Aspect="AspectFill" Margin="0"/>
+                </Frame>
+            </StackLayout>
+            <ScrollView>
+                <Frame BackgroundColor="White" HasShadow="True" Margin="10,80,10,10" Padding="0">
+                    <StackLayout Orientation="Vertical" Margin="10,10,10,10">
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="PETIT-DÉJEUNER" Style="{StaticResource TitleStyle}"/>
+                            <ListView ItemsSource="{Binding PtiDej}" CachingStrategy="RecycleElement" IsRefreshing="{Binding IsRefreshing}" HeightRequest="{Binding Height}" Style="{StaticResource ListStyle}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid>
+                                                <StackLayout Orientation="Vertical" Margin="20,0,0,0">
+                                                    <Label Text="{Binding AlimentName}" Style="{StaticResource InfoStyle}" />
+                                                </StackLayout>
+                                            </Grid>  
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>                            
+                        </StackLayout>                        
+                        <StackLayout Orientation="Vertical">                            
+                            <Label Text="ENCAS" Style="{StaticResource TitleStyle}"/>
+                            <ListView IsVisible="{Binding IsVisible}" CachingStrategy="RecycleElement" ItemsSource="{Binding Collation}" IsRefreshing="{Binding IsRefreshing}" HeightRequest="{Binding Height}" Style="{StaticResource ListStyle}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid>
+                                                <StackLayout Orientation="Vertical" Margin="20,0,0,0">
+                                                    <Label Text="{Binding AlimentName}" Style="{StaticResource InfoStyle}" />
+                                                </StackLayout>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>                          
                         </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Label HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Text="ENCAS" />
-        <ListView x:Name="CollationView" ItemsSource="{Binding Collation}" BackgroundColor="AliceBlue">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
-                            <StackLayout Orientation="Vertical" HeightRequest="100">
-                                <Label Grid.Column="0" Text="{Binding AlimentName}" HorizontalOptions="CenterAndExpand" />
-                            </StackLayout>
-
+                        <!--<Label IsVisible="{Binding IsEmpty}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="No items" BackgroundColor="Aqua" />-->                        
+                        <StackLayout Orientation="Vertical">                            
+                        <Label Text="DÉJEUNER" Style="{StaticResource TitleStyle}" />
+                            <ListView ItemsSource="{Binding Dejeuner}" CachingStrategy="RecycleElement" IsRefreshing="{Binding IsRefreshing}" HeightRequest="{Binding Height}" Style="{StaticResource ListStyle}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid>
+                                                <StackLayout Orientation="Vertical" Margin="20,0,0,0">
+                                                    <Label Text="{Binding AlimentName}" Style="{StaticResource InfoStyle}"/>
+                                                </StackLayout>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>                         
                         </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Label HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Text="DÉJEUNER" />
-        <ListView x:Name="DejView" ItemsSource="{Binding Dejeuner}" BackgroundColor="BlueViolet">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
-                            <StackLayout Orientation="Vertical" HeightRequest="100">
-                                <Label Grid.Column="0" Text="{Binding AlimentName}" HorizontalOptions="CenterAndExpand"/>
-                            </StackLayout>
-
+                        <StackLayout Orientation="Vertical">                            
+                        <Label Text="DINER" Style="{StaticResource TitleStyle}" />
+                            <ListView ItemsSource="{Binding Diner}" CachingStrategy="RecycleElement" HeightRequest="{Binding Height}" Style="{StaticResource ListStyle}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid>
+                                                <StackLayout Orientation="Vertical" Margin="20,0,0,0">
+                                                    <Label Text="{Binding AlimentName}" Style="{StaticResource InfoStyle}"/>
+                                                </StackLayout>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
                         </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Label HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Text="DINER" />
-        <ListView x:Name="DinerView" ItemsSource="{Binding Diner}" BackgroundColor="DarkMagenta">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
-                            <StackLayout Orientation="Vertical" HeightRequest="100">
-                                <Label Grid.Column="0" Text="{Binding AlimentName}" HorizontalOptions="CenterAndExpand"/>
-                            </StackLayout>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
-
+                    </StackLayout>
+                </Frame>                
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

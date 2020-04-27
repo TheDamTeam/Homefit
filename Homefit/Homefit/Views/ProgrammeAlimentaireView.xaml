@@ -3,39 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Homefit.Views.Controls"
              mc:Ignorable="d"
              x:Class="Homefit.Views.ProgrammeAlimentaireView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="SubtitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="None"/>
+                <Setter Property="Margin" Value="10,0,0,0"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            </Style>  
+            <Style x:Key="ListStyle" TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HasUnevenRows" Value="True" />
+                <Setter Property="SeparatorVisibility" Value="None" />
+                <Setter Property="SelectionMode" Value="None" />
+                <Setter Property="IsPullToRefreshEnabled" Value="True" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <ScrollView>
-                <ListView x:Name="DaysView" ItemsSource="{Binding ListDays}" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
-                                    <StackLayout Orientation="Vertical" HeightRequest="100">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
+        <Grid>
+            <local:GradientColorStack StartColor="#8A2BE2" EndColor="#87CEEB">
+            </local:GradientColorStack>
+            <StackLayout Orientation="Vertical">
+                <Frame HeightRequest="150" Padding="0" Margin="0">
+                    <Image Source="healthy.jpg" Aspect="AspectFill" Margin="0"/>
+                </Frame>
+            </StackLayout>
+            <StackLayout Margin="0,100,0,0">
+                <ScrollView>
+                    <ListView x:Name="DaysView" ItemsSource="{Binding ListDays}" Style="{StaticResource ListStyle}" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <StackLayout Orientation="Vertical">
+                                            <StackLayout Orientation="Horizontal" Margin="15,0,15,0">
+                                                <Button Text="{Binding day1}" HorizontalOptions="CenterAndExpand" Command="{Binding Path=BindingContext.GetProgramme1, Source={x:Reference DaysView}}" CommandParameter="{Binding .}" HeightRequest="80" WidthRequest="100"/>
+                                                <Button Text="{Binding day2}" Command="{Binding Path=BindingContext.GetProgramme2, Source={x:Reference DaysView}}" CommandParameter="{Binding .}" HorizontalOptions="CenterAndExpand" HeightRequest="80" WidthRequest="100"/>
+                                                <Button Text="{Binding day3}" Command="{Binding Path=BindingContext.GetProgramme3, Source={x:Reference DaysView}}" CommandParameter="{Binding .}" HorizontalOptions="CenterAndExpand" HeightRequest="80" WidthRequest="100"/>
+                                            </StackLayout>
 
-                                            <Button Grid.Column="0" Text="{Binding day1}" HorizontalOptions="CenterAndExpand" Command="{Binding Path=BindingContext.GetProgramme1, Source={x:Reference DaysView}}" CommandParameter="{Binding .}"/>
-                                            <Button Grid.Column="1" Text="{Binding day2}" Command="{Binding Path=BindingContext.GetProgramme2, Source={x:Reference DaysView}}" CommandParameter="{Binding .}" HorizontalOptions="CenterAndExpand" />
-                                            <Button Grid.Column="2" Text="{Binding day3}" Command="{Binding Path=BindingContext.GetProgramme3, Source={x:Reference DaysView}}" CommandParameter="{Binding .}" HorizontalOptions="CenterAndExpand" />
-                                        </Grid>
+                                        </StackLayout>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
-                                    </StackLayout>
+                </ScrollView>
 
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
-            </ScrollView>
-
-        </StackLayout>
+            </StackLayout>
+            
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
